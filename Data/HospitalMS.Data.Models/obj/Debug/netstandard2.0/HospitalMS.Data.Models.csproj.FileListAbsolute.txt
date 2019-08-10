@@ -1,9 +1,0 @@
-C:\Programing\HospitalMS\HospitalMS\HospitalMs\Data\HospitalMS.Data.Models\bin\Debug\netstandard2.0\HospitalMS.Data.Models.deps.json
-C:\Programing\HospitalMS\HospitalMS\HospitalMs\Data\HospitalMS.Data.Models\bin\Debug\netstandard2.0\HospitalMS.Data.Models.dll
-C:\Programing\HospitalMS\HospitalMS\HospitalMs\Data\HospitalMS.Data.Models\bin\Debug\netstandard2.0\HospitalMS.Data.Models.pdb
-C:\Programing\HospitalMS\HospitalMS\HospitalMs\Data\HospitalMS.Data.Models\obj\Debug\netstandard2.0\HospitalMS.Data.Models.csprojAssemblyReference.cache
-C:\Programing\HospitalMS\HospitalMS\HospitalMs\Data\HospitalMS.Data.Models\obj\Debug\netstandard2.0\HospitalMS.Data.Models.csproj.CoreCompileInputs.cache
-C:\Programing\HospitalMS\HospitalMS\HospitalMs\Data\HospitalMS.Data.Models\obj\Debug\netstandard2.0\HospitalMS.Data.Models.AssemblyInfoInputs.cache
-C:\Programing\HospitalMS\HospitalMS\HospitalMs\Data\HospitalMS.Data.Models\obj\Debug\netstandard2.0\HospitalMS.Data.Models.AssemblyInfo.cs
-C:\Programing\HospitalMS\HospitalMS\HospitalMs\Data\HospitalMS.Data.Models\obj\Debug\netstandard2.0\HospitalMS.Data.Models.dll
-C:\Programing\HospitalMS\HospitalMS\HospitalMs\Data\HospitalMS.Data.Models\obj\Debug\netstandard2.0\HospitalMS.Data.Models.pdb
