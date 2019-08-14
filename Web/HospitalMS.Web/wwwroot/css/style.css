@@ -28,6 +28,12 @@ a {
     padding: 20px;
 }
 
+.btn-f {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    width: 84%
+}
+
 #formContent {
     -webkit-border-radius: 15px 15px 15px 15px;
     border-radius: 15px 15px 15px 15px;
@@ -62,11 +68,7 @@ a {
     width: 42%
 }
 
-#btn-reg-reg {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    width: 84%
-}
+
 
 input[type=text], input[type=email], input[type=password] {
     background-color: #f6f6f6;
