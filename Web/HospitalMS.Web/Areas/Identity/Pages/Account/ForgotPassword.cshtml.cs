@@ -30,7 +30,7 @@ namespace HospitalMS.Web.Areas.Identity.Pages.Account
         public class InputModel
         {
             [Required]
-            [EmailAddress]
+            [EmailAddress(ErrorMessage ="")]
             public string Email { get; set; }
         }
 

@@ -3,10 +3,10 @@
 
 <div class="wrapper fadeInDown">
     <div id="formContent">
-        <div id="sname" class="fadeIn second">
+        <div id="sname" class="fadeIn first">
             <h1>Hospital<span class="text-info">MS</span></h1>
         </div>
-        <div class="fadeIn first">
+        <div class="fadeIn second">
             <h5>Use an account to log in.</h5>
         </div>
 
@@ -14,14 +14,14 @@
         <form method="post" asp-action="/">
             <div asp-validation-summary="All"></div>
             <div>
-                <input asp-for="Input.Email" class="fadeIn second" name="Email" placeholder="Enter your e-mail">
-                <span asp-validation-for="Input.Email" ></span>
+                <input asp-for="Input.Email" class="fadeIn third" name="Email" placeholder="Enter your e-mail">
+               
             </div>
             <div>
-                <input asp-for="Input.Password" class="fadeIn third" name="Password" placeholder="Enter your password">
-                <span asp-validation-for="Input.Password"></span>
+                <input asp-for="Input.Password" class="fadeIn fourth" name="Password" placeholder="Enter your password">
+                
             </div>
-            <button type="submit" id="btn-lgn" class="btn btn-info fadeIn fourth">Log in</button>
+            <button type="submit" id="btn-lgn" class="btn btn-info fadeIn five">Log in</button>
             <a asp-page="./Register" id="btn-reg" class="btn btn-danger fadeIn five"> Register </a>
         </form>
 

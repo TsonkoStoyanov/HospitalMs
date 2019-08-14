@@ -3,32 +3,27 @@
 
 <div class="wrapper fadeInDown">
     <div id="formContent">
-        <div id="sname" class="fadeIn second">
+        <div id="sname" class="fadeIn first">
             <h1>Hospital<span class="text-info">MS</span></h1>
         </div>
-        <div class="fadeIn first">
+        <div class="fadeIn second">
             <h5>Create a new account.</h5>
         </div>
 
         <!-- Register Form -->
-
         <form method="post" asp-action="/Identity/Account/Register">
             <div asp-validation-summary="All"></div>
             <div>
-                <input asp-for="Input.Email" id="login" class="fadeIn second" name="Email" placeholder="Enter your e-mail">
-                <span asp-validation-for="Input.Email"></span>
+                <input asp-for="Input.Email" id="login" class="fadeIn third" name="Email" placeholder="Enter your e-mail">
             </div>
             <div>
-                <input asp-for="Input.Password" id="password" class="fadeIn third" name="Password" placeholder="Enter your password">
-                <span asp-validation-for="Input.Password"></span>
+                <input asp-for="Input.Password" id="password" class="fadeIn fourth" name="Password" placeholder="Enter your password">
             </div>
             <div>
-                <input asp-for="Input.ConfirmPassword" id="confirmPassword" class="fadeIn third" name="ConfirmPassword" placeholder="Confirm your password">
-                <span asp-validation-for="Input.ConfirmPassword"></span>
+                <input asp-for="Input.ConfirmPassword" id="confirmPassword" class="fadeIn five" name="ConfirmPassword" placeholder="Confirm your password">
             </div>
             <button type="submit" class="btn btn-danger fadeIn five btn-f">Register</button>
         </form>
-
 
         <div id="formFooter">
             <a class="underlineHover" asp-page="./Login">Already have an account? Login!</a>
