@@ -5,10 +5,12 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using HospitalMS.Services.Messaging.SendGrid;
 
 namespace HospitalMS.Web
 {
@@ -36,17 +38,22 @@ namespace HospitalMS.Web
               options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
 
             services
-                .AddIdentity<HospitalMSUser, HospitalMSRole>(options =>
+                .AddIdentity<HospitalMSUser, IdentityRole>(options =>
                 {
                     options.Password.RequireDigit = false;
                     options.Password.RequireLowercase = false;
                     options.Password.RequireUppercase = false;
                     options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequiredLength = 6;
+                    options.Password.RequiredLength = 3;
                 })
                 .AddEntityFrameworkStores<HospitalDbContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI(UIFramework.Bootstrap4);
+
+            //SendGirdConfiguration
+            services.Configure<SendGridOptions>(this.Configuration.GetSection("SendGridApiKey"));
+            services.AddTransient<IEmailSender, EmailSender>();
+
 
             services.AddMvc().AddRazorPagesOptions(options =>
             {
@@ -77,7 +84,7 @@ namespace HospitalMS.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute("areaRoute", "{area:exists}/{controller=Home}/{action=Index}/{id?}");
-                routes.MapRoute(name: "default",template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

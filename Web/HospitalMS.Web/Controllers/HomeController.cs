@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
+using HospitalMS.Web.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using HospitalMS.Web.Models;
 
 namespace HospitalMS.Web.Controllers
 {

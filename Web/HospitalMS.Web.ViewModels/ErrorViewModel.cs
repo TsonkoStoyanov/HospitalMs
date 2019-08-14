@@ -1,6 +1,4 @@
-using System;
-
-namespace HospitalMS.Web.Models
+namespace HospitalMS.Web.ViewModels
 {
     public class ErrorViewModel
     {

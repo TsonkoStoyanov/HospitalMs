@@ -1,34 +1,39 @@
 ﻿@page
 @model RegisterModel
-@{
-    ViewData["Title"] = "Register";
-}
 
-<h1>@ViewData["Title"]</h1>
+<div class="wrapper fadeInDown">
+    <div id="formContent">
+        <div id="sname" class="fadeIn second">
+            <h1>Hospital<span class="text-info">MS</span></h1>
+        </div>
+        <div class="fadeIn first">
+            <h5>Create a new account.</h5>
+        </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <form asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h4>Create a new account.</h4>
-            <hr />
-            <div asp-validation-summary="All" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Input.Email"></label>
-                <input asp-for="Input.Email" class="form-control" />
-                <span asp-validation-for="Input.Email" class="text-danger"></span>
+        <!-- Register Form -->
+
+        <form method="post" asp-action="/Identity/Account/Register">
+            <div asp-validation-summary="All"></div>
+            <div>
+                <input asp-for="Input.Email" id="login" class="fadeIn second" name="Email" placeholder="Enter your e-mail">
+                <span asp-validation-for="Input.Email"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.Password"></label>
-                <input asp-for="Input.Password" class="form-control" />
-                <span asp-validation-for="Input.Password" class="text-danger"></span>
+            <div>
+                <input asp-for="Input.Password" id="password" class="fadeIn third" name="Password" placeholder="Enter your password">
+                <span asp-validation-for="Input.Password"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Input.ConfirmPassword"></label>
-                <input asp-for="Input.ConfirmPassword" class="form-control" />
-                <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
+            <div>
+                <input asp-for="Input.ConfirmPassword" id="confirmPassword" class="fadeIn third" name="ConfirmPassword" placeholder="Confirm your password">
+                <span asp-validation-for="Input.ConfirmPassword"></span>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" id="btn-reg-reg" class="btn btn-danger fadeIn five ">Register</button>
         </form>
+
+
+        <div id="formFooter">
+            <a class="underlineHover" asp-page="./Login">Already have an account? Login!</a>
+            <a class="underlineHover" asp-page="./ForgotPassword">Forgot Password?</a>
+        </div>
     </div>
 </div>
 
