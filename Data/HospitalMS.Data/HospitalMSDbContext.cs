@@ -9,6 +9,7 @@ namespace HospitalMS.Data
     {
         public DbSet<Hospital> Hospitals { get; set; }
 
+        
         public HospitalMSDbContext(DbContextOptions options) : base(options)
         {
         }
