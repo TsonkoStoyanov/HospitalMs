@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using HospitalMS.Common.HospitalMS.Common;
 
 namespace HospitalMS.Web.Areas.Identity.Pages.Account
 {
@@ -15,15 +16,18 @@ namespace HospitalMS.Web.Areas.Identity.Pages.Account
     public class RegisterModel : PageModel
     {
         private readonly UserManager<HospitalMSUser> _userManager;
+        private readonly RoleManager<IdentityRole> _roleManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
 
         public RegisterModel(
             UserManager<HospitalMSUser> userManager,
+            RoleManager<IdentityRole> roleManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
             _logger = logger;
             _emailSender = emailSender;
         }
@@ -77,6 +81,8 @@ namespace HospitalMS.Web.Areas.Identity.Pages.Account
 
                     await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
                         $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+                    await _userManager.AddToRoleAsync(user, GlobalConstants.PatientRoleName);
 
                     return LocalRedirect(returnUrl);
                 }

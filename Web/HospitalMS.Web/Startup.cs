@@ -11,6 +11,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using HospitalMS.Services.Messaging.SendGrid;
+using HospitalMS.Data.Seeding;
 
 namespace HospitalMS.Web
 {
@@ -34,7 +35,7 @@ namespace HospitalMS.Web
             });
 
 
-            services.AddDbContext<HospitalDbContext>(
+            services.AddDbContext<HospitalMSDbContext>(
               options => options.UseSqlServer(this.Configuration.GetConnectionString("DefaultConnection")));
 
             services
@@ -46,7 +47,7 @@ namespace HospitalMS.Web
                     options.Password.RequireNonAlphanumeric = false;
                     options.Password.RequiredLength = 3;
                 })
-                .AddEntityFrameworkStores<HospitalDbContext>()
+                .AddEntityFrameworkStores<HospitalMSDbContext>()
                 .AddDefaultTokenProviders()
                 .AddDefaultUI(UIFramework.Bootstrap4);
 
@@ -66,6 +67,18 @@ namespace HospitalMS.Web
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            using (var serviceScope = app.ApplicationServices.CreateScope())
+            {
+                var dbContext = serviceScope.ServiceProvider.GetRequiredService<HospitalMSDbContext>();
+
+                if (env.IsDevelopment())
+                {
+                    dbContext.Database.Migrate();
+                }
+
+                new HospitalMSDbContextSeeder().SeedAsync(dbContext, serviceScope.ServiceProvider).GetAwaiter().GetResult();
+            }
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();

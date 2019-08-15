@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace HospitalMS.Data.Migrations
 {
-    [DbContext(typeof(HospitalDbContext))]
+    [DbContext(typeof(HospitalMSDbContext))]
     [Migration("20190814125734_initial")]
     partial class initial
     {

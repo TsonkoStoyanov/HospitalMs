@@ -15,6 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\HospitalMS.Common\HospitalMS.Common.csproj" />
     <ProjectReference Include="..\HospitalMS.Data.Models\HospitalMS.Data.Models.csproj" />
   </ItemGroup>
 
