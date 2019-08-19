@@ -21,12 +21,14 @@
 
 
   <ItemGroup>
+    <Folder Include="Areas\Administration\ViewModels\" />
+    <Folder Include="Areas\Administration\Views\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 
   <ItemGroup>
-    <Content Update="Views\Shared\_navPartial.cshtml">
+    <Content Update="Views\Shared\_NavigationPartial.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

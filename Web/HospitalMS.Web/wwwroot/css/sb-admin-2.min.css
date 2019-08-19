@@ -12048,7 +12048,6 @@ a:focus {
         font-size: 1.2rem;
         padding: 1.5rem 1rem;
         text-align: center;
-        
         z-index: 1;
     }
 
@@ -12968,4 +12967,10 @@ footer.sticky-footer {
 
 body.sidebar-toggled footer.sticky-footer {
     width: 100%;
+}
+
+#sname {
+    padding-right: 11rem;
+    font-family:Verdana;
+    padding-left: 1rem;
 }

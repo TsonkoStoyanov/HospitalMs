@@ -1,4 +1,4 @@
-﻿<nav class="navbar-nav bg-gradient-info sidebar sidebar-dark accordion" id="accordionSidebar">
+﻿<nav class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
 
     <!-- Sidebar - Brand -->
     <div class="img_container mt-3 mb-3">
@@ -22,15 +22,27 @@
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.AdministratorRoleName))
     {
         <!-- Heading -->
-        <div class="sidebar-heading">
-            @this.User.Identity.Name
-        </div>
+    <div class="sidebar-heading">
+        Administrator
+    </div>
     }
     else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.PatientRoleName))
     {
-        <div class="sidebar-heading">
-            @this.User.Identity.Name
-        </div>
+    <div class="sidebar-heading">
+        Patient
+    </div>
+    }
+    else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.DoctorRoleName))
+    {
+    <div class="sidebar-heading">
+        Doctor
+    </div>
+    }
+    else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.ReceptionistRoleName))
+    {
+<div class="sidebar-heading">
+    Receptionist
+</div>
     }
     <!-- Nav Item - Pages Collapse Menu -->
     <div class="nav-item">
