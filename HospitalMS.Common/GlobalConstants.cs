@@ -10,9 +10,12 @@
 
 
         public const string AdminEmail = "admin@hospitalms.com";
-        public const string AdminUserName = "Admin";
 
 
+        public const string HospitalName = "MBAL Burgas";
+        public const string HospitalAddress = "Burgas, 73, Stefan Stambolov str.";
+        public const string HospitalEmail = "mbal@mbal.com";
+        public const string HospitalPhone = "+3595660689";
     }
 
 

@@ -20,7 +20,7 @@ namespace HospitalMS.Services.Messaging.SendGrid
         {
             var apiKey = this.options.ApiKey;
             var client = new SendGridClient(apiKey);
-            var from = new EmailAddress(GlobalConstants.AdminEmail, GlobalConstants.AdminUserName);
+            var from = new EmailAddress(GlobalConstants.AdminEmail, GlobalConstants.AdminEmail);
             var to = new EmailAddress(email, email);
             var msg = MailHelper.CreateSingleEmail(from, to, subject, htmlMessage, htmlMessage);
             var response = await client.SendEmailAsync(msg);

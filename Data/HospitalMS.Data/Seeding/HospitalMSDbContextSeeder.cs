@@ -27,6 +27,7 @@
                           {
                               new RolesSeeder(),
                               new RootSeeder(),
+                              new HospitalSeeder()
                           };
 
             foreach (var seeder in seeders)

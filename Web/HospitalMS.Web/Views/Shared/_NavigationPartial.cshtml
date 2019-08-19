@@ -6,12 +6,11 @@
             <i class="far fa-hospital fa-5x text-light"></i>
         </a>
     </div>
-    <!-- Divider -->
-    <hr class="sidebar-divider my-0">
+
 
     <!-- Nav Item - Dashboard -->
     <div class="nav-item active">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="/Home/Index">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
@@ -22,103 +21,162 @@
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.AdministratorRoleName))
     {
         <!-- Heading -->
-    <div class="sidebar-heading">
-        Administrator
-    </div>
+        <div class="sidebar-heading">
+            Admin
+        </div>
+
+        <!-- Nav Item - Hospital Collapse Menu -->
+        <div class="nav-item">
+            <a class="nav-link" href="charts.html">
+                <i class="fas fa-hospital-symbol"></i>
+                <span>Hospital</span>
+            </a>
+        </div>
+
+        <!-- Nav Item - Department Collapse Menu -->
+        <div class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepartmentMenu" aria-expanded="true" aria-controls="collapseDepartmentMenu">
+                <i class="fas fa-clinic-medical"></i>
+                <span>Department</span>
+            </a>
+            <div id="collapseDepartmentMenu" class="collapse" aria-labelledby="collapseDepartmentMenu" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Department menu:</h6>
+                    <a class="collapse-item" href="utilities-color.html">Add Department</a>
+                    <a class="collapse-item" href="utilities-border.html">List Departments</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - Doctor Collapse Menu -->
+        <div class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDoctorMenu" aria-expanded="true" aria-controls="collapseDoctorMenu">
+                <i class="fas fa-user-md"></i>
+                <span>Doctor</span>
+            </a>
+            <div id="collapseDoctorMenu" class="collapse" aria-labelledby="collapseDoctorMenu" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Doctor menu:</h6>
+                    <a class="collapse-item" href="utilities-color.html">Add Doctor</a>
+                    <a class="collapse-item" href="utilities-border.html">List Doctors</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nav Item - Patient Collapse Menu -->
+        <div class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePatientMenu" aria-expanded="true" aria-controls="collapsePatientMenu">
+                <i class="fas fa-user-injured"></i>
+                <span>Patient</span>
+            </a>
+            <div id="collapsePatientMenu" class="collapse" aria-labelledby="collapsePatientMenu" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Patient menu:</h6>
+                    <a class="collapse-item" href="utilities-color.html">Add Patient</a>
+                    <a class="collapse-item" href="utilities-border.html">List Patients</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nav Item - Recepcionist Collapse Menu -->
+        <div class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRecepcionistMenu" aria-expanded="true" aria-controls="collapseRecepcionistMenu">
+                <i class="fas fa-notes-medical"></i>
+                <span>Recepcionist</span>
+            </a>
+            <div id="collapseRecepcionistMenu" class="collapse" aria-labelledby="collapseRecepcionistMenu" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Recepcionist menu:</h6>
+                    <a class="collapse-item" href="utilities-color.html">Add Recepcionist</a>
+                    <a class="collapse-item" href="utilities-border.html">List Recepcionists</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Nav Item - Room Collapse Menu -->
+        <div class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRoomMenu" aria-expanded="true" aria-controls="collapseRoomMenu">
+                <i class="fas fa-door-open"></i>
+                <span>Room</span>
+            </a>
+            <div id="collapseRoomMenu" class="collapse" aria-labelledby="collapseRoomMenu" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Room menu:</h6>
+                    <a class="collapse-item" href="login.html">Add Room</a>
+                    <a class="collapse-item" href="register.html">List Rooms </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nav Item - Bed Collapse Menu -->
+        <div class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBedMenu" aria-expanded="true" aria-controls="collapseBedMenu">
+                <i class="fas fa-bed"></i>
+                <span>Bed</span>
+            </a>
+            <div id="collapseBedMenu" class="collapse" aria-labelledby="collapseBedMenu" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Bed menu:</h6>
+                    <a class="collapse-item" href="login.html">Add Bed</a>
+                    <a class="collapse-item" href="register.html">List Beds </a>
+                </div>
+            </div>
+        </div>
+
     }
     else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.PatientRoleName))
     {
-    <div class="sidebar-heading">
-        Patient
-    </div>
+        <div class="sidebar-heading">
+            Patient
+        </div>
+
+        <!-- Nav Item - Hospitals -->
+        <div class="nav-item">
+            <a class="nav-link" href="charts.html">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Hospitals</span>
+            </a>
+        </div>
+
+        <!-- Nav Item - Departments -->
+        <div class="nav-item">
+            <a class="nav-link" href="charts.html">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Departments</span>
+            </a>
+        </div>
     }
     else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.DoctorRoleName))
     {
-    <div class="sidebar-heading">
-        Doctor
-    </div>
+        <div class="sidebar-heading">
+            Doctor
+        </div>
     }
     else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.ReceptionistRoleName))
     {
-<div class="sidebar-heading">
-    Receptionist
-</div>
+        <div class="sidebar-heading">
+            Receptionist
+        </div>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Nav Item - Charts -->
+        <div class="nav-item">
+            <a class="nav-link" href="charts.html">
+                <i class="fas fa-fw fa-chart-area"></i>
+                <span>Charts</span>
+            </a>
+        </div>
     }
-    <!-- Nav Item - Pages Collapse Menu -->
-    <div class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-            <i class="fas fa-fw fa-cog"></i>
-            <span>Components</span>
-        </a>
-        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Components:</h6>
-                <a class="collapse-item" href="buttons.html">Buttons</a>
-                <a class="collapse-item" href="cards.html">Cards</a>
-            </div>
-        </div>
-    </div>
 
-    <!-- Nav Item - Utilities Collapse Menu -->
-    <div class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities" aria-expanded="true" aria-controls="collapseUtilities">
-            <i class="fas fa-fw fa-wrench"></i>
-            <span>Utilities</span>
-        </a>
-        <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Custom Utilities:</h6>
-                <a class="collapse-item" href="utilities-color.html">Colors</a>
-                <a class="collapse-item" href="utilities-border.html">Borders</a>
-                <a class="collapse-item" href="utilities-animation.html">Animations</a>
-                <a class="collapse-item" href="utilities-other.html">Other</a>
-            </div>
-        </div>
-    </div>
 
-    <!-- Divider -->
-    <hr class="sidebar-divider">
-
-    <!-- Heading -->
-    <div class="sidebar-heading">
-        Addons
-    </div>
-
-    <!-- Nav Item - Pages Collapse Menu -->
-    <div class="nav-item">
-        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages" aria-expanded="true" aria-controls="collapsePages">
-            <i class="fas fa-fw fa-folder"></i>
-            <span>Pages</span>
-        </a>
-        <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
-            <div class="bg-white py-2 collapse-inner rounded">
-                <h6 class="collapse-header">Login Screens:</h6>
-                <a class="collapse-item" href="login.html">Login</a>
-                <a class="collapse-item" href="register.html">Register</a>
-                <a class="collapse-item" href="forgot-password.html">Forgot Password</a>
-                <div class="collapse-divider"></div>
-                <h6 class="collapse-header">Other Pages:</h6>
-                <a class="collapse-item" href="404.html">404 Page</a>
-                <a class="collapse-item" href="blank.html">Blank Page</a>
-            </div>
-        </div>
-    </div>
-
-    <!-- Nav Item - Charts -->
-    <div class="nav-item">
-        <a class="nav-link" href="charts.html">
-            <i class="fas fa-fw fa-chart-area"></i>
-            <span>Charts</span>
-        </a>
-    </div>
-
-    <!-- Nav Item - Tables -->
-    <div class="nav-item">
-        <a class="nav-link" href="tables.html">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Tables</span>
-        </a>
-    </div>
 
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">

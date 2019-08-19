@@ -21,8 +21,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Areas\Administration\ViewModels\" />
-    <Folder Include="Areas\Administration\Views\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
