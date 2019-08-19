@@ -6,6 +6,12 @@ namespace HospitalMS.Data.Models
 {
     public class Hospital
     {
+        public Hospital()
+        {
+            this.Departaments = new HashSet<Departament>();
+            this.Users = new HashSet<HospitalMSUser>();
+        }
+
         public string Id { get; set; }
 
         public string Name { get; set; }
@@ -16,6 +22,8 @@ namespace HospitalMS.Data.Models
 
         public string PhoneNumber { get; set; }
 
+        public ICollection<Departament> Departaments { get; set; }
+        public ICollection<HospitalMSUser> Users { get; set; }
 
     }
 }

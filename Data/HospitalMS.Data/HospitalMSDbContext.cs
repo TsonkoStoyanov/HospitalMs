@@ -9,7 +9,12 @@ namespace HospitalMS.Data
     {
         public DbSet<Hospital> Hospitals { get; set; }
 
-        
+        public DbSet<Departament> Departaments { get; set; }
+
+        public DbSet<Room> Rooms { get; set; }
+
+        public DbSet<Bed> Beds { get; set; }
+
         public HospitalMSDbContext(DbContextOptions options) : base(options)
         {
         }

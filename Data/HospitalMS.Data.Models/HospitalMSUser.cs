@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity;
-
-namespace HospitalMS.Data.Models
+﻿namespace HospitalMS.Data.Models
 {
+    using Microsoft.AspNetCore.Identity;
+
+
     public class HospitalMSUser : IdentityUser
     {
+
 
         public string FirstName { get; set; }
 
@@ -11,6 +13,6 @@ namespace HospitalMS.Data.Models
 
         public string LastName { get; set; }
 
-        
+
     }
 }

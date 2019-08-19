@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HospitalMS.Data.Migrations
 {
     [DbContext(typeof(HospitalMSDbContext))]
-    partial class HospitalDbContextModelSnapshot : ModelSnapshot
+    partial class HospitalMSDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,40 @@ namespace HospitalMS.Data.Migrations
                 .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("HospitalMS.Data.Models.Bed", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<bool>("IsOcupied");
+
+                    b.Property<int>("Number");
+
+                    b.Property<string>("RoomId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("RoomId");
+
+                    b.ToTable("Beds");
+                });
+
+            modelBuilder.Entity("HospitalMS.Data.Models.Departament", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("HospitalId");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HospitalId");
+
+                    b.ToTable("Departaments");
+                });
 
             modelBuilder.Entity("HospitalMS.Data.Models.Hospital", b =>
                 {
@@ -47,8 +81,7 @@ namespace HospitalMS.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired();
+                    b.Property<string>("DepartamentId");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -56,6 +89,8 @@ namespace HospitalMS.Data.Migrations
                     b.Property<bool>("EmailConfirmed");
 
                     b.Property<string>("FirstName");
+
+                    b.Property<string>("HospitalId");
 
                     b.Property<string>("LastName");
 
@@ -86,6 +121,10 @@ namespace HospitalMS.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartamentId");
+
+                    b.HasIndex("HospitalId");
+
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
 
@@ -95,8 +134,22 @@ namespace HospitalMS.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("HospitalMSUser");
+            modelBuilder.Entity("HospitalMS.Data.Models.Room", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DepartamentId");
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartamentId");
+
+                    b.ToTable("Rooms");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -209,11 +262,36 @@ namespace HospitalMS.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("HospitalMS.Data.Models.Patient", b =>
+            modelBuilder.Entity("HospitalMS.Data.Models.Bed", b =>
                 {
-                    b.HasBaseType("HospitalMS.Data.Models.HospitalMSUser");
+                    b.HasOne("HospitalMS.Data.Models.Room", "Room")
+                        .WithMany("Beds")
+                        .HasForeignKey("RoomId");
+                });
 
-                    b.HasDiscriminator().HasValue("Patient");
+            modelBuilder.Entity("HospitalMS.Data.Models.Departament", b =>
+                {
+                    b.HasOne("HospitalMS.Data.Models.Hospital")
+                        .WithMany("Departaments")
+                        .HasForeignKey("HospitalId");
+                });
+
+            modelBuilder.Entity("HospitalMS.Data.Models.HospitalMSUser", b =>
+                {
+                    b.HasOne("HospitalMS.Data.Models.Departament")
+                        .WithMany("Users")
+                        .HasForeignKey("DepartamentId");
+
+                    b.HasOne("HospitalMS.Data.Models.Hospital")
+                        .WithMany("Users")
+                        .HasForeignKey("HospitalId");
+                });
+
+            modelBuilder.Entity("HospitalMS.Data.Models.Room", b =>
+                {
+                    b.HasOne("HospitalMS.Data.Models.Departament")
+                        .WithMany("Rooms")
+                        .HasForeignKey("DepartamentId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

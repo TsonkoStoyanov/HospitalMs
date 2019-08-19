@@ -1,6 +1,6 @@
 ﻿namespace HospitalMS.Data.Seeding
 {
-    using HospitalMS.Common.HospitalMS.Common;
+    using HospitalMS.Common;
     using HospitalMS.Data.Models;
     using Microsoft.AspNetCore.Identity;
     using Microsoft.Extensions.DependencyInjection;

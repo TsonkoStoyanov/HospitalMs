@@ -1,4 +1,4 @@
-﻿using HospitalMS.Common.HospitalMS.Common;
+﻿using HospitalMS.Common;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.Extensions.Options;
 using SendGrid;
