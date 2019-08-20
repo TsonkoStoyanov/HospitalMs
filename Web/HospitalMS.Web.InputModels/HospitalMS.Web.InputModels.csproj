@@ -1,7 +1,12 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Services\HospitalMS.Services.Mapping\HospitalMS.Services.Mapping.csproj" />
+    <ProjectReference Include="..\..\Services\HospitalMS.Services.Models\HospitalMS.Services.Models.csproj" />
+  </ItemGroup>
 
 </Project>

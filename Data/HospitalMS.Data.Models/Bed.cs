@@ -1,9 +1,7 @@
 ﻿namespace HospitalMS.Data.Models
 {
-    public class Bed
+    public class Bed : BaseModel<string>
     {
-        public string Id { get; set; }
-
         public int Number { get; set; }
 
         public bool IsOcupied { get; set; } = false;

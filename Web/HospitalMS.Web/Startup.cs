@@ -13,6 +13,12 @@
     using Microsoft.Extensions.DependencyInjection;
     using HospitalMS.Services.Messaging.SendGrid;
     using HospitalMS.Data.Seeding;
+    using HospitalMS.Services.Mapping;
+    using HospitalMS.Web.ViewModels.Hospital;
+    using HospitalMS.Services.Models;
+    using System.Reflection;
+    using HospitalMS.Services;
+    using HospitalMS.Web.InputModels.Hospital;
 
     public class Startup
     {
@@ -50,6 +56,9 @@
                 .AddDefaultTokenProviders()
                 .AddDefaultUI();
 
+            //DependancyContainer
+            services.AddTransient<IHospitalService, HospitalService>();
+
             //SendGirdConfiguration
             services.Configure<SendGridOptions>(this.Configuration.GetSection("SendGridApiKey"));
             services.AddTransient<IEmailSender, EmailSender>();
@@ -66,6 +75,11 @@
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            AutoMapperConfig.RegisterMappings(
+              typeof(HospitalDetailsViewModel).GetTypeInfo().Assembly,
+              typeof(HospitalEditInputModel).GetTypeInfo().Assembly,
+              typeof(HospitalServiceModel).GetTypeInfo().Assembly);
+
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {
                 var dbContext = serviceScope.ServiceProvider.GetRequiredService<HospitalMSDbContext>();

@@ -15,13 +15,19 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalMS.Data", "Data\Hos
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalMS.Web", "Web\HospitalMS.Web\HospitalMS.Web.csproj", "{C2DAAC76-983E-4F6C-993C-1AEF136B5481}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalMS.Web.ViewModels", "Web\HospitalMS.Web.ViewModels\HospitalMS.Web.ViewModels.csproj", "{93EFAB49-D4A0-4892-B427-E37C285D371C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalMS.Web.ViewModels", "Web\HospitalMS.Web.ViewModels\HospitalMS.Web.ViewModels.csproj", "{93EFAB49-D4A0-4892-B427-E37C285D371C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalMS.Web.InputModels", "Web\HospitalMS.Web.InputModels\HospitalMS.Web.InputModels.csproj", "{0B2EA9F1-C57A-4186-B4CB-F333A99A0235}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalMS.Web.InputModels", "Web\HospitalMS.Web.InputModels\HospitalMS.Web.InputModels.csproj", "{0B2EA9F1-C57A-4186-B4CB-F333A99A0235}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalMS.Services.Messaging", "Services\HospitalMS.Services.Messaging\HospitalMS.Services.Messaging.csproj", "{D1C218E5-B068-4183-AFC3-12770CC0E380}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalMS.Services.Messaging", "Services\HospitalMS.Services.Messaging\HospitalMS.Services.Messaging.csproj", "{D1C218E5-B068-4183-AFC3-12770CC0E380}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalMS.Common", "HospitalMS.Common\HospitalMS.Common.csproj", "{A9DA4F92-64C1-414F-8FC6-FCA58590CA5A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HospitalMS.Common", "HospitalMS.Common\HospitalMS.Common.csproj", "{A9DA4F92-64C1-414F-8FC6-FCA58590CA5A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalMS.Services", "Services\HospitalMS.Services\HospitalMS.Services.csproj", "{A8B6AC91-C2E3-4A8E-82D4-E7E34B77A73E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalMS.Services.Models", "Services\HospitalMS.Services.Models\HospitalMS.Services.Models.csproj", "{F1EE1B2A-0541-4902-BDD0-F55B02854C93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HospitalMS.Services.Mapping", "Services\HospitalMS.Services.Mapping\HospitalMS.Services.Mapping.csproj", "{30FDD574-959B-454D-AD29-1718C5B1680B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -57,6 +63,18 @@ Global
 		{A9DA4F92-64C1-414F-8FC6-FCA58590CA5A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9DA4F92-64C1-414F-8FC6-FCA58590CA5A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9DA4F92-64C1-414F-8FC6-FCA58590CA5A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8B6AC91-C2E3-4A8E-82D4-E7E34B77A73E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8B6AC91-C2E3-4A8E-82D4-E7E34B77A73E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8B6AC91-C2E3-4A8E-82D4-E7E34B77A73E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8B6AC91-C2E3-4A8E-82D4-E7E34B77A73E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1EE1B2A-0541-4902-BDD0-F55B02854C93}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1EE1B2A-0541-4902-BDD0-F55B02854C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1EE1B2A-0541-4902-BDD0-F55B02854C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1EE1B2A-0541-4902-BDD0-F55B02854C93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30FDD574-959B-454D-AD29-1718C5B1680B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30FDD574-959B-454D-AD29-1718C5B1680B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30FDD574-959B-454D-AD29-1718C5B1680B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30FDD574-959B-454D-AD29-1718C5B1680B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +86,9 @@ Global
 		{93EFAB49-D4A0-4892-B427-E37C285D371C} = {1EE8F8E5-D016-4D57-A3A4-05C618B6F65B}
 		{0B2EA9F1-C57A-4186-B4CB-F333A99A0235} = {1EE8F8E5-D016-4D57-A3A4-05C618B6F65B}
 		{D1C218E5-B068-4183-AFC3-12770CC0E380} = {39956EB8-1905-4E68-9297-6A40CE9A26EA}
+		{A8B6AC91-C2E3-4A8E-82D4-E7E34B77A73E} = {39956EB8-1905-4E68-9297-6A40CE9A26EA}
+		{F1EE1B2A-0541-4902-BDD0-F55B02854C93} = {39956EB8-1905-4E68-9297-6A40CE9A26EA}
+		{30FDD574-959B-454D-AD29-1718C5B1680B} = {39956EB8-1905-4E68-9297-6A40CE9A26EA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {8FCF30F9-67A3-48D1-BD83-6F76E6985CB5}

@@ -45,11 +45,21 @@
                     await Html.RenderPartialAsync("_TopBarPartial");
                 }
                 <!-- End of Topbar -->
-                @RenderBody()
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Welcome @this.User.Identity.Name</h1>
+
+                    </div>
+                    @RenderBody()
+
+                </div>
+                <!-- End of Main Content -->
             </div>
-            <!-- End of Main Content -->
+            <!-- End of Content Wrapper -->
         </div>
-        <!-- End of Content Wrapper -->
     </div>
     <!-- End of Page Wrapper -->
     <!-- Scroll to Top Button-->

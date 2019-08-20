@@ -94,12 +94,9 @@ p {
 abbr[title],
 abbr[data-original-title] {
     text-decoration: underline;
-    -webkit-text-decoration: underline dotted;
     text-decoration: underline dotted;
     cursor: help;
     border-bottom: 0;
-    -webkit-text-decoration-skip-ink: none;
-    text-decoration-skip-ink: none;
 }
 
 address {
@@ -595,13 +592,8 @@ pre {
 }
 
 .row {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    margin-right: -0.75rem;
-    margin-left: -0.75rem;
+    margin-right: -15px;
+    margin-left: -15px;
 }
 
 .no-gutters {
@@ -2179,6 +2171,7 @@ pre {
     height: calc(1.5em + 0.75rem + 2px);
     padding: 0.375rem 0.75rem;
     font-size: 1rem;
+    margin-left: 1rem;
     font-weight: 400;
     line-height: 1.5;
     color: #6e707e;
@@ -2228,15 +2221,11 @@ pre {
     opacity: 1;
 }
 
-.form-control::-ms-input-placeholder {
+.form-control:-ms-input-placeholder {
     color: #858796;
     opacity: 1;
 }
 
-.form-control::placeholder {
-    color: #858796;
-    opacity: 1;
-}
 
 .form-control:disabled, .form-control[readonly] {
     background-color: #eaecf4;
@@ -2257,6 +2246,7 @@ select.form-control:focus::-ms-value {
 .col-form-label {
     padding-top: calc(0.375rem + 1px);
     padding-bottom: calc(0.375rem + 1px);
+    padding-left: 10px;
     margin-bottom: 0;
     font-size: inherit;
     line-height: 1.5;
@@ -2319,7 +2309,7 @@ textarea.form-control {
 }
 
 .form-group {
-    margin-bottom: 1rem;
+    margin-bottom: 15px;
 }
 
 .form-text {
@@ -12971,6 +12961,6 @@ body.sidebar-toggled footer.sticky-footer {
 
 #sname {
     padding-right: 11rem;
-    font-family:Verdana;
+    font-family: Verdana;
     padding-left: 1rem;
 }

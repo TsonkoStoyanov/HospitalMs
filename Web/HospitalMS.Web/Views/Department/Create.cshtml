@@ -1,0 +1,36 @@
+﻿@model HospitalMS.Data.Models.Departament
+
+@{
+    ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!-- Departments Card Example -->
+<div class="card shadow mb-4">
+    <div class="card-header">
+        <h6 class="m-0 font-weight-bold text-secondary">Add Department</h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row">
+                <label for="name" class="col-xs-3 col-form-label">Department Name <i class="text-danger">*</i></label>
+                <div class="col-xs-9">
+                    <input name="name" type="text" class="form-control" id="name" placeholder="Department Name" value="">
+                </div>
+            </div>
+            <div class="form-group">
+                <a href="#" class="btn btn-secondary btn-icon-split">
+                    <span class="icon text-white-50">
+                        <i class="fas fa-arrow-right"></i>
+                    </span>
+                    <span class="text">Add Department</span>
+                </a>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

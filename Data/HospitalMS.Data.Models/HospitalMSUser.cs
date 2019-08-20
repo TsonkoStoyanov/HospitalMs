@@ -2,7 +2,6 @@
 {
     using Microsoft.AspNetCore.Identity;
 
-
     public class HospitalMSUser : IdentityUser
     {
 

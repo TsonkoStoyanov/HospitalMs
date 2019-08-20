@@ -15,17 +15,28 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Data\HospitalMS.Data\HospitalMS.Data.csproj" />
+    <ProjectReference Include="..\..\Services\HospitalMS.Services.Mapping\HospitalMS.Services.Mapping.csproj" />
     <ProjectReference Include="..\..\Services\HospitalMS.Services.Messaging\HospitalMS.Services.Messaging.csproj" />
+    <ProjectReference Include="..\..\Services\HospitalMS.Services\HospitalMS.Services.csproj" />
+    <ProjectReference Include="..\HospitalMS.Web.InputModels\HospitalMS.Web.InputModels.csproj" />
     <ProjectReference Include="..\HospitalMS.Web.ViewModels\HospitalMS.Web.ViewModels.csproj" />
   </ItemGroup>
 
 
   <ItemGroup>
+    <Folder Include="Views\Bed\" />
+    <Folder Include="Views\Room\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 
   <ItemGroup>
+    <Content Update="Views\Department\All.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Department\Create.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Views\Shared\_NavigationPartial.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

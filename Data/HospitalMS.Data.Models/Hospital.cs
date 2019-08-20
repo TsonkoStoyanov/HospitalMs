@@ -1,18 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HospitalMS.Data.Models
+﻿namespace HospitalMS.Data.Models
 {
-    public class Hospital
+    using System.Collections.Generic;
+    public class Hospital : BaseModel<string>
     {
         public Hospital()
         {
             this.Departaments = new HashSet<Departament>();
             this.Users = new HashSet<HospitalMSUser>();
         }
-
-        public string Id { get; set; }
 
         public string Name { get; set; }
 
