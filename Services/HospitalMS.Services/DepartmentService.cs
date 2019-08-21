@@ -21,7 +21,7 @@
 
             Hospital hospitalFromDb =
                  context.Hospitals
-                 .SingleOrDefault(hospital => hospital.Name == departmentServiceModel.Hospital.Name);
+                 .SingleOrDefault(hospital => hospital.Name == departmentServiceModel.HospitalName);
 
             if (hospitalFromDb == null)
             {

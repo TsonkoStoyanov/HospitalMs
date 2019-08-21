@@ -12,6 +12,6 @@
 
         public bool IsActive { get; set; }
 
-        public HospitalServiceModel Hospital { get; set; }
+        public string HospitalName { get; set; }
     }
 }

@@ -1,8 +1,10 @@
 ﻿namespace HospitalMS.Web.InputModels.Department
 {
+    using HospitalMS.Services.Mapping;
+    using HospitalMS.Services.Models;
     using System.ComponentModel.DataAnnotations;
 
-    public class DepartmentAddInputModel
+    public class DepartmentAddInputModel: IMapTo<DepartmentServiceModel>
     {
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
@@ -10,9 +12,9 @@
 
         public string Description { get; set; }
 
-        public bool IsActive { get; set; }
+        public int IsActive { get; set; }
 
-        public string Hospital { get; set; }
+        public string HospitalName { get; set; }
 
     }
 }
