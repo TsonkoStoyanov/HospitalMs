@@ -1,15 +1,15 @@
-﻿using HospitalMS.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-
-namespace HospitalMS.Data
+﻿namespace HospitalMS.Data
 {
+    using HospitalMS.Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+    using Microsoft.EntityFrameworkCore;
+
     public class HospitalMSDbContext : IdentityDbContext<HospitalMSUser, IdentityRole, string>
     {
         public DbSet<Hospital> Hospitals { get; set; }
 
-        public DbSet<Departament> Departaments { get; set; }
+        public DbSet<Department> Departments { get; set; }
 
         public DbSet<Room> Rooms { get; set; }
 

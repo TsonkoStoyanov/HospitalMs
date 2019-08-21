@@ -1,7 +1,7 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace HospitalMS.Data.Models
 {
+    using System.Collections.Generic;
     public class Room : BaseModel<string>
     {
         public Room()

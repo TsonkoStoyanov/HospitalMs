@@ -1,6 +1,7 @@
 ﻿namespace HospitalMS.Services
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using HospitalMS.Data;
     using HospitalMS.Data.Models;
@@ -43,6 +44,18 @@
             return await this.context.Hospitals
               .To<HospitalServiceModel>()
               .FirstOrDefaultAsync();
+        }
+
+        public async Task<HospitalServiceModel> GetById(string id)
+        {
+            return await this.context.Hospitals
+           .To<HospitalServiceModel>()
+           .SingleOrDefaultAsync(hospital => hospital.Id == id);
+        }
+
+        public IQueryable<HospitalServiceModel> GetAllHospitals()
+        {
+            return this.context.Hospitals.To<HospitalServiceModel>();
         }
     }
 }

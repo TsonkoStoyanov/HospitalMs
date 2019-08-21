@@ -1,6 +1,5 @@
 ﻿namespace HospitalMS.Common
 {
-
     public static class GlobalConstants
     {
         public const string AdministratorRoleName = "Administrator";
@@ -17,6 +16,5 @@
         public const string HospitalEmail = "mbal@mbal.com";
         public const string HospitalPhone = "+3595660689";
     }
-
 
 }

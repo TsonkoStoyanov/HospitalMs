@@ -1,9 +1,9 @@
-﻿using System.Diagnostics;
-using HospitalMS.Web.ViewModels;
-using Microsoft.AspNetCore.Mvc;
-
-namespace HospitalMS.Web.Controllers
+﻿namespace HospitalMS.Web.Controllers
 {
+    using System.Diagnostics;
+    using HospitalMS.Web.ViewModels;
+    using Microsoft.AspNetCore.Mvc;
+
     public class HomeController : BaseController
     {
         public IActionResult Index()

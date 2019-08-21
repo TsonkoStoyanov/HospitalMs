@@ -61,7 +61,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 
 body {
     margin: 0;
-    font-family: Tahoma;
+    font-family:Tahoma;
     font-size: 1rem;
     font-weight: 400;
     line-height: 1.5;
@@ -121,11 +121,13 @@ dl {
 
 dt {
     font-weight: 700;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 dd {
-    margin-bottom: .5rem;
-    margin-left: 0;
+    padding-top: 4px;
+    padding-bottom: 4px;
 }
 
 blockquote {
@@ -2157,6 +2159,8 @@ pre {
 .table-responsive {
     display: block;
     width: 100%;
+    padding-left:3px;
+    padding-right:3px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -2169,9 +2173,7 @@ pre {
     display: block;
     width: 100%;
     height: calc(1.5em + 0.75rem + 2px);
-    padding: 0.375rem 0.75rem;
     font-size: 1rem;
-    margin-left: 1rem;
     font-weight: 400;
     line-height: 1.5;
     color: #6e707e;
@@ -2334,20 +2336,15 @@ textarea.form-control {
     }
 
 .form-check {
-    position: relative;
+    position: absolute;
     display: block;
-    padding-left: 1.25rem;
+    padding-left: 0px;
 }
 
 .form-check-input {
     position: absolute;
-    margin-top: 0.3rem;
-    margin-left: -1.25rem;
 }
 
-    .form-check-input:disabled ~ .form-check-label {
-        color: #858796;
-    }
 
 .form-check-label {
     margin-bottom: 0;
@@ -2360,16 +2357,8 @@ textarea.form-control {
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
-    padding-left: 0;
-    margin-right: 0.75rem;
 }
 
-    .form-check-inline .form-check-input {
-        position: static;
-        margin-top: 0;
-        margin-right: 0.3125rem;
-        margin-left: 0;
-    }
 
 .valid-feedback {
     display: none;
@@ -2704,7 +2693,6 @@ textarea.form-control {
 
     .form-inline .form-check-input {
         position: relative;
-        -ms-flex-negative: 0;
         flex-shrink: 0;
         margin-top: 0;
         margin-right: 0.25rem;
@@ -3371,6 +3359,9 @@ fieldset:disabled a.btn {
 }
 
 .btn-block {
+    margin-top: 50px;
+    margin-bottom: 10px;
+    margin-left: -10px;
     display: block;
     width: 100%;
 }
@@ -12963,4 +12954,38 @@ body.sidebar-toggled footer.sticky-footer {
     padding-right: 11rem;
     font-family: Verdana;
     padding-left: 1rem;
+}
+
+.col-form-label {
+    margin-bottom: 0;
+    text-align: left;
+}
+
+.asp-val {
+    text-align: center;
+    font-size: 14px;
+    font-style: italic;
+    color: coral;
+}
+
+.radio-inline {
+    margin-top: 8px;
+    margin-right: 8px;
+}
+.textarea-des {
+    height:130px;
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #6e707e;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #d1d3e2;
+    border-radius: 0.35rem;
+    -webkit-transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
 }

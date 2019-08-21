@@ -1,8 +1,7 @@
-﻿using HospitalMS.Services.Mapping;
-using HospitalMS.Data.Models;
-
-namespace HospitalMS.Services.Models
+﻿namespace HospitalMS.Services.Models
 {
+    using HospitalMS.Services.Mapping;
+    using HospitalMS.Data.Models;
     public class HospitalServiceModel : IMapFrom<Hospital>, IMapTo<Hospital>
     {
         public string Id { get; set; }

@@ -37,12 +37,16 @@ namespace HospitalMS.Data.Migrations
                     b.ToTable("Beds");
                 });
 
-            modelBuilder.Entity("HospitalMS.Data.Models.Departament", b =>
+            modelBuilder.Entity("HospitalMS.Data.Models.Department", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Description");
+
                     b.Property<string>("HospitalId");
+
+                    b.Property<bool>("IsActive");
 
                     b.Property<string>("Name");
 
@@ -50,7 +54,7 @@ namespace HospitalMS.Data.Migrations
 
                     b.HasIndex("HospitalId");
 
-                    b.ToTable("Departaments");
+                    b.ToTable("Departments");
                 });
 
             modelBuilder.Entity("HospitalMS.Data.Models.Hospital", b =>
@@ -81,7 +85,7 @@ namespace HospitalMS.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<string>("DepartamentId");
+                    b.Property<string>("DepartmentId");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256);
@@ -121,7 +125,7 @@ namespace HospitalMS.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartamentId");
+                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("HospitalId");
 
@@ -141,13 +145,13 @@ namespace HospitalMS.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("DepartamentId");
+                    b.Property<string>("DepartmentId");
 
                     b.Property<string>("Name");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartamentId");
+                    b.HasIndex("DepartmentId");
 
                     b.ToTable("Rooms");
                 });
@@ -269,18 +273,18 @@ namespace HospitalMS.Data.Migrations
                         .HasForeignKey("RoomId");
                 });
 
-            modelBuilder.Entity("HospitalMS.Data.Models.Departament", b =>
+            modelBuilder.Entity("HospitalMS.Data.Models.Department", b =>
                 {
-                    b.HasOne("HospitalMS.Data.Models.Hospital")
-                        .WithMany("Departaments")
+                    b.HasOne("HospitalMS.Data.Models.Hospital", "Hospital")
+                        .WithMany("Departments")
                         .HasForeignKey("HospitalId");
                 });
 
             modelBuilder.Entity("HospitalMS.Data.Models.HospitalMSUser", b =>
                 {
-                    b.HasOne("HospitalMS.Data.Models.Departament")
+                    b.HasOne("HospitalMS.Data.Models.Department")
                         .WithMany("Users")
-                        .HasForeignKey("DepartamentId");
+                        .HasForeignKey("DepartmentId");
 
                     b.HasOne("HospitalMS.Data.Models.Hospital")
                         .WithMany("Users")
@@ -289,9 +293,9 @@ namespace HospitalMS.Data.Migrations
 
             modelBuilder.Entity("HospitalMS.Data.Models.Room", b =>
                 {
-                    b.HasOne("HospitalMS.Data.Models.Departament")
+                    b.HasOne("HospitalMS.Data.Models.Department")
                         .WithMany("Rooms")
-                        .HasForeignKey("DepartamentId");
+                        .HasForeignKey("DepartmentId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -5,7 +5,7 @@
     {
         public Hospital()
         {
-            this.Departaments = new HashSet<Departament>();
+            this.Departments = new HashSet<Department>();
             this.Users = new HashSet<HospitalMSUser>();
         }
 
@@ -17,7 +17,7 @@
 
         public string PhoneNumber { get; set; }
 
-        public ICollection<Departament> Departaments { get; set; }
+        public ICollection<Department> Departments { get; set; }
         public ICollection<HospitalMSUser> Users { get; set; }
 
     }

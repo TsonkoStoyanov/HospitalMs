@@ -1,4 +1,12 @@
-﻿<!-- Content Row -->
+﻿@{
+    ViewData["Title"] = "Dashboard";
+}
+
+<!-- Page Heading -->
+<div class="d-sm-flex align-items-center justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Welcome, @this.User.Identity.Name</h1>
+</div>
+<!-- Content Row -->
 <div class="row">
     <!-- Departments Card Example -->
     <div class="col-xl-4 col-md-6 mb-4">
@@ -102,4 +110,3 @@
         </div>
     </div>
 </div>
-

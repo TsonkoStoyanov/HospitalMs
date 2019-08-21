@@ -7,12 +7,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-
-    <title>HospitalMS</title>
+  
+    <title>@this.ViewData["Title"]</title>
 
     <environment include="Development">
         <!-- Custom fonts for this template-->
         <link href="~/css/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
+        <link rel="shortcut icon" href="~/hospital.ico">
         <!-- Custom styles for this template-->
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
         <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
@@ -47,12 +48,7 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-
-                    <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Welcome @this.User.Identity.Name</h1>
-
-                    </div>
+                                    
                     @RenderBody()
 
                 </div>
@@ -82,6 +78,7 @@
         <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
         <!-- Custom scripts for all pages-->
         <script src="/js/sb-admin-2.min.js"></script>
+        <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/js/jquery-easing/jquery.easing.min.js"></script>
     </environment>
     <environment exclude="Development">
