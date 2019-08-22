@@ -82,8 +82,12 @@ namespace HospitalMS.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
+                    b.Property<int>("Age");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
+
+                    b.Property<DateTime>("DateOfBirth");
 
                     b.Property<string>("DepartmentId");
 
@@ -93,8 +97,6 @@ namespace HospitalMS.Data.Migrations
                     b.Property<bool>("EmailConfirmed");
 
                     b.Property<string>("FirstName");
-
-                    b.Property<string>("HospitalId");
 
                     b.Property<string>("LastName");
 
@@ -126,8 +128,6 @@ namespace HospitalMS.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
-
-                    b.HasIndex("HospitalId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -282,13 +282,9 @@ namespace HospitalMS.Data.Migrations
 
             modelBuilder.Entity("HospitalMS.Data.Models.HospitalMSUser", b =>
                 {
-                    b.HasOne("HospitalMS.Data.Models.Department")
+                    b.HasOne("HospitalMS.Data.Models.Department", "Department")
                         .WithMany("Users")
                         .HasForeignKey("DepartmentId");
-
-                    b.HasOne("HospitalMS.Data.Models.Hospital")
-                        .WithMany("Users")
-                        .HasForeignKey("HospitalId");
                 });
 
             modelBuilder.Entity("HospitalMS.Data.Models.Room", b =>

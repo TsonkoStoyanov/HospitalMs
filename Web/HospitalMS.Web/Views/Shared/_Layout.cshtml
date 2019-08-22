@@ -7,16 +7,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-  
+
     <title>@this.ViewData["Title"]</title>
 
     <environment include="Development">
         <!-- Custom fonts for this template-->
         <link href="~/css/fontawesome-free/css/all.css" rel="stylesheet" type="text/css">
         <link rel="shortcut icon" href="~/hospital.ico">
+
         <!-- Custom styles for this template-->
         <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
         <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
+        <link href="~/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
@@ -48,7 +51,7 @@
                 <!-- End of Topbar -->
                 <!-- Begin Page Content -->
                 <div class="container-fluid">
-                                    
+
                     @RenderBody()
 
                 </div>
@@ -80,6 +83,11 @@
         <script src="/js/sb-admin-2.min.js"></script>
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/js/jquery-easing/jquery.easing.min.js"></script>
+        <!-- Page level plugins -->
+        <script src="/datatables/jquery.dataTables.min.js"></script>
+        <script src="/datatables/dataTables.bootstrap4.min.js"></script>
+
+        <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment exclude="Development">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"
@@ -95,7 +103,7 @@
                 integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o">
         </script>
     </environment>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+    
 
     @RenderSection("Scripts", required: false)
 

@@ -2159,8 +2159,8 @@ pre {
 .table-responsive {
     display: block;
     width: 100%;
-    padding-left:3px;
-    padding-right:3px;
+    padding-left:15px;
+    padding-right:15px;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
 }
@@ -12988,4 +12988,7 @@ body.sidebar-toggled footer.sticky-footer {
     transition: border-color 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
     transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out, -webkit-box-shadow 0.15s ease-in-out;
+}
+.mright {
+    margin-right:13px;
 }

@@ -5,6 +5,7 @@
     using System.Threading.Tasks;
     using HospitalMS.Data;
     using HospitalMS.Data.Models;
+    using HospitalMS.Services.Mapping;
     using HospitalMS.Services.Models;
 
     public class DepartmentService : IDepartmentService
@@ -49,7 +50,7 @@
 
         public IQueryable<DepartmentServiceModel> GetAllDepartments()
         {
-            throw new NotImplementedException();
+            return this.context.Departments.To<DepartmentServiceModel>();
         }
 
         public Task<DepartmentServiceModel> GetById(string id)

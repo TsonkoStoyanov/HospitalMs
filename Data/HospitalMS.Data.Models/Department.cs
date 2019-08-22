@@ -19,7 +19,6 @@
         public ICollection<Room> Rooms { get; set; }
         public ICollection<HospitalMSUser> Users { get; set; }
 
-
         public string HospitalId { get; set; }
         public Hospital Hospital { get; set; }
     }

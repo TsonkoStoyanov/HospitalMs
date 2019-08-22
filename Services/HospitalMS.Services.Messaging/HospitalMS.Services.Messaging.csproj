@@ -13,7 +13,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\HospitalMS.Common\HospitalMS.Common.csproj" />
-    <ProjectReference Include="..\..\Web\HospitalMS.Web.Common\HospitalMS.Web.Common.csproj" />
   </ItemGroup>
 
   <ItemGroup>
