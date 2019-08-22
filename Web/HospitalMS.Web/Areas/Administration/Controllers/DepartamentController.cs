@@ -7,8 +7,10 @@
     using HospitalMS.Web.InputModels.Department;
     using HospitalMS.Web.ViewModels.Department;
     using HospitalMS.Services;
+    using HospitalMS.Services.Mapping;
     using Microsoft.EntityFrameworkCore;
     using HospitalMS.Services.Models;
+    using System.Collections.Generic;
 
     public class DepartmentController : AdministratorController
     {
@@ -21,16 +23,15 @@
             this.hospitalService = hospitalService;
         }
 
-        [HttpGet(Name = "All")]
+        [HttpGet("All")]
+        [Route("/Administration/Department/All")]
         public async Task<IActionResult> All()
         {
-            return View();
-        }
+            List<DepartmentAllViewModel> departments = await this.departmentService.GetAllDepartments()
+                .To<DepartmentAllViewModel>()
+                .ToListAsync();
 
-
-        public async Task<IActionResult> Details(string id)
-        {
-            return View();
+            return this.View(departments);
         }
 
         [HttpGet(Name = "Add")]
@@ -68,20 +69,20 @@
 
             await this.departmentService.Add(departmentServiceModel);
 
-            return this.Redirect("/Department/All");
+            return this.Redirect("/Administration/Department/All");
 
         }
 
-        // GET: Departament/Edit/5
-        public async Task<IActionResult> Edit(int id)
+
+        public async Task<IActionResult> Edit(string id)
         {
             return View();
         }
 
-        // POST: Departament/Edit/5
+
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(string id, DepartmentEditInputModel departmentEditInputModel)
         {
             try
             {
@@ -95,13 +96,12 @@
             }
         }
 
-        // GET: Departament/Delete/5
+
         public async Task<IActionResult> Delete(int id)
         {
             return View();
         }
 
-        // POST: Departament/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id, IFormCollection collection)

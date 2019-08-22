@@ -7,6 +7,8 @@
     {
         IQueryable<DepartmentServiceModel> GetAllDepartments();
 
+        IQueryable<DepartmentServiceModel> GetAllActiveDepartments();
+
         Task<DepartmentServiceModel> GetById(string id);
 
         Task<bool> Add(DepartmentServiceModel departmentServiceModel);

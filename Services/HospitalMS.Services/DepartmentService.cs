@@ -7,6 +7,7 @@
     using HospitalMS.Data.Models;
     using HospitalMS.Services.Mapping;
     using HospitalMS.Services.Models;
+    using Microsoft.EntityFrameworkCore;
 
     public class DepartmentService : IDepartmentService
     {
@@ -48,14 +49,23 @@
             throw new NotImplementedException();
         }
 
+        public IQueryable<DepartmentServiceModel> GetAllActiveDepartments()
+        {
+            return this.context.Departments.Where(status => status.IsActive == true).To<DepartmentServiceModel>();
+        }
+
         public IQueryable<DepartmentServiceModel> GetAllDepartments()
         {
             return this.context.Departments.To<DepartmentServiceModel>();
         }
 
-        public Task<DepartmentServiceModel> GetById(string id)
+        public async Task<DepartmentServiceModel> GetById(string id)
         {
-            throw new NotImplementedException();
+
+            return await this.context.Departments
+                 .To<DepartmentServiceModel>()
+                 .SingleOrDefaultAsync(department => department.Id == id);
+
         }
     }
 }

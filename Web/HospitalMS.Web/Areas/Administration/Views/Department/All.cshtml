@@ -1,0 +1,78 @@
+﻿@model List<DepartmentAllViewModel>
+
+@{
+    ViewData["Title"] = "All";
+
+}
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold">Department <span class="text-info">All</span></h6>
+    </div>
+
+    <div class="card-body">
+        @if (@Model.Count != 0)
+        {
+            <div class="table-responsive">
+                <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                        </div>
+                        <div class="col-sm-12 col-md-6"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <table class="table table-bordered dataTable" id="dataTable" role="grid" aria-describedby="dataTable_info" style="width: 100%;" width="100%" cellspacing="0">
+                                <thead>
+                                    <tr role="row">
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 160px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 246px;" aria-label="Description: activate to sort column ascending">Description</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 115px;" aria-label="Status: activate to sort column ascending">Status</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 50px;" aria-label="Hospital: activate to sort column ascending">Hospital</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 96px;">Actions</th>
+                                    </tr>
+                                </thead>
+                                <tfoot>
+                                    <tr>
+                                        <th rowspan="1" colspan="1">Name</th>
+                                        <th rowspan="1" colspan="1">Description</th>
+                                        <th rowspan="1" colspan="1">Status</th>
+                                        <th rowspan="1" colspan="1">Hospital</th>
+                                        <th rowspan="1" colspan="1">Actions</th>
+                                    </tr>
+                                </tfoot>
+                                <tbody>
+                                    @for (int i = 0; i < Model.Count; i++)
+                                    {
+                                        <tr role="row" class="@(i % 2 != 0 ? "even" : "odd")">
+                                            <td class="sorting_1">
+                                                <a class="text-info" href="/Department/Details/@Model[i].Id">
+                                                    @Model[i].Name
+                                                </a>
+                                            </td>
+                                            <td>@Model[i].Description</td>
+                                            <td>@(Model[i].IsActive ? "active" : "inactive")</td>
+                                            <td>@Model[i].HospitalName</td>
+                                            <td>
+                                                <a href="/Administration/Department/Edit/@Model[i].Id" class="btn btn-xs  btn-info">
+                                                    <i class="fa fa-edit"></i>
+                                                </a>
+                                                <a href="/Administration/Department/Delete/@Model[i].Id" class="btn btn-xs  btn-danger">
+                                                    <i class="fa fa-trash"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+        else
+        {
+            <h4>You have no Departments in your Hospital.</h4>
+        }
+
+    </div>
+</div>

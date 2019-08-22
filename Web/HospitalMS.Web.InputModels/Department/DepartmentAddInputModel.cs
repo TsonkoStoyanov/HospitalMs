@@ -4,7 +4,7 @@
     using HospitalMS.Services.Models;
     using System.ComponentModel.DataAnnotations;
 
-    public class DepartmentAddInputModel: IMapTo<DepartmentServiceModel>
+    public class DepartmentAddInputModel : IMapTo<DepartmentServiceModel>
     {
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
@@ -14,6 +14,7 @@
 
         public int IsActive { get; set; }
 
+        [Required]
         public string HospitalName { get; set; }
 
     }

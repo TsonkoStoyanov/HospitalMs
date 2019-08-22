@@ -21,17 +21,20 @@
         [Route("/Department/All")]
         public async Task<IActionResult> All()
         {
-            List<DepartamentAllViewModel> departments = await this.departmentService.GetAllDepartments()
-                .To<DepartamentAllViewModel>()
+            List<DepartmentAllViewModel> departments = await this.departmentService.GetAllActiveDepartments()
+                .To<DepartmentAllViewModel>()
                 .ToListAsync();
 
             return this.View(departments);
         }
 
-        // GET: Departament/Details/5
-        public async Task<IActionResult> Details(int id)
+    
+        public async Task<IActionResult> Details(string id)
         {
-            return View();
+            DepartmentViewModel department = (await this.departmentService.GetById(id))
+                .To<DepartmentViewModel>();
+
+            return this.View(department);
         }
 
     }

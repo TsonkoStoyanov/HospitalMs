@@ -1,4 +1,4 @@
-﻿@model List<DepartamentAllViewModel>
+﻿@model List<DepartmentAllViewModel>
 
 @{
     ViewData["Title"] = "All";
@@ -16,7 +16,7 @@
                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
-                            
+
                         </div>
                         <div class="col-sm-12 col-md-6"></div>
                     </div>
@@ -29,10 +29,7 @@
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 246px;" aria-label="Description: activate to sort column ascending">Description</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 115px;" aria-label="Status: activate to sort column ascending">Status</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 50px;" aria-label="Hospital: activate to sort column ascending">Hospital</th>
-                                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-                                        {
-                                            <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 96px;">Actions</th>
-                                        }
+
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -41,28 +38,23 @@
                                         <th rowspan="1" colspan="1">Description</th>
                                         <th rowspan="1" colspan="1">Status</th>
                                         <th rowspan="1" colspan="1">Hospital</th>
-                                        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-                                        {
-                                            <th rowspan="1" colspan="1">Actions</th>
-                                        }
+
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                     @for (int i = 0; i < Model.Count; i++)
                                     {
                                         <tr role="row" class="@(i % 2 != 0 ? "even" : "odd")">
-                                            <td class="sorting_1">@Model[i].Name</td>
+                                            <td class="sorting_1">
+                                                <a class="text-info" href="/Department/Details/@Model[i].Id">
+                                                    @Model[i].Name
+                                                </a>
+                                            </td>
                                             <td>@Model[i].Description</td>
                                             <td>@(Model[i].IsActive ? "active" : "inactive")</td>
                                             <td>@Model[i].HospitalName</td>
-
-                                            @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
-                                            {
-                                                <td>Admin</td>
-                                            }
                                         </tr>
                                     }
-
                                 </tbody>
                             </table>
                         </div>
