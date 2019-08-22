@@ -13,6 +13,8 @@
 
         public DbSet<Room> Rooms { get; set; }
 
+        public DbSet<RoomType> RoomTypes { get; set; }
+
         public DbSet<Bed> Beds { get; set; }
 
         public HospitalMSDbContext(DbContextOptions options) : base(options)

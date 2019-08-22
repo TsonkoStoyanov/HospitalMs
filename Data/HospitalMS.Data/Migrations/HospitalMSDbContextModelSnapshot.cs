@@ -149,11 +149,28 @@ namespace HospitalMS.Data.Migrations
 
                     b.Property<string>("Name");
 
+                    b.Property<int>("RoomTypeId");
+
                     b.HasKey("Id");
 
                     b.HasIndex("DepartmentId");
 
+                    b.HasIndex("RoomTypeId");
+
                     b.ToTable("Rooms");
+                });
+
+            modelBuilder.Entity("HospitalMS.Data.Models.RoomType", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("RoomTypes");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -292,6 +309,11 @@ namespace HospitalMS.Data.Migrations
                     b.HasOne("HospitalMS.Data.Models.Department")
                         .WithMany("Rooms")
                         .HasForeignKey("DepartmentId");
+
+                    b.HasOne("HospitalMS.Data.Models.RoomType", "RoomType")
+                        .WithMany()
+                        .HasForeignKey("RoomTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

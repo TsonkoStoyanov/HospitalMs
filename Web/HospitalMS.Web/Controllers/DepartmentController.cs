@@ -27,8 +27,7 @@
 
             return this.View(departments);
         }
-
-    
+            
         public async Task<IActionResult> Details(string id)
         {
             DepartmentViewModel department = (await this.departmentService.GetById(id))

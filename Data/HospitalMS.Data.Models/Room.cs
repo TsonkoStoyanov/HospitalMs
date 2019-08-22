@@ -10,6 +10,9 @@ namespace HospitalMS.Data.Models
         }
         public string Name { get; set; }
 
+        public int RoomTypeId { get; set; }
+        public RoomType RoomType { get; set; }
         public ICollection<Bed> Beds { get; set; }
+
     }
 }

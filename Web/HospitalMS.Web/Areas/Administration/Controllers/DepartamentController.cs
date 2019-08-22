@@ -61,7 +61,7 @@
                     HospitalName = hospital.Name
                 }).ToList();
 
-                return this.View();
+                return this.View(departmentAddInputModel);
             }
 
             DepartmentServiceModel departmentServiceModel = AutoMapper.Mapper.Map<DepartmentServiceModel>(departmentAddInputModel);
@@ -76,7 +76,21 @@
 
         public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            DepartmentEditInputModel departmentEditInputModel = (await this.departmentService.GetById(id)
+               ).To<DepartmentEditInputModel>();
+
+            if (departmentEditInputModel == null)
+            {
+                return this.Redirect("/Administration/Department/All");
+            }
+            var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
+            this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentAddHospitalViewModel
+            {
+                HospitalName = hospital.Name
+            }).ToList();
+
+            return this.View(departmentEditInputModel);
+
         }
 
 
@@ -84,16 +98,24 @@
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, DepartmentEditInputModel departmentEditInputModel)
         {
-            try
+            if (!this.ModelState.IsValid)
             {
-                // TODO: Add update logic here
+                var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
 
-                return RedirectToAction(nameof(All));
+                this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentAddHospitalViewModel
+                {
+                    HospitalName = hospital.Name
+                }).ToList();
+
+                return this.View(departmentEditInputModel);
             }
-            catch
-            {
-                return View();
-            }
+
+        
+            DepartmentServiceModel departmentServiceModel = AutoMapper.Mapper.Map<DepartmentServiceModel>(departmentEditInputModel);
+
+            await this.departmentService.Edit(id, departmentServiceModel);
+
+            return this.Redirect("/Administration/Department/All");
         }
 
 

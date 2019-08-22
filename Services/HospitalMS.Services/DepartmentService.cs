@@ -44,9 +44,35 @@
             throw new NotImplementedException();
         }
 
-        public Task<bool> Edit(string id, DepartmentServiceModel departmentServiceModel)
+        public async Task<bool> Edit(string id, DepartmentServiceModel departmentServiceModel)
         {
-            throw new NotImplementedException();
+            Hospital hospitalFromDb =
+                 context.Hospitals
+                 .SingleOrDefault(hospital => hospital.Name == departmentServiceModel.HospitalName);
+
+            if (hospitalFromDb == null)
+            {
+                throw new ArgumentNullException(nameof(hospitalFromDb));
+            }
+
+            Department departmentFromDb = await this.context.Departments.SingleOrDefaultAsync(department => department.Id == id);
+
+            if (departmentFromDb == null)
+            {
+                throw new ArgumentNullException(nameof(departmentFromDb));
+            }
+
+            departmentFromDb.Name = departmentServiceModel.Name;
+            departmentFromDb.Description = departmentServiceModel.Description;
+            departmentFromDb.IsActive = departmentServiceModel.IsActive;
+            
+
+            departmentFromDb.Hospital.Id = hospitalFromDb.Id;
+
+            this.context.Departments.Update(departmentFromDb);
+            int result = await context.SaveChangesAsync();
+
+            return result > 0;
         }
 
         public IQueryable<DepartmentServiceModel> GetAllActiveDepartments()
