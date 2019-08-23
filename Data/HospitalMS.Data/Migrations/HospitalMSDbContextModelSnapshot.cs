@@ -147,6 +147,8 @@ namespace HospitalMS.Data.Migrations
 
                     b.Property<string>("DepartmentId");
 
+                    b.Property<string>("Description");
+
                     b.Property<string>("Name");
 
                     b.Property<int>("RoomTypeId");
@@ -299,14 +301,14 @@ namespace HospitalMS.Data.Migrations
 
             modelBuilder.Entity("HospitalMS.Data.Models.HospitalMSUser", b =>
                 {
-                    b.HasOne("HospitalMS.Data.Models.Department", "Department")
+                    b.HasOne("HospitalMS.Data.Models.Department")
                         .WithMany("Users")
                         .HasForeignKey("DepartmentId");
                 });
 
             modelBuilder.Entity("HospitalMS.Data.Models.Room", b =>
                 {
-                    b.HasOne("HospitalMS.Data.Models.Department")
+                    b.HasOne("HospitalMS.Data.Models.Department", "Department")
                         .WithMany("Rooms")
                         .HasForeignKey("DepartmentId");
 

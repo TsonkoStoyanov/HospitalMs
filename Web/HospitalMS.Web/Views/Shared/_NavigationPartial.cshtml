@@ -7,23 +7,22 @@
         </a>
     </div>
 
-
-    <!-- Nav Item - Dashboard -->
-    <div id="p" class="nav-item">
-        <a class="nav-link" href="/Home/Index">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Dashboard</span>
-        </a>
-    </div>
-
-    <!-- Divider -->
-    <hr class="sidebar-divider">
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.AdministratorRoleName))
     {
         <!-- Heading -->
-        <div class="sidebar-heading">
-            Admin
+        <div class="sidebar-heading text-center">
+            Administrator
         </div>
+
+        
+        <!-- Nav Item - Dashboard -->
+        <div id="p" class="nav-item">
+            <a class="nav-link" href="/Home/Index">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span>
+            </a>
+        </div>
+        <hr class="sidebar-divider">
 
         <!-- Nav Item - Hospital Collapse Menu -->
         <div class="nav-item">
@@ -109,6 +108,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Room menu:</h6>
                     <a class="collapse-item" href="login.html">Add RoomType</a>
+                    <a class="collapse-item" href="register.html">List RoomTypes </a>
                     <a class="collapse-item" href="login.html">Add Room</a>
                     <a class="collapse-item" href="register.html">List Rooms </a>
                 </div>

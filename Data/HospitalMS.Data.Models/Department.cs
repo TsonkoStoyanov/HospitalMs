@@ -3,7 +3,6 @@
     using System.Collections.Generic;
     public class Department : BaseModel<string>
     {
-
         public Department()
         {
             this.Rooms = new HashSet<Room>();

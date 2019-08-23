@@ -2,7 +2,6 @@
 {
     using HospitalMS.Services.Models;
     using HospitalMS.Services.Mapping;
-    using AutoMapper;
 
     public class DepartmentAllViewModel : IMapFrom<DepartmentServiceModel>
     {

@@ -1,17 +1,30 @@
 ﻿namespace HospitalMS.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Threading.Tasks;
+    using HospitalMS.Common;
     using HospitalMS.Web.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController
     {
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
+        {
+            if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                return this.View("DashBoard");
+            }
+            else
+            {
+                return View("Privacy");
+            }
+        }
+
+        public async Task<IActionResult> Privacy()
         {
             return View();
         }
-
-        public IActionResult Privacy()
+        public async Task<IActionResult> Dashboard()
         {
             return View();
         }

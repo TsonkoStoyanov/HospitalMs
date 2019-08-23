@@ -26,8 +26,7 @@
                                 <thead>
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 160px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 246px;" aria-label="Description: activate to sort column ascending">Description</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 115px;" aria-label="Status: activate to sort column ascending">Status</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 246px;" aria-label="Description: activate to sort column ascending">Description</th>                                     
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 50px;" aria-label="Hospital: activate to sort column ascending">Hospital</th>
 
                                     </tr>
@@ -35,8 +34,7 @@
                                 <tfoot>
                                     <tr>
                                         <th rowspan="1" colspan="1">Name</th>
-                                        <th rowspan="1" colspan="1">Description</th>
-                                        <th rowspan="1" colspan="1">Status</th>
+                                        <th rowspan="1" colspan="1">Description</th>                                       
                                         <th rowspan="1" colspan="1">Hospital</th>
 
                                     </tr>
@@ -50,8 +48,7 @@
                                                     @Model[i].Name
                                                 </a>
                                             </td>
-                                            <td>@Model[i].Description</td>
-                                            <td>@(Model[i].IsActive ? "active" : "inactive")</td>
+                                            <td>@Model[i].Description</td>                                          
                                             <td>@Model[i].HospitalName</td>
                                         </tr>
                                     }

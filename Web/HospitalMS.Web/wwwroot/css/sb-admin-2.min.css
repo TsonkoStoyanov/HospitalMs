@@ -4,6 +4,7 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-sb-admin-2/blob/master/LICENSE)
  */
 
+
 /*!
  * Bootstrap v4.3.1 (https://getbootstrap.com/)
  * Copyright 2011-2019 The Bootstrap Authors
@@ -12048,8 +12049,9 @@ a:focus {
         text-align: center;
         padding: 0 1rem;
         font-weight: 800;
-        font-size: 0.65rem;
+        font-size: 1rem;
     }
+   
 
 .img_container {
     display: table-cell;
@@ -12201,6 +12203,8 @@ a:focus {
 
             .sidebar.toggled .sidebar-heading {
                 text-align: center;
+                font-size:0.5rem;
+                color:white;
             }
 }
 
@@ -12991,4 +12995,9 @@ body.sidebar-toggled footer.sticky-footer {
 }
 .mright {
     margin-right:13px;
+}
+
+.minus-mb{
+    margin-top:50px;
+    margin-bottom:-30px;
 }

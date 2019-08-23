@@ -1,7 +1,6 @@
 ﻿namespace HospitalMS.Web.Areas.Administration.Controllers
 {
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Http;
     using System.Linq;
     using Microsoft.AspNetCore.Mvc;
     using HospitalMS.Web.InputModels.Department;
@@ -34,8 +33,8 @@
             return this.View(departments);
         }
 
-        [HttpGet(Name = "Add")]
-        public async Task<IActionResult> Add()
+        [HttpGet(Name = "Create")]
+        public async Task<IActionResult> Create()
         {
             var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
 
@@ -48,9 +47,9 @@
 
         }
 
-        [HttpPost(Name = "Add")]
+        [HttpPost(Name = "Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Add(DepartmentAddInputModel departmentAddInputModel)
+        public async Task<IActionResult> Create(DepartmentAddInputModel departmentAddInputModel)
         {
             if (!this.ModelState.IsValid)
             {
@@ -110,7 +109,7 @@
                 return this.View(departmentEditInputModel);
             }
 
-        
+
             DepartmentServiceModel departmentServiceModel = AutoMapper.Mapper.Map<DepartmentServiceModel>(departmentEditInputModel);
 
             await this.departmentService.Edit(id, departmentServiceModel);
@@ -118,26 +117,33 @@
             return this.Redirect("/Administration/Department/All");
         }
 
-
-        public async Task<IActionResult> Delete(int id)
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
         {
-            return View();
+            DepartmentDeleteViewModel DepartmentDeleteViewModel = (await this.departmentService.GetById(id)
+              ).To<DepartmentDeleteViewModel>();
+
+            if (DepartmentDeleteViewModel == null)
+            {
+                return this.Redirect("/Administration/Department/All");
+            }
+            var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
+            this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentAddHospitalViewModel
+            {
+                HospitalName = hospital.Name
+            }).ToList();
+
+            return this.View(DepartmentDeleteViewModel);
+
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Delete(int id, IFormCollection collection)
+        [Route("/Administration/Department/Delete/{id}")]
+        public async Task<IActionResult> ConfirmDelete(string id)
         {
-            try
-            {
-                // TODO: Add delete logic here
+            await this.departmentService.Delete(id);
 
-                return RedirectToAction(nameof(All));
-            }
-            catch
-            {
-                return View();
-            }
+            return this.Redirect("/Administration/Department/All");
         }
     }
 }

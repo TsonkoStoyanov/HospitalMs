@@ -9,8 +9,4 @@
     <ProjectReference Include="..\..\Services\HospitalMS.Services.Models\HospitalMS.Services.Models.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Home\" />
-  </ItemGroup>
-
 </Project>

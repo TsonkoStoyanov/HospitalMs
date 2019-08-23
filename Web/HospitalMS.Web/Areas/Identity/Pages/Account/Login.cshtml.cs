@@ -1,28 +1,30 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using HospitalMS.Data.Models;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-
-namespace HospitalMS.Web.Areas.Identity.Pages.Account
+﻿namespace HospitalMS.Web.Areas.Identity.Pages.Account
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Linq;
+    using System.Threading.Tasks;
+    using Microsoft.AspNetCore.Authorization;
+    using HospitalMS.Data.Models;
+    using Microsoft.AspNetCore.Authentication;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.Extensions.Logging;
+
+
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly SignInManager<HospitalMSUser> _signInManager;
-        private readonly ILogger<LoginModel> _logger;
+        private readonly SignInManager<HospitalMSUser> signInManager;
+        private readonly UserManager<HospitalMSUser> userManager;
+        private readonly ILogger<LoginModel> logger;
 
-        public LoginModel(SignInManager<HospitalMSUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<HospitalMSUser> signInManager, UserManager<HospitalMSUser> userManager, ILogger<LoginModel> logger)
         {
-            _signInManager = signInManager;
-            _logger = logger;
+            this.signInManager = signInManager;
+            this.userManager = userManager;
+            this.logger = logger;
         }
 
         [BindProperty]
@@ -34,6 +36,8 @@ namespace HospitalMS.Web.Areas.Identity.Pages.Account
 
         [TempData]
         public string ErrorMessage { get; set; }
+        public bool ShowResend { get; set; }
+        public string UserId { get; set; }
 
         public class InputModel
         {
@@ -58,7 +62,7 @@ namespace HospitalMS.Web.Areas.Identity.Pages.Account
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
 
-            ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+            ExternalLogins = (await signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             ReturnUrl = returnUrl;
         }
@@ -71,17 +75,28 @@ namespace HospitalMS.Web.Areas.Identity.Pages.Account
             {
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, true, lockoutOnFailure: true);
+                var result = await signInManager.PasswordSignInAsync(Input.Email, Input.Password, true, lockoutOnFailure: true);
+
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("User logged in.");
+                    logger.LogInformation("User logged in.");
                     return LocalRedirect(returnUrl);
                 }
-                
+
                 if (result.IsLockedOut)
                 {
-                    _logger.LogWarning("User account locked out.");
+                    logger.LogWarning("User account locked out.");
                     return RedirectToPage("./Lockout");
+                }
+
+                if (result.IsNotAllowed)
+                {
+                    logger.LogWarning("User email is not confirmed.");
+                    var user = await userManager.FindByNameAsync(Input.Email);
+                    ModelState.AddModelError(string.Empty, $"Please confirm your email address. {user.Email}");
+                    UserId = user.Id;
+                    ShowResend = true;
+                    return Page();
                 }
                 else
                 {

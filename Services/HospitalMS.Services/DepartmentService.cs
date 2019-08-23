@@ -39,9 +39,20 @@
             return result > 0;
         }
 
-        public Task<bool> Delete(string id)
+        public async Task<bool> Delete(string id)
         {
-            throw new NotImplementedException();
+            Department departmentFromDb = await this.context.Departments.SingleOrDefaultAsync(department => department.Id == id);
+
+            if (departmentFromDb == null)
+            {
+                throw new ArgumentNullException(nameof(departmentFromDb));
+            }
+
+            this.context.Departments.Remove(departmentFromDb);
+
+            int result = await this.context.SaveChangesAsync();
+
+            return result > 0;
         }
 
         public async Task<bool> Edit(string id, DepartmentServiceModel departmentServiceModel)
