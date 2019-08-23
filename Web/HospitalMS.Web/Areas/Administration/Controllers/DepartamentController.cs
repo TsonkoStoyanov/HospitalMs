@@ -38,7 +38,7 @@
         {
             var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
 
-            this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentAddHospitalViewModel
+            this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentCreateHospitalViewModel
             {
                 HospitalName = hospital.Name
             }).ToList();
@@ -49,13 +49,13 @@
 
         [HttpPost(Name = "Create")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(DepartmentAddInputModel departmentAddInputModel)
+        public async Task<IActionResult> Create(DepartmentCreateInputModel departmentAddInputModel)
         {
             if (!this.ModelState.IsValid)
             {
                 var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
 
-                this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentAddHospitalViewModel
+                this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentCreateHospitalViewModel
                 {
                     HospitalName = hospital.Name
                 }).ToList();
@@ -83,7 +83,7 @@
                 return this.Redirect("/Administration/Department/All");
             }
             var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
-            this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentAddHospitalViewModel
+            this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentCreateHospitalViewModel
             {
                 HospitalName = hospital.Name
             }).ToList();
@@ -101,7 +101,7 @@
             {
                 var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
 
-                this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentAddHospitalViewModel
+                this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentCreateHospitalViewModel
                 {
                     HospitalName = hospital.Name
                 }).ToList();
@@ -128,7 +128,7 @@
                 return this.Redirect("/Administration/Department/All");
             }
             var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
-            this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentAddHospitalViewModel
+            this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentCreateHospitalViewModel
             {
                 HospitalName = hospital.Name
             }).ToList();

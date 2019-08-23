@@ -24,7 +24,6 @@
 
 
   <ItemGroup>
-    <Folder Include="Areas\Administration\Views\Room\Type\" />
     <Folder Include="Views\Bed\" />
     <Folder Include="Views\Room\" />
     <Folder Include="wwwroot\images\" />
@@ -33,6 +32,12 @@
 
   <ItemGroup>
     <Content Update="Areas\Administration\Views\Department\All.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Administration\Views\Room\Type\All.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Administration\Views\Room\Type\Create.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Views\Department\All.cshtml">

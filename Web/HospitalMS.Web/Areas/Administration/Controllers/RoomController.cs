@@ -9,6 +9,7 @@
     using HospitalMS.Services;
     using HospitalMS.Web.ViewModels.Room;
     using Microsoft.EntityFrameworkCore;
+    using System.Collections.Generic;
 
     public class RoomController : AdministratorController
     {
@@ -38,6 +39,17 @@
             await this.roomService.CreateRoomType(roomTypeServiceModel);
 
             return this.Redirect("/");
+        }
+
+        [HttpGet("All")]
+        [Route("/Administration/Room/Type/All")]
+        public async Task<IActionResult> All()
+        {
+            List<RoomTypeAllViewModel> departments = await this.roomService.GetAllRoomTypes()
+                .To<RoomTypeAllViewModel>()
+                .ToListAsync();
+
+            return this.View(departments);
         }
 
         [HttpGet(Name = "Create")]

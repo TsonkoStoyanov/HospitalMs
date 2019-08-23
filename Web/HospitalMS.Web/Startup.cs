@@ -61,6 +61,7 @@
             //DependancyContainer
             services.AddTransient<IHospitalService, HospitalService>();
             services.AddTransient<IDepartmentService, DepartmentService>();
+            services.AddTransient<IRoomService, RoomService>();
 
             //SendGirdConfiguration
             services.Configure<SendGridOptions>(this.Configuration.GetSection("SendGridApiKey"));

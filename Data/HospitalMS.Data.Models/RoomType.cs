@@ -1,9 +1,7 @@
 ﻿namespace HospitalMS.Data.Models
 {
-    public class RoomType
+    public class RoomType : BaseModel<int>
     {
-        public int Id { get; set; }
-
         public string Name { get; set; }
     }
 }

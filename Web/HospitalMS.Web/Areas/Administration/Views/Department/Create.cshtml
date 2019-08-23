@@ -1,4 +1,4 @@
-﻿@model DepartmentAddInputModel
+﻿@model DepartmentCreateInputModel
 
 @{
     ViewData["Title"] = "Department Add";
@@ -59,7 +59,7 @@
                         <div class="col-sm-10">
                             <select class="form-control text-primary" id="type" asp-for="HospitalName">
                                 <option selected disabled>--- Select Hospital ---</option>
-                                @foreach (var type in (IEnumerable<DepartmentAddHospitalViewModel>)this.ViewData["hospitals"])
+                                @foreach (var type in (IEnumerable<DepartmentCreateHospitalViewModel>)this.ViewData["hospitals"])
                                 {
                                     <option value="@type.HospitalName">@type.HospitalName</option>
                                 }
