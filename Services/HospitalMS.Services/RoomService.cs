@@ -56,7 +56,7 @@
             return this.context.RoomTypes.To<RoomTypeServiceModel>();
         }
 
-        public IQueryable<RoomServiceModel> GetAllRoom()
+        public IQueryable<RoomServiceModel> GetAllRooms()
         {
 
             return this.context.Rooms.To<RoomServiceModel>();

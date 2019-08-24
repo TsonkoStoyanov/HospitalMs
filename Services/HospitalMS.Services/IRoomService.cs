@@ -8,7 +8,7 @@
     {
         IQueryable<RoomTypeServiceModel> GetAllRoomTypes();
 
-        IQueryable<RoomServiceModel> GetAllRoom();
+        IQueryable<RoomServiceModel> GetAllRooms();
 
         Task<RoomServiceModel> GetById(string id);
 

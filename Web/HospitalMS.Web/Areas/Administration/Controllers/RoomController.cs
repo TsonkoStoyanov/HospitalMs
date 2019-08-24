@@ -14,10 +14,12 @@
     public class RoomController : AdministratorController
     {
         private readonly IRoomService roomService;
+        private readonly IDepartmentService departmentService;
 
-        public RoomController(IRoomService roomService)
+        public RoomController(IRoomService roomService, IDepartmentService departmentService)
         {
             this.roomService = roomService;
+            this.departmentService = departmentService;
         }
 
 
@@ -38,30 +40,38 @@
 
             await this.roomService.CreateRoomType(roomTypeServiceModel);
 
-            return this.Redirect("/");
+            return this.Redirect("/Administration/Room/Type/All");
         }
 
         [HttpGet("All")]
         [Route("/Administration/Room/Type/All")]
         public async Task<IActionResult> All()
         {
-            List<RoomTypeAllViewModel> departments = await this.roomService.GetAllRoomTypes()
+            List<RoomTypeAllViewModel> roomTypes = await this.roomService.GetAllRoomTypes()
                 .To<RoomTypeAllViewModel>()
                 .ToListAsync();
 
-            return this.View(departments);
+            return this.View("Type/All", roomTypes);
         }
 
-        [HttpGet(Name = "Create")]
-        public async Task<IActionResult> Create()
+        [HttpGet("All")]
+        [Route("/Administration/Room/All")]
+        public async Task<IActionResult> AllRooms()
         {
-            var allRoomTypes = await this.roomService.GetAllRoomTypes().ToListAsync();
+            //TODO async
+            var rooms = this.roomService.GetAllRooms()
+                .To<RoomAllViewModel>().ToList();
 
-            this.ViewData["types"] = allRoomTypes.Select(roomType => new RoomTypeCreateRoomViewModel
-            {
-                Name = roomType.Name
-            })
-                .ToList(); ;
+            return this.View(rooms);
+        }
+
+        [HttpGet("Create")]
+        [Route("/Administration/Room/Create")]
+        public async Task<IActionResult> CreateRoom()
+        {
+            await this.GetAllRoomTypes();
+
+            await this.GetAllDepartments();
 
             return this.View();
         }
@@ -71,23 +81,40 @@
         {
             if (!this.ModelState.IsValid)
             {
-                var allRoomTypes = await this.roomService.GetAllRoomTypes().ToListAsync();
+                await this.GetAllRoomTypes();
 
-                this.ViewData["types"] = allRoomTypes.Select(roomType => new RoomTypeCreateRoomViewModel
-                {
-                    Name = roomType.Name
-                })
-                    .ToList(); ;
+                await this.GetAllDepartments();
 
                 return this.View();
             }
-
-
+            
             RoomServiceModel roomServiceModel = AutoMapper.Mapper.Map<RoomServiceModel>(roomCreateInputModel);
 
             await this.roomService.Create(roomServiceModel);
 
             return this.Redirect("/");
+        }
+
+        private async Task GetAllRoomTypes()
+        {
+            var allRoomTypes = await this.roomService.GetAllRoomTypes().ToListAsync();
+
+            this.ViewData["roomTypes"] = allRoomTypes.Select(roomType => new RoomCreateRoomTypeViewModel
+            {
+                RoomTypeName = roomType.Name
+            })
+            .ToList();
+        }
+
+        private async Task GetAllDepartments()
+        {
+            var allDepartments = await this.departmentService.GetAllActiveDepartments().ToListAsync();
+
+            this.ViewData["departments"] = allDepartments.Select(department => new RoomCreateDepartmentViewModel
+            {
+                DepartmentName = department.Name
+            })
+            .ToList();
         }
     }
 }

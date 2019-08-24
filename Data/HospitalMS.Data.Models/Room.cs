@@ -6,12 +6,10 @@ namespace HospitalMS.Data.Models
     {
         public Room()
         {
-            this.Beds = new HashSet<Bed>();
+            this.Beds = new List<Bed>();
         }
         public string Name { get; set; }
-
-        public string Description { get; set; }
-
+              
         public int RoomTypeId { get; set; }
         public RoomType RoomType { get; set; }
 
@@ -19,7 +17,7 @@ namespace HospitalMS.Data.Models
         public string DepartmentId { get; set; }
         public Department Department { get; set; }
 
-        public ICollection<Bed> Beds { get; set; }
+        public List<Bed> Beds { get; set; }
 
     }
 }

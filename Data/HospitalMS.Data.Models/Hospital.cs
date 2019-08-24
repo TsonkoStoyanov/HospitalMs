@@ -5,7 +5,7 @@
     {
         public Hospital()
         {
-            this.Departments = new HashSet<Department>();
+            this.Departments = new List<Department>();
         }
 
         public string Name { get; set; }
@@ -16,7 +16,7 @@
 
         public string PhoneNumber { get; set; }
 
-        public ICollection<Department> Departments { get; set; }
+        public List<Department> Departments { get; set; }
 
     }
 }

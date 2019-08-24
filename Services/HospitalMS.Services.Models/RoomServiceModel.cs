@@ -2,8 +2,9 @@
 {
     using HospitalMS.Data.Models;
     using HospitalMS.Services.Mapping;
+    using System.Collections.Generic;
 
-    public class RoomServiceModel : IMapFrom<Room>, IMapTo<Room>
+    public class RoomServiceModel :  IMapTo<Room>, IMapFrom<Room>
     {
         public string Id { get; set; }
 
@@ -11,7 +12,9 @@
 
         public RoomTypeServiceModel RoomType { get; set; }
 
-        public int Beds { get; set; }
+        public DepartmentServiceModel Department { get; set; }
+
+        public List<BedServiceModel> Beds { get; set; }
 
     }
 }

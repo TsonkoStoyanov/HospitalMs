@@ -36,15 +36,9 @@
         [HttpGet(Name = "Create")]
         public async Task<IActionResult> Create()
         {
-            var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
-
-            this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentCreateHospitalViewModel
-            {
-                HospitalName = hospital.Name
-            }).ToList();
+            await GetAllHospitals();
 
             return this.View();
-
         }
 
         [HttpPost(Name = "Create")]
@@ -53,18 +47,12 @@
         {
             if (!this.ModelState.IsValid)
             {
-                var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
-
-                this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentCreateHospitalViewModel
-                {
-                    HospitalName = hospital.Name
-                }).ToList();
+                await GetAllHospitals();
 
                 return this.View(departmentAddInputModel);
             }
 
             DepartmentServiceModel departmentServiceModel = AutoMapper.Mapper.Map<DepartmentServiceModel>(departmentAddInputModel);
-
 
             await this.departmentService.Add(departmentServiceModel);
 
@@ -82,16 +70,11 @@
             {
                 return this.Redirect("/Administration/Department/All");
             }
-            var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
-            this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentCreateHospitalViewModel
-            {
-                HospitalName = hospital.Name
-            }).ToList();
+
+            await GetAllHospitals();
 
             return this.View(departmentEditInputModel);
-
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -99,16 +82,10 @@
         {
             if (!this.ModelState.IsValid)
             {
-                var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
-
-                this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentCreateHospitalViewModel
-                {
-                    HospitalName = hospital.Name
-                }).ToList();
+                await GetAllHospitals();
 
                 return this.View(departmentEditInputModel);
             }
-
 
             DepartmentServiceModel departmentServiceModel = AutoMapper.Mapper.Map<DepartmentServiceModel>(departmentEditInputModel);
 
@@ -127,14 +104,10 @@
             {
                 return this.Redirect("/Administration/Department/All");
             }
-            var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
-            this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentCreateHospitalViewModel
-            {
-                HospitalName = hospital.Name
-            }).ToList();
+
+            await GetAllHospitals();
 
             return this.View(DepartmentDeleteViewModel);
-
         }
 
         [HttpPost]
@@ -144,6 +117,16 @@
             await this.departmentService.Delete(id);
 
             return this.Redirect("/Administration/Department/All");
+        }
+
+        private async Task GetAllHospitals()
+        {
+            var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
+
+            this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentCreateHospitalViewModel
+            {
+                HospitalName = hospital.Name
+            }).ToList();
         }
     }
 }

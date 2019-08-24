@@ -1,6 +1,9 @@
 ﻿namespace HospitalMS.Web.ViewModels.Room
 {
-    public class RoomTypeAllViewModel
+    using HospitalMS.Services.Mapping;
+    using HospitalMS.Services.Models;
+
+    public class RoomTypeAllViewModel : IMapFrom<RoomTypeServiceModel>
     {
         public int Id { get; set; }
 

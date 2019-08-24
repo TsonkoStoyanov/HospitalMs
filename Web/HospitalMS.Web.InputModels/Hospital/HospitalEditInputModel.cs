@@ -9,11 +9,11 @@
         public string Id { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
+        [StringLength(30, ErrorMessage = "{0} must be between {2} and {1} symbols", MinimumLength = 4)]
         public string Name { get; set; }
 
         [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
+        [StringLength(30, ErrorMessage = "{0} must be between {2} and {1} symbols", MinimumLength = 4)]
         public string Address { get; set; }
 
         [Required]

@@ -5,8 +5,8 @@
     {
         public Department()
         {
-            this.Rooms = new HashSet<Room>();
-            this.Users = new HashSet<HospitalMSUser>();
+            this.Rooms = new List<Room>();
+            this.Users = new List<HospitalMSUser>();
         }
 
         public string Name { get; set; }
@@ -15,8 +15,8 @@
 
         public bool IsActive { get; set; }
 
-        public ICollection<Room> Rooms { get; set; }
-        public ICollection<HospitalMSUser> Users { get; set; }
+        public List<Room> Rooms { get; set; }
+        public List<HospitalMSUser> Users { get; set; }
 
         public string HospitalId { get; set; }
         public Hospital Hospital { get; set; }
