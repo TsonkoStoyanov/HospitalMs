@@ -31,8 +31,6 @@ namespace HospitalMS.Data.Migrations
 
                     b.Property<int>("Number");
 
-                    b.Property<decimal>("Price");
-
                     b.Property<string>("RoomId");
 
                     b.HasKey("Id");
@@ -94,7 +92,7 @@ namespace HospitalMS.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<DateTime>("DateOfBirth");
+                    b.Property<DateTime?>("DateOfBirth");
 
                     b.Property<string>("DepartmentId");
 
@@ -174,6 +172,8 @@ namespace HospitalMS.Data.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<string>("Name");
+
+                    b.Property<decimal>("PriceForBed");
 
                     b.HasKey("Id");
 

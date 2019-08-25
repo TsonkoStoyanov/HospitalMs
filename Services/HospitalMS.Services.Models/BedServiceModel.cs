@@ -12,7 +12,5 @@
 
         public bool IsOcupied { get; set; } = false;
 
-        public decimal Price { get; set; }
-
     }
 }

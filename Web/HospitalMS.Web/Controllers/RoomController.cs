@@ -11,7 +11,7 @@
     public class RoomController : BaseController
     {
         private readonly IRoomService roomService;
-               
+
 
         public RoomController(IRoomService roomService)
         {
@@ -29,12 +29,11 @@
             return this.View(rooms);
         }
 
-        [HttpGet("Details")]
-        [Route("/Room/All")]
+        [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
-           RoomDetailsViewModel room = (await this.roomService.GetById(id))
-                .To<RoomDetailsViewModel>();
+            RoomDetailsViewModel room = (await this.roomService.GetById(id))
+                 .To<RoomDetailsViewModel>();
 
             return this.View(room);
         }

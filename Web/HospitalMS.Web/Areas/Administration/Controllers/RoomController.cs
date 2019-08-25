@@ -26,6 +26,7 @@
         }
 
         [HttpGet]
+        [Route("/Administration/Room/All")]
         public async Task<IActionResult> All()
         {
             //TODO if time remains make it async

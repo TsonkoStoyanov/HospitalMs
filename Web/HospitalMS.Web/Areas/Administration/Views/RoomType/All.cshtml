@@ -26,6 +26,7 @@
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 160px;" aria-sort="ascending" aria-label="Id: activate to sort column descending">Id</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 246px;" aria-label="Name: activate to sort column ascending">Name</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 96px;">Price for bed</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 96px;">Actions</th>
                                     </tr>
                                 </thead>
@@ -33,24 +34,26 @@
                                     <tr>
                                         <th rowspan="1" colspan="1">Id</th>
                                         <th rowspan="1" colspan="1">Name</th>
+                                        <th rowspan="1" colspan="1">Price for bed</th>
                                         <th rowspan="1" colspan="1">Actions</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                     @for (int i = 0; i < Model.Count; i++)
                                     {
-                                        <tr role="row" class="@(i % 2 != 0 ? "even" : "odd")">
-                                            <td>@Model[i].Id</td>
-                                            <td>@(Model[i].Name)</td>
-                                            <td>
-                                                <a href="/Administration/RoomType/Edit/@Model[i].Id" class="btn btn-xs  btn-info">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a href="/Administration/RoomType/Delete/@Model[i].Id" class="btn btn-xs  btn-danger">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </td>
-                                        </tr>
+                                    <tr role="row" class="@(i % 2 != 0 ? "even" : "odd")">
+                                        <td>@Model[i].Id</td>
+                                        <td>@Model[i].Name</td>
+                                        <td>@Model[i].PriceForBed.ToString("F2")</td>
+                                        <td>
+                                            <a href="/Administration/RoomType/Edit/@Model[i].Id" class="btn btn-xs  btn-info">
+                                                <i class="fa fa-edit"></i>
+                                            </a>
+                                            <a href="/Administration/RoomType/Delete/@Model[i].Id" class="btn btn-xs  btn-danger">
+                                                <i class="fa fa-trash"></i>
+                                            </a>
+                                        </td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>

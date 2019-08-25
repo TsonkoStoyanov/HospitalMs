@@ -5,8 +5,6 @@
         public int Number { get; set; }
         public bool IsOcupied { get; set; } = false;
 
-        public decimal Price { get; set; }
-
         public string RoomId { get; set; }
         public virtual Room Room { get; set; }
 

@@ -54,16 +54,14 @@
             </dl>
             @if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                <div>
-                    <form asp-action="Add Bed">
-                        <input type="hidden" asp-for="Id" />
-                        <input class="col-sm-2 btn btn-danger" type="submit" value="Add Bed" />
-                    </form>
-                    <form asp-action="Remove Bed">
-                        <input type="hidden" asp-for="Id" />
-                        <input class="col-sm-2 btn btn-danger" type="submit" value="Remove Bed" />
-                    </form>
-
+                <div class="row">
+                    <div class="col-sm-2">
+                        <input type="hidden" value="@Model.Id">
+                        <a href="/Administration/Bed/Create" class="btn btn-info btn-block font-weight-bold">Add Bed</a>
+                    </div>
+                    <div class="col-sm-2">
+                        <a href="/Administration/Bed/Remove" class="btn btn-danger btn-block font-weight-bold">Remove Bed</a>
+                    </div>
                 </div>
             }
         </div>

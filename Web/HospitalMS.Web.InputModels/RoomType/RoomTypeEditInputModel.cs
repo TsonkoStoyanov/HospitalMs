@@ -10,5 +10,9 @@
         [Required]
         [StringLength(10, ErrorMessage = "{0} must be between {2} and {1} symbols", MinimumLength = 3)]
         public string Name { get; set; }
+
+        [Required]
+        [Range(1, 200, ErrorMessage = "Bed {0} can only be between {1} .. {2}")]
+        public decimal PriceForBed { get; set; }
     }
 }

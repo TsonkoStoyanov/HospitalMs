@@ -19,6 +19,7 @@
     using System.Reflection;
     using HospitalMS.Services;
     using HospitalMS.Web.InputModels.Hospital;
+    using System.Globalization;
 
     public class Startup
     {
@@ -63,6 +64,7 @@
             services.AddTransient<IDepartmentService, DepartmentService>();
             services.AddTransient<IRoomService, RoomService>();
             services.AddTransient<IRoomTypeService, RoomTypeService>();
+            services.AddTransient<IBedService, BedService>();
 
             //SendGirdConfiguration
             services.Configure<SendGridOptions>(this.Configuration.GetSection("SendGridApiKey"));
@@ -74,7 +76,6 @@
                 options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "");
             }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -84,6 +85,9 @@
               typeof(HospitalDetailsViewModel).GetTypeInfo().Assembly,
               typeof(HospitalEditInputModel).GetTypeInfo().Assembly,
               typeof(HospitalServiceModel).GetTypeInfo().Assembly);
+
+            CultureInfo.DefaultThreadCurrentCulture = CultureInfo.InvariantCulture;
+            CultureInfo.DefaultThreadCurrentUICulture = CultureInfo.InvariantCulture;
 
             using (var serviceScope = app.ApplicationServices.CreateScope())
             {

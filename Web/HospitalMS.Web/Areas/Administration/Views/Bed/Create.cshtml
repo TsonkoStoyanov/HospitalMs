@@ -1,0 +1,44 @@
+﻿@model BedCreateInputModel
+
+
+@{
+    ViewData["Title"] = "Bed Create";
+}
+<!-- Departments Card Example -->
+<div class="card shadow mb-4">
+    <div class="card-header d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-secondary">Bed <span class="text-info">Create</span></h6>
+        <div>
+            <a class="" href="/Administration/Room/All" role="button">
+                <h6 class="m-0 font-weight-bold text-secondary"><i class="fas fa-step-backward"></i>Back to <span class="text-info">All</span></h6>
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-10">
+                <form method="post">
+                    <div class="form-group row">
+                        <label asp-for="Number" class="col-sm-2 col-form-label">
+                            Number
+                            <i class="text-danger">*</i>
+                        </label>
+                        <div class="col-sm-4">
+                            <input class="form-control" type="number" asp-for="Number" />
+                            <div class="asp-val">
+                                <span asp-validation-for="Number"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-sm-2">
+                        <input type="submit" value="Create" class="btn btn-info btn-block font-weight-bold" />
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

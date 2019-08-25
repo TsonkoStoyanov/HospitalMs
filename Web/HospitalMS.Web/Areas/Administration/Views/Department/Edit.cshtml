@@ -60,9 +60,9 @@
                         <div class="col-sm-10">
                             <select class="form-control text-primary" id="type" asp-for="HospitalName">
                                 <option selected disabled>--- Select Hospital ---</option>
-                                @foreach (var type in hospitals)
+                                @foreach (var hospital in hospitals)
                                 {
-                                    <option value="@type.HospitalName">@type.HospitalName</option>
+                                    <option value="@hospital.HospitalName">@hospital.HospitalName</option>
                                 }
                             </select>
                             <div class="asp-val">

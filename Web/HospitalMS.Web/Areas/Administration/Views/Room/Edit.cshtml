@@ -40,7 +40,7 @@
                             <i class="text-danger">*</i>
                         </label>
                         <div class="col-sm-10">
-                            <select class="form-control text-primary" id="type" asp-for="RoomType">
+                            <select class="form-control text-primary" id="type" asp-for="RoomTypeName">
                                 <option selected disabled>--- Select RoomType ---</option>
                                 @foreach (var type in roomTypes)
                                 {
@@ -48,7 +48,7 @@
                                 }
                             </select>
                             <div class="asp-val">
-                                <span asp-validation-for="RoomType"></span>
+                                <span asp-validation-for="RoomTypeName"></span>
                             </div>
                         </div>
                     </div>
@@ -58,15 +58,15 @@
                             <i class="text-danger">*</i>
                         </label>
                         <div class="col-sm-10">
-                            <select class="form-control text-primary" id="type" asp-for="Department">
+                            <select class="form-control text-primary" id="type" asp-for="DepartmentName">
                                 <option selected disabled>--- Select Department ---</option>
-                                @foreach (var hospital in departments)
+                                @foreach (var departament in departments)
                                 {
-                                    <option value="@hospital.DepartmentName">@hospital.DepartmentName</option>
+                                    <option value="@departament.DepartmentName">@departament.DepartmentName</option>
                                 }
                             </select>
                             <div class="asp-val">
-                                <span asp-validation-for="Department"></span>
+                                <span asp-validation-for="DepartmentName"></span>
                             </div>
                         </div>
                     </div>

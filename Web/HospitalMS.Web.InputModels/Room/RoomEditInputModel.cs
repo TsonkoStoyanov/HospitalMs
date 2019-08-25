@@ -13,19 +13,19 @@
         public string Name { get; set; }
 
         [Required]
-        public string RoomType { get; set; }
+        public string RoomTypeName { get; set; }
 
         [Required]
-        public string Department { get; set; }
+        public string DepartmentName { get; set; }
 
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration
                .CreateMap<RoomEditInputModel, RoomServiceModel>()
                .ForMember(destination => destination.RoomType,
-                           opts => opts.MapFrom(origin => new RoomTypeServiceModel { Name = origin.RoomType }))
+                           opts => opts.MapFrom(origin => new RoomTypeServiceModel { Name = origin.RoomTypeName }))
                .ForMember(destination => destination.Department,
-                           opts => opts.MapFrom(origin => new DepartmentServiceModel { Name = origin.Department }));
+                           opts => opts.MapFrom(origin => new DepartmentServiceModel { Name = origin.DepartmentName }));
         }
 
     }

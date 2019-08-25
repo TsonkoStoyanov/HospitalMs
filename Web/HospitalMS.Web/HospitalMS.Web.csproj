@@ -30,6 +30,9 @@
 
 
   <ItemGroup>
+    <Content Update="Areas\Administration\Views\Bed\Create.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Update="Areas\Administration\Views\Department\All.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

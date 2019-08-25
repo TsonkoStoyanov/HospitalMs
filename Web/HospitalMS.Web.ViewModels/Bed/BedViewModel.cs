@@ -10,6 +10,5 @@
         public int Number { get; set; }
         public bool IsOcupied { get; set; }
 
-        public decimal Price { get; set; }
     }
 }
