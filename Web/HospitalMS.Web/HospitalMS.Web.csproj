@@ -25,7 +25,6 @@
 
   <ItemGroup>
     <Folder Include="Views\Bed\" />
-    <Folder Include="Views\Room\" />
     <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
@@ -34,16 +33,19 @@
     <Content Update="Areas\Administration\Views\Department\All.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="Areas\Administration\Views\Room\AllRooms.cshtml">
+    <Content Update="Areas\Administration\Views\Room\All.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="Areas\Administration\Views\Room\CreateRoom.cshtml">
+    <Content Update="Areas\Administration\Views\Room\Edit.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="Areas\Administration\Views\Room\Type\All.cshtml">
+    <Content Update="Areas\Administration\Views\Room\Create.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="Areas\Administration\Views\Room\Type\Create.cshtml">
+    <Content Update="Areas\Administration\Views\RoomType\All.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Administration\Views\RoomType\Create.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Views\Department\All.cshtml">
@@ -53,6 +55,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Views\Department\Details.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Room\All.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Views\Room\Details.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Views\Shared\_NavigationPartial.cshtml">

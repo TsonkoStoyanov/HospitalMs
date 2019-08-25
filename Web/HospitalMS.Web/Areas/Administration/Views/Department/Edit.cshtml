@@ -1,4 +1,5 @@
 ﻿@model DepartmentEditInputModel
+@{var hospitals = (IEnumerable<DepartmentCreateHospitalViewModel>)this.ViewData["hospitals"];}
 
 @{
     ViewData["Title"] = "Department Edit";
@@ -43,10 +44,10 @@
                         <div class="col-sm-10">
                             <div class="form-check">
                                 <label class="radio-inline">
-                                    <input type="radio" asp-for="IsActive" value="0"/> Inactive
+                                    <input type="radio" asp-for="IsActive" value="0" /> Inactive
                                 </label>
                                 <label class="radio-inline text-info">
-                                    <input type="radio" asp-for="IsActive" value="1"/> Active
+                                    <input type="radio" asp-for="IsActive" value="1" /> Active
                                 </label>
                             </div>
                         </div>
@@ -59,7 +60,7 @@
                         <div class="col-sm-10">
                             <select class="form-control text-primary" id="type" asp-for="HospitalName">
                                 <option selected disabled>--- Select Hospital ---</option>
-                                @foreach (var type in (IEnumerable<DepartmentCreateHospitalViewModel>)this.ViewData["hospitals"])
+                                @foreach (var type in hospitals)
                                 {
                                     <option value="@type.HospitalName">@type.HospitalName</option>
                                 }

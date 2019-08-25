@@ -25,13 +25,19 @@ namespace HospitalMS.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("HospitalMSUserId");
+
                     b.Property<bool>("IsOcupied");
 
                     b.Property<int>("Number");
 
+                    b.Property<decimal>("Price");
+
                     b.Property<string>("RoomId");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("HospitalMSUserId");
 
                     b.HasIndex("RoomId");
 
@@ -286,6 +292,10 @@ namespace HospitalMS.Data.Migrations
 
             modelBuilder.Entity("HospitalMS.Data.Models.Bed", b =>
                 {
+                    b.HasOne("HospitalMS.Data.Models.HospitalMSUser", "Patient")
+                        .WithMany()
+                        .HasForeignKey("HospitalMSUserId");
+
                     b.HasOne("HospitalMS.Data.Models.Room", "Room")
                         .WithMany("Beds")
                         .HasForeignKey("RoomId");
@@ -309,7 +319,8 @@ namespace HospitalMS.Data.Migrations
                 {
                     b.HasOne("HospitalMS.Data.Models.Department", "Department")
                         .WithMany("Rooms")
-                        .HasForeignKey("DepartmentId");
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HospitalMS.Data.Models.RoomType", "RoomType")
                         .WithMany()

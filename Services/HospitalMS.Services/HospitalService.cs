@@ -9,6 +9,7 @@
     using HospitalMS.Services.Models;
     using Microsoft.EntityFrameworkCore;
 
+
     public class HospitalService : IHospitalService
     {
         private readonly HospitalMSDbContext context;

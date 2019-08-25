@@ -2,6 +2,8 @@
 {
     using HospitalMS.Services.Mapping;
     using HospitalMS.Data.Models;
+
+
     public class HospitalServiceModel : IMapTo<Hospital>, IMapFrom<Hospital>
     {
         public string Id { get; set; }

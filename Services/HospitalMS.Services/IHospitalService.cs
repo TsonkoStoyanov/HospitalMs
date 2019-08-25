@@ -4,6 +4,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+
     public interface IHospitalService
     {
         Task<HospitalServiceModel> Get();

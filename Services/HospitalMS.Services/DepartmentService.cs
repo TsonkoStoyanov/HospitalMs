@@ -9,6 +9,7 @@
     using HospitalMS.Services.Models;
     using Microsoft.EntityFrameworkCore;
 
+
     public class DepartmentService : IDepartmentService
     {
         private readonly HospitalMSDbContext context;
@@ -18,7 +19,7 @@
             this.context = context;
         }
 
-        public async Task<bool> Add(DepartmentServiceModel departmentServiceModel)
+        public async Task<bool> Create(DepartmentServiceModel departmentServiceModel)
         {
 
             Hospital hospitalFromDb =
@@ -48,6 +49,17 @@
                 throw new ArgumentNullException(nameof(departmentFromDb));
             }
 
+            //TODO Cascade Delete if time remains to make warrning has room and users on department before delete
+            //if (departmentFromDb.Rooms.Count > 0)
+            //{
+            //    throw new ArgumentException("Are sure there is rooms related to Department.");
+            //}
+
+            //if (departmentFromDb.Users.Count > 0)
+            //{
+            //    throw new ArgumentException("Are sure there is users related to Department.");
+            //}
+
             this.context.Departments.Remove(departmentFromDb);
 
             int result = await this.context.SaveChangesAsync();
@@ -76,7 +88,7 @@
             departmentFromDb.Name = departmentServiceModel.Name;
             departmentFromDb.Description = departmentServiceModel.Description;
             departmentFromDb.IsActive = departmentServiceModel.IsActive;
-            
+
 
             departmentFromDb.Hospital.Id = hospitalFromDb.Id;
 

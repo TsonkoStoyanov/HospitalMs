@@ -9,6 +9,7 @@ namespace HospitalMS.Services.Mapping
     using AutoMapper;
     using AutoMapper.Configuration;
 
+
     public static class AutoMapperConfig
     {
         private static bool initialized;

@@ -4,6 +4,7 @@
     using HospitalMS.Services.Mapping;
     using System.Collections.Generic;
 
+
     public class RoomServiceModel :  IMapTo<Room>, IMapFrom<Room>
     {
         public string Id { get; set; }

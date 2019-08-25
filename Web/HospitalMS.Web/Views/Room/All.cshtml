@@ -28,7 +28,6 @@
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 246px;" aria-label="RoomType: activate to sort column ascending">RoomType</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 246px;" aria-label="Department: activate to sort column ascending">Department</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 246px;" aria-label="Beds: activate to sort column ascending">Beds</th>
-                                        <th rowspan="1" colspan="1" style="width: 96px;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
@@ -37,7 +36,6 @@
                                         <th rowspan="1" colspan="1">RoomType</th>
                                         <th rowspan="1" colspan="1">Department</th>
                                         <th rowspan="1" colspan="1">Beds</th>
-                                        <th rowspan="1" colspan="1">Actions</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
@@ -49,17 +47,9 @@
                                                     @Model[i].Name
                                                 </a>
                                             </td>
-                                            <td>@(Model[i].RoomType)</td>
-                                            <td>@(Model[i].Department)</td>
-                                            <td>@(Model[i].Beds.Count)</td>
-                                            <td>
-                                                <a href="/Administration/Room/Edit/@Model[i].Id" class="btn btn-xs  btn-info">
-                                                    <i class="fa fa-edit"></i>
-                                                </a>
-                                                <a href="/Administration/Room/Delete/@Model[i].Id" class="btn btn-xs  btn-danger">
-                                                    <i class="fa fa-trash"></i>
-                                                </a>
-                                            </td>
+                                            <td>@(Model[i].RoomTypeName)</td>
+                                            <td>@(Model[i].DepartmentName)</td>
+                                            <td>@(Model[i].Beds.Count)</td>                                            
                                         </tr>
                                     }
                                 </tbody>

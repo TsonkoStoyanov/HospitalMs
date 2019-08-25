@@ -146,7 +146,7 @@ namespace HospitalMS.Data.Migrations
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Rooms_RoomTypes_RoomTypeId",
                         column: x => x.RoomTypeId,
@@ -248,11 +248,19 @@ namespace HospitalMS.Data.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Number = table.Column<int>(nullable: false),
                     IsOcupied = table.Column<bool>(nullable: false),
-                    RoomId = table.Column<string>(nullable: true)
+                    Price = table.Column<decimal>(nullable: false),
+                    RoomId = table.Column<string>(nullable: true),
+                    HospitalMSUserId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Beds", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Beds_AspNetUsers_HospitalMSUserId",
+                        column: x => x.HospitalMSUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Beds_Rooms_RoomId",
                         column: x => x.RoomId,
@@ -304,6 +312,11 @@ namespace HospitalMS.Data.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Beds_HospitalMSUserId",
+                table: "Beds",
+                column: "HospitalMSUserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Beds_RoomId",

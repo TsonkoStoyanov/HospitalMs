@@ -4,6 +4,7 @@
     using HospitalMS.Services.Models;
     using System.ComponentModel.DataAnnotations;
 
+
     public class DepartmentCreateInputModel : IMapTo<DepartmentServiceModel>
     {
         [Required]

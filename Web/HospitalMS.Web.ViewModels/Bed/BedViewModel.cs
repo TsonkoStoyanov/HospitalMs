@@ -2,11 +2,14 @@
 {
     using HospitalMS.Services.Mapping;
     using HospitalMS.Services.Models;
+
     public class BedViewModel : IMapFrom<BedServiceModel>
     {
         public int Id { get; set; }
 
         public int Number { get; set; }
         public bool IsOcupied { get; set; }
+
+        public decimal Price { get; set; }
     }
 }

@@ -21,5 +21,21 @@
         {
         }
 
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseLazyLoadingProxies();
+        }
+
+        protected override void OnModelCreating(ModelBuilder builder)
+        {
+            builder.Entity<Department>()
+                .HasMany(room => room.Rooms)
+                .WithOne(department => department.Department)
+                .HasForeignKey(department => department.DepartmentId)
+               .OnDelete(DeleteBehavior.Cascade
+               );
+
+            base.OnModelCreating(builder);
+        }
     }
 }

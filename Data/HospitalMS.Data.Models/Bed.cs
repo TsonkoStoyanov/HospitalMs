@@ -8,11 +8,11 @@
         public decimal Price { get; set; }
 
         public string RoomId { get; set; }
-        public Room Room { get; set; }
+        public virtual Room Room { get; set; }
 
         public string HospitalMSUserId { get; set; }
 
-        public HospitalMSUser Patient { get; set; }
+        public virtual HospitalMSUser Patient { get; set; }
 
     }
 }

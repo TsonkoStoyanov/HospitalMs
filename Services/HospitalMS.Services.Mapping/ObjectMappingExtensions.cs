@@ -1,7 +1,8 @@
-﻿using System;
-
-namespace HospitalMS.Services.Mapping
+﻿namespace HospitalMS.Services.Mapping
 {
+    using System;
+
+
     public static class ObjectMappingExtensions
     {
         public static T To<T>(this object origin)

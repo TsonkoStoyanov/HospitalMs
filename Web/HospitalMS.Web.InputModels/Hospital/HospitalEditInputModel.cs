@@ -4,6 +4,7 @@
     using HospitalMS.Services.Mapping;
     using System.ComponentModel.DataAnnotations;
 
+
     public class HospitalEditInputModel : IMapTo<HospitalServiceModel>, IMapFrom<HospitalServiceModel>
     {
         public string Id { get; set; }
@@ -13,7 +14,7 @@
         public string Name { get; set; }
 
         [Required]
-        [StringLength(30, ErrorMessage = "{0} must be between {2} and {1} symbols", MinimumLength = 4)]
+        [StringLength(50, ErrorMessage = "{0} must be between {2} and {1} symbols", MinimumLength = 4)]
         public string Address { get; set; }
 
         [Required]

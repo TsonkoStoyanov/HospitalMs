@@ -3,6 +3,7 @@
     using Microsoft.AspNetCore.Identity;
     using System;
 
+
     public class HospitalMSUser : IdentityUser
     {
         public int Age { get; set; }

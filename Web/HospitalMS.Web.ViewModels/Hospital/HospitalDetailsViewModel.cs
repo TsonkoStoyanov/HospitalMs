@@ -3,6 +3,7 @@
     using HospitalMS.Services.Mapping;
     using HospitalMS.Services.Models;
 
+
     public class HospitalDetailsViewModel : IMapFrom<HospitalServiceModel>
     {
         public string Id { get; set; }

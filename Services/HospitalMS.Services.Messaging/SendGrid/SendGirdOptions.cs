@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace HospitalMS.Services.Messaging.SendGrid
+﻿namespace HospitalMS.Services.Messaging.SendGrid
 {
     public class SendGridOptions
     {

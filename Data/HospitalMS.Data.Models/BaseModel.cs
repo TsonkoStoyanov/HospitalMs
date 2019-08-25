@@ -1,6 +1,8 @@
 ﻿namespace HospitalMS.Data.Models
 {
     using System.ComponentModel.DataAnnotations;
+
+
     public class BaseModel<TKey>
     {
         [Key]

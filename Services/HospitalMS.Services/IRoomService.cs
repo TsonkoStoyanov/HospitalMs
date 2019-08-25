@@ -4,10 +4,9 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+
     public interface IRoomService
     {
-        IQueryable<RoomTypeServiceModel> GetAllRoomTypes();
-
         IQueryable<RoomServiceModel> GetAllRooms();
 
         Task<RoomServiceModel> GetById(string id);
@@ -18,6 +17,6 @@
 
         Task<bool> Delete(string id);
 
-        Task<bool> CreateRoomType(RoomTypeServiceModel roomTypeServiceModel);
+
     }
 }

@@ -1,0 +1,71 @@
+﻿@model RoomDetailsViewModel
+
+@{
+    ViewData["Title"] = "Room Details";
+}
+<!-- Departments Card Example -->
+<div class="card shadow mb-4">
+    <div class="card-header d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-secondary">Room <span class="text-info">Details</span></h6>
+        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+        {
+            <div>
+                <a class="" href="/Administration/Room/All" role="button">
+                    <h6 class="m-0 font-weight-bold text-secondary"><i class="fas fa-step-backward"></i>Back to <span class="text-info">All</span></h6>
+                </a>
+            </div>
+        }
+        else
+        {
+            <div>
+                <a class="" href="/Room/All" role="button">
+                    <h6 class="m-0 font-weight-bold text-secondary"><i class="fas fa-step-backward"></i>Back to <span class="text-info">All</span></h6>
+                </a>
+            </div>
+        }
+    </div>
+    <div class="card-body">
+        <div>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Name)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Name)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.RoomTypeName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.RoomTypeName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.DepartmentName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.DepartmentName)
+                </dd>
+                <dt class="col-sm-2">
+                    Beds Count
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Beds.Count)
+                </dd>
+            </dl>
+            @if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                <div>
+                    <form asp-action="Add Bed">
+                        <input type="hidden" asp-for="Id" />
+                        <input class="col-sm-2 btn btn-danger" type="submit" value="Add Bed" />
+                    </form>
+                    <form asp-action="Remove Bed">
+                        <input type="hidden" asp-for="Id" />
+                        <input class="col-sm-2 btn btn-danger" type="submit" value="Remove Bed" />
+                    </form>
+
+                </div>
+            }
+        </div>
+    </div>
+</div>

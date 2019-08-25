@@ -1,12 +1,13 @@
-﻿using HospitalMS.Common;
-using Microsoft.AspNetCore.Identity.UI.Services;
-using Microsoft.Extensions.Options;
-using SendGrid;
-using SendGrid.Helpers.Mail;
-using System.Threading.Tasks;
-
-namespace HospitalMS.Services.Messaging.SendGrid
+﻿namespace HospitalMS.Services.Messaging.SendGrid
 {
+    using HospitalMS.Common;
+    using Microsoft.AspNetCore.Identity.UI.Services;
+    using Microsoft.Extensions.Options;
+    using System.Threading.Tasks;
+    using global::SendGrid.Helpers.Mail;
+    using global::SendGrid;
+
+
     public class EmailSender : IEmailSender
     {
         private SendGridOptions options;

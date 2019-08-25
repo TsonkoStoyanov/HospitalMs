@@ -2,6 +2,9 @@
 {
     using HospitalMS.Services.Models;
     using HospitalMS.Services.Mapping;
+    using System.Collections.Generic;
+    using HospitalMS.Web.ViewModels.Room;
+
 
     public class DepartmentAllViewModel : IMapFrom<DepartmentServiceModel>
     {
@@ -15,6 +18,6 @@
 
         public string HospitalName { get; set; }
 
-
+        public List<RoomViewModel> Rooms { get; set; }
     }
 }

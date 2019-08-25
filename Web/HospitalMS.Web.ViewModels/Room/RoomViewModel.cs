@@ -3,10 +3,9 @@
     using HospitalMS.Services.Mapping;
     using HospitalMS.Services.Models;
 
-    public class RoomTypeAllViewModel : IMapFrom<RoomTypeServiceModel>
-    {
-        public int Id { get; set; }
 
+    public class RoomViewModel : IMapFrom<RoomServiceModel>
+    {
         public string Name { get; set; }
     }
 }

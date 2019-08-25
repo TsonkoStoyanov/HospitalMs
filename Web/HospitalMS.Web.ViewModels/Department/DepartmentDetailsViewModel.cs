@@ -2,8 +2,10 @@
 {
     using HospitalMS.Services.Mapping;
     using HospitalMS.Services.Models;
+    using HospitalMS.Web.ViewModels.Room;
+    using System.Collections.Generic;
 
-    public class DepartmentViewModel : IMapFrom<DepartmentServiceModel>
+    public class DepartmentDetailsViewModel : IMapFrom<DepartmentServiceModel>
     {
         public string Id { get; set; }
 
@@ -14,5 +16,7 @@
         public bool IsActive { get; set; }
 
         public string HospitalName { get; set; }
+
+        public List<RoomViewModel> Rooms { get; set; }
     }
 }

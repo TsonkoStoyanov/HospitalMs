@@ -30,8 +30,8 @@
             
         public async Task<IActionResult> Details(string id)
         {
-            DepartmentViewModel department = (await this.departmentService.GetById(id))
-                .To<DepartmentViewModel>();
+            DepartmentDetailsViewModel department = (await this.departmentService.GetById(id))
+                .To<DepartmentDetailsViewModel>();
 
             return this.View(department);
         }

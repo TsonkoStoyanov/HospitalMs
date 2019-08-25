@@ -9,6 +9,7 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+
     public class RoomService : IRoomService
     {
         private readonly HospitalMSDbContext context;
@@ -20,40 +21,27 @@
 
         public async Task<bool> Create(RoomServiceModel roomServiceModel)
         {
-            RoomType roomTypeFromDb =
-                context.RoomTypes
-                .SingleOrDefault(roomType => roomType.Name == roomServiceModel.RoomType.Name);
+            RoomType roomTypeFromDb = GetRoomTypeFromDb(roomServiceModel);
 
             if (roomTypeFromDb == null)
             {
                 throw new ArgumentNullException(nameof(roomTypeFromDb));
             }
+            Department departmentFromDb = GetDepartmentFromDb(roomServiceModel);
+
+            if (departmentFromDb == null)
+            {
+                throw new ArgumentNullException(nameof(departmentFromDb));
+            }
 
             Room room = AutoMapper.Mapper.Map<Room>(roomServiceModel);
             room.RoomType = roomTypeFromDb;
+            room.Department = departmentFromDb;
 
             context.Rooms.Add(room);
             int result = await context.SaveChangesAsync();
 
             return result > 0;
-        }
-
-        public async Task<bool> CreateRoomType(RoomTypeServiceModel roomTypeServiceModel)
-        {
-            RoomType roomType = new RoomType
-            {
-                Name = roomTypeServiceModel.Name
-            };
-
-            context.RoomTypes.Add(roomType);
-            int result = await context.SaveChangesAsync();
-
-            return result > 0;
-        }
-
-        public IQueryable<RoomTypeServiceModel> GetAllRoomTypes()
-        {
-            return this.context.RoomTypes.To<RoomTypeServiceModel>();
         }
 
         public IQueryable<RoomServiceModel> GetAllRooms()
@@ -71,13 +59,18 @@
 
         public async Task<bool> Edit(string id, RoomServiceModel roomServiceModel)
         {
-            RoomType roomTypeFromDb =
-                 context.RoomTypes
-                 .SingleOrDefault(roomType => roomType.Name == roomServiceModel.RoomType.Name);
+            RoomType roomTypeFromDb = GetRoomTypeFromDb(roomServiceModel);
 
             if (roomTypeFromDb == null)
             {
                 throw new ArgumentNullException(nameof(roomTypeFromDb));
+            }
+
+            Department departmentFromDb = GetDepartmentFromDb(roomServiceModel);
+
+            if (departmentFromDb == null)
+            {
+                throw new ArgumentNullException(nameof(departmentFromDb));
             }
 
             Room roomFromDb = await this.context.Rooms.SingleOrDefaultAsync(room => room.Id == id);
@@ -88,13 +81,17 @@
             }
 
             roomFromDb.Name = roomServiceModel.Name;
-            roomFromDb.RoomType.Id = roomTypeFromDb.Id;
+            roomFromDb.RoomType = roomTypeFromDb;
+            roomFromDb.Department = roomFromDb.Department;
+
 
             this.context.Rooms.Update(roomFromDb);
             int result = await context.SaveChangesAsync();
 
             return result > 0;
         }
+
+
 
         public async Task<bool> Delete(string id)
         {
@@ -112,5 +109,15 @@
             return result > 0;
         }
 
+        private RoomType GetRoomTypeFromDb(RoomServiceModel roomServiceModel)
+        {
+            return context.RoomTypes
+                 .SingleOrDefault(roomType => roomType.Name == roomServiceModel.RoomType.Name);
+        }
+        private Department GetDepartmentFromDb(RoomServiceModel roomServiceModel)
+        {
+            return context.Departments
+                .SingleOrDefault(department => department.Name == roomServiceModel.Department.Name);
+        }
     }
 }

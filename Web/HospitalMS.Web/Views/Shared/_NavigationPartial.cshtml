@@ -1,20 +1,16 @@
 ﻿<nav class="navbar-nav bg-gradient-secondary sidebar sidebar-dark accordion" id="accordionSidebar">
-
     <!-- Sidebar - Brand -->
     <div class="img_container mt-3 mb-3">
         <a href="/Home/Index">
             <i class="far fa-hospital fa-5x text-light"></i>
         </a>
     </div>
-
     @if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.AdministratorRoleName))
     {
         <!-- Heading -->
         <div class="sidebar-heading text-center">
             Administrator
         </div>
-
-        
         <!-- Nav Item - Dashboard -->
         <div id="p" class="nav-item">
             <a class="nav-link" href="/Home/Index">
@@ -23,7 +19,6 @@
             </a>
         </div>
         <hr class="sidebar-divider">
-
         <!-- Nav Item - Hospital Collapse Menu -->
         <div class="nav-item">
             <a class="nav-link" href="/Hospital/Details">
@@ -31,7 +26,6 @@
                 <span>Hospital</span>
             </a>
         </div>
-
         <!-- Nav Item - Department Collapse Menu -->
         <div class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepartmentMenu" aria-expanded="true" aria-controls="collapseDepartmentMenu">
@@ -46,10 +40,8 @@
                 </div>
             </div>
         </div>
-
         <!-- Divider -->
         <hr class="sidebar-divider">
-
         <!-- Nav Item - Doctor Collapse Menu -->
         <div class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDoctorMenu" aria-expanded="true" aria-controls="collapseDoctorMenu">
@@ -64,7 +56,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Nav Item - Patient Collapse Menu -->
         <div class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePatientMenu" aria-expanded="true" aria-controls="collapsePatientMenu">
@@ -79,7 +70,6 @@
                 </div>
             </div>
         </div>
-
         <!-- Nav Item - Recepcionist Collapse Menu -->
         <div class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRecepcionistMenu" aria-expanded="true" aria-controls="collapseRecepcionistMenu">
@@ -94,10 +84,8 @@
                 </div>
             </div>
         </div>
-
         <!-- Divider -->
         <hr class="sidebar-divider">
-
         <!-- Nav Item - Room Collapse Menu -->
         <div class="nav-item">
             <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRoomMenu" aria-expanded="true" aria-controls="collapseRoomMenu">
@@ -107,43 +95,25 @@
             <div id="collapseRoomMenu" class="collapse" aria-labelledby="collapseRoomMenu" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Room menu:</h6>
-                    <a class="collapse-item" href="/Administration/Room/Type/Create">Create RoomType</a>
-                    <a class="collapse-item" href="/Administration/Room/Type/All">List RoomTypes </a>
+                    <a class="collapse-item" href="/Administration/RoomType/Create">Create RoomType</a>
+                    <a class="collapse-item" href="/Administration/RoomType/All">List RoomTypes </a>
                     <a class="collapse-item" href="/Administration/Room/Create">Create Room</a>
                     <a class="collapse-item" href="/Administration/Room/All">List Rooms </a>
                 </div>
             </div>
         </div>
-
-        <!-- Nav Item - Bed Collapse Menu -->
-        <div class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseBedMenu" aria-expanded="true" aria-controls="collapseBedMenu">
-                <i class="fas fa-bed"></i>
-                <span>Bed</span>
-            </a>
-            <div id="collapseBedMenu" class="collapse" aria-labelledby="collapseBedMenu" data-parent="#accordionSidebar">
-                <div class="bg-white py-2 collapse-inner rounded">
-                    <h6 class="collapse-header">Bed menu:</h6>
-                    <a class="collapse-item" href="login.html">Add Bed</a>
-                    <a class="collapse-item" href="register.html">List Beds </a>
-                </div>
-            </div>
-        </div>
-
     }
     else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.PatientRoleName))
     {
-        <div class="sidebar-heading">
+        <div class="sidebar-heading text-center">
             Patient
         </div>
-
         <div class="nav-item">
             <a class="nav-link" href="/Hospital/Details">
                 <i class="fas fa-hospital-symbol"></i>
                 <span>Hospital</span>
             </a>
         </div>
-
         <!-- Nav Item - Departments -->
         <div class="nav-item">
             <a class="nav-link" href="/Department/All">
@@ -154,19 +124,15 @@
     }
     else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.DoctorRoleName))
     {
-        <div class="sidebar-heading">
+        <div class="sidebar-heading text-center">
             Doctor
         </div>
     }
     else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.ReceptionistRoleName))
     {
-        <div class="sidebar-heading">
-            Receptionist
+        <div class="sidebar-heading text-center">
+            Recepcionist
         </div>
-
-        <!-- Divider -->
-        <hr class="sidebar-divider d-none d-md-block">
-
         <!-- Nav Item - Charts -->
         <div class="nav-item">
             <a class="nav-link" href="charts.html">
@@ -175,13 +141,10 @@
             </a>
         </div>
     }
-
     <!-- Divider -->
     <hr class="sidebar-divider d-none d-md-block">
-
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
         <button class="rounded-circle border-0" id="sidebarToggle"></button>
     </div>
-
 </nav>
