@@ -47,12 +47,12 @@
         public IQueryable<RoomServiceModel> GetAllRooms()
         {
 
-            return this.context.Rooms.To<RoomServiceModel>();
+            return context.Rooms.To<RoomServiceModel>();
         }
 
         public async Task<RoomServiceModel> GetById(string id)
         {
-            return await this.context.Rooms
+            return await context.Rooms
                 .To<RoomServiceModel>()
                 .SingleOrDefaultAsync(room => room.Id == id);
         }
@@ -73,7 +73,7 @@
                 throw new ArgumentNullException(nameof(departmentFromDb));
             }
 
-            Room roomFromDb = await this.context.Rooms.SingleOrDefaultAsync(room => room.Id == id);
+            Room roomFromDb = await context.Rooms.SingleOrDefaultAsync(room => room.Id == id);
 
             if (roomTypeFromDb == null)
             {
@@ -82,29 +82,28 @@
 
             roomFromDb.Name = roomServiceModel.Name;
             roomFromDb.RoomType = roomTypeFromDb;
-            roomFromDb.Department = roomFromDb.Department;
+            roomFromDb.Department = departmentFromDb;
 
 
-            this.context.Rooms.Update(roomFromDb);
+            context.Rooms.Update(roomFromDb);
             int result = await context.SaveChangesAsync();
 
             return result > 0;
         }
-
-
+        
 
         public async Task<bool> Delete(string id)
         {
-            Room roomFromDb = await this.context.Rooms.SingleOrDefaultAsync(room => room.Id == id);
+            Room roomFromDb = await context.Rooms.SingleOrDefaultAsync(room => room.Id == id);
 
             if (roomFromDb == null)
             {
                 throw new ArgumentNullException(nameof(roomFromDb));
             }
 
-            this.context.Rooms.Remove(roomFromDb);
+            context.Rooms.Remove(roomFromDb);
 
-            int result = await this.context.SaveChangesAsync();
+            int result = await context.SaveChangesAsync();
 
             return result > 0;
         }

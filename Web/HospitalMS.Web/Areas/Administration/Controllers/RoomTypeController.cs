@@ -16,13 +16,13 @@
 
         public RoomTypeController(IRoomTypeService roomService)
         {
-            this.roomTypeService = roomService;
+            roomTypeService = roomService;
         }
 
         [HttpGet()]
         public async Task<IActionResult> Create()
         {
-            return this.View();
+            return View();
         }
 
         [HttpPost]
@@ -31,7 +31,7 @@
         {
             if (!ModelState.IsValid)
             {
-                return this.View(roomTypeCreateInputModel);
+                return View(roomTypeCreateInputModel);
             }
 
             RoomTypeServiceModel roomTypeServiceModel = new RoomTypeServiceModel
@@ -39,63 +39,63 @@
                 Name = roomTypeCreateInputModel.Name
             };
 
-            await this.roomTypeService.CreateRoomType(roomTypeServiceModel);
+            await roomTypeService.CreateRoomType(roomTypeServiceModel);
 
-            return this.Redirect("/Administration/RoomType/All");
+            return Redirect("/Administration/RoomType/All");
         }
 
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            List<RoomTypeAllViewModel> roomTypes = await this.roomTypeService.GetAllRoomTypes()
+            List<RoomTypeAllViewModel> roomTypes = await roomTypeService.GetAllRoomTypes()
                 .To<RoomTypeAllViewModel>()
                 .ToListAsync();
 
-            return this.View(roomTypes);
+            return View(roomTypes);
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(int id)
         {
-            RoomTypeEditInputModel roomTypeInputModel = (await this.roomTypeService.GetById(id)
+            RoomTypeEditInputModel roomTypeInputModel = (await roomTypeService.GetById(id)
                ).To<RoomTypeEditInputModel>();
 
             if (roomTypeInputModel == null)
             {
-                return this.Redirect("/Administration/RoomtType/All");
+                return Redirect("/Administration/RoomtType/All");
             }
 
-            return this.View(roomTypeInputModel);
+            return View(roomTypeInputModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, RoomTypeEditInputModel roomTypeEditInputModel)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.View(roomTypeEditInputModel);
+                return View(roomTypeEditInputModel);
             }
 
             RoomTypeServiceModel roomTypeServiceModel = AutoMapper.Mapper.Map<RoomTypeServiceModel>(roomTypeEditInputModel);
 
-            await this.roomTypeService.Edit(id, roomTypeServiceModel);
+            await roomTypeService.Edit(id, roomTypeServiceModel);
 
-            return this.Redirect("/Administration/RoomType/All");
+            return Redirect("/Administration/RoomType/All");
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete(int id)
         {
-            RoomTypeDeleteViewModel roomTypeDeleteViewModel = (await this.roomTypeService.GetById(id)
+            RoomTypeDeleteViewModel roomTypeDeleteViewModel = (await roomTypeService.GetById(id)
                ).To<RoomTypeDeleteViewModel>();
 
             if (roomTypeDeleteViewModel == null)
             {
-                return this.Redirect("/Administration/RoomType/All");
+                return Redirect("/Administration/RoomType/All");
             }
 
-            return this.View(roomTypeDeleteViewModel);
+            return View(roomTypeDeleteViewModel);
         }
 
         [HttpPost]
@@ -103,9 +103,9 @@
         [Route("/Administration/RoomType/Delete/{id}")]
         public async Task<IActionResult> ConfirmDelete(int id)
         {
-            await this.roomTypeService.Delete(id);
+            await roomTypeService.Delete(id);
 
-            return this.Redirect("/Administration/RoomType/All");
+            return Redirect("/Administration/RoomType/All");
         }
     }
 }

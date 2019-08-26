@@ -25,17 +25,19 @@ namespace HospitalMS.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("HospitalMSUserId");
-
                     b.Property<bool>("IsOcupied");
 
                     b.Property<int>("Number");
+
+                    b.Property<string>("PatientId");
 
                     b.Property<string>("RoomId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("HospitalMSUserId");
+                    b.HasIndex("PatientId")
+                        .IsUnique()
+                        .HasFilter("[PatientId] IS NOT NULL");
 
                     b.HasIndex("RoomId");
 
@@ -60,6 +62,32 @@ namespace HospitalMS.Data.Migrations
                     b.HasIndex("HospitalId");
 
                     b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("HospitalMS.Data.Models.Doctor", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("DepartmentId");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("HospitalMSUserId");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
+
+                    b.HasIndex("HospitalMSUserId");
+
+                    b.ToTable("Doctors");
                 });
 
             modelBuilder.Entity("HospitalMS.Data.Models.Hospital", b =>
@@ -87,12 +115,8 @@ namespace HospitalMS.Data.Migrations
 
                     b.Property<int>("AccessFailedCount");
 
-                    b.Property<int>("Age");
-
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
-
-                    b.Property<DateTime?>("DateOfBirth");
 
                     b.Property<string>("DepartmentId");
 
@@ -101,15 +125,11 @@ namespace HospitalMS.Data.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
+                    b.Property<bool>("IsFirstLogin");
 
                     b.Property<bool>("LockoutEnabled");
 
                     b.Property<DateTimeOffset?>("LockoutEnd");
-
-                    b.Property<string>("MiddleName");
 
                     b.Property<string>("NormalizedEmail")
                         .HasMaxLength(256);
@@ -143,6 +163,78 @@ namespace HospitalMS.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
+                });
+
+            modelBuilder.Entity("HospitalMS.Data.Models.Invoice", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("DateOfAcceptance");
+
+                    b.Property<DateTime>("DateOfDischarge");
+
+                    b.Property<DateTime>("IssuedOn");
+
+                    b.Property<int>("Number");
+
+                    b.Property<string>("PatientId");
+
+                    b.Property<decimal>("TotalPrice");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Invoices");
+                });
+
+            modelBuilder.Entity("HospitalMS.Data.Models.Patient", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Address");
+
+                    b.Property<string>("Diagnose");
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("HospitalMSUserId");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HospitalMSUserId");
+
+                    b.ToTable("Patients");
+                });
+
+            modelBuilder.Entity("HospitalMS.Data.Models.Recepcionist", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email");
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("HospitalMSUserId");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("PhoneNumber");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("HospitalMSUserId");
+
+                    b.ToTable("Recepcionists");
                 });
 
             modelBuilder.Entity("HospitalMS.Data.Models.Room", b =>
@@ -292,9 +384,9 @@ namespace HospitalMS.Data.Migrations
 
             modelBuilder.Entity("HospitalMS.Data.Models.Bed", b =>
                 {
-                    b.HasOne("HospitalMS.Data.Models.HospitalMSUser", "Patient")
-                        .WithMany()
-                        .HasForeignKey("HospitalMSUserId");
+                    b.HasOne("HospitalMS.Data.Models.Patient", "Patient")
+                        .WithOne("Bed")
+                        .HasForeignKey("HospitalMS.Data.Models.Bed", "PatientId");
 
                     b.HasOne("HospitalMS.Data.Models.Room", "Room")
                         .WithMany("Beds")
@@ -308,11 +400,43 @@ namespace HospitalMS.Data.Migrations
                         .HasForeignKey("HospitalId");
                 });
 
+            modelBuilder.Entity("HospitalMS.Data.Models.Doctor", b =>
+                {
+                    b.HasOne("HospitalMS.Data.Models.Department", "Department")
+                        .WithMany()
+                        .HasForeignKey("DepartmentId");
+
+                    b.HasOne("HospitalMS.Data.Models.HospitalMSUser", "UserDoctor")
+                        .WithMany()
+                        .HasForeignKey("HospitalMSUserId");
+                });
+
             modelBuilder.Entity("HospitalMS.Data.Models.HospitalMSUser", b =>
                 {
                     b.HasOne("HospitalMS.Data.Models.Department")
                         .WithMany("Users")
                         .HasForeignKey("DepartmentId");
+                });
+
+            modelBuilder.Entity("HospitalMS.Data.Models.Invoice", b =>
+                {
+                    b.HasOne("HospitalMS.Data.Models.Patient", "Patient")
+                        .WithMany()
+                        .HasForeignKey("PatientId");
+                });
+
+            modelBuilder.Entity("HospitalMS.Data.Models.Patient", b =>
+                {
+                    b.HasOne("HospitalMS.Data.Models.HospitalMSUser", "UserPatient")
+                        .WithMany()
+                        .HasForeignKey("HospitalMSUserId");
+                });
+
+            modelBuilder.Entity("HospitalMS.Data.Models.Recepcionist", b =>
+                {
+                    b.HasOne("HospitalMS.Data.Models.HospitalMSUser", "UserRecepcionist")
+                        .WithMany()
+                        .HasForeignKey("HospitalMSUserId");
                 });
 
             modelBuilder.Entity("HospitalMS.Data.Models.Room", b =>

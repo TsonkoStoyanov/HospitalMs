@@ -21,7 +21,7 @@
 
         public async Task<bool> Edit(string id, HospitalServiceModel hospitalServiceModel)
         {
-            Hospital hospitalFromDb = await this.context.Hospitals.SingleOrDefaultAsync(hospital => hospital.Id == id);
+            Hospital hospitalFromDb = await context.Hospitals.SingleOrDefaultAsync(hospital => hospital.Id == id);
 
             if (hospitalFromDb == null)
             {
@@ -34,7 +34,7 @@
             hospitalFromDb.PhoneNumber = hospitalServiceModel.PhoneNumber;
 
 
-            this.context.Hospitals.Update(hospitalFromDb);
+            context.Hospitals.Update(hospitalFromDb);
             int result = await context.SaveChangesAsync();
 
             return result > 0;
@@ -42,21 +42,21 @@
 
         public async Task<HospitalServiceModel> Get()
         {
-            return await this.context.Hospitals
+            return await context.Hospitals
               .To<HospitalServiceModel>()
               .FirstOrDefaultAsync();
         }
 
         public async Task<HospitalServiceModel> GetById(string id)
         {
-            return await this.context.Hospitals
+            return await context.Hospitals
            .To<HospitalServiceModel>()
            .SingleOrDefaultAsync(hospital => hospital.Id == id);
         }
 
         public IQueryable<HospitalServiceModel> GetAllHospitals()
         {
-            return this.context.Hospitals.To<HospitalServiceModel>();
+            return context.Hospitals.To<HospitalServiceModel>();
         }
     }
 }

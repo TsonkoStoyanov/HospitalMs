@@ -21,6 +21,7 @@
                     UserName = GlobalConstants.AdminEmail,
                     Email = GlobalConstants.AdminEmail,
                     EmailConfirmed = true,
+                    IsFirstLogin = false,
                 };
 
                 var password = "superSecret";

@@ -21,7 +21,6 @@
 
         public RegisterModel(
             UserManager<HospitalMSUser> userManager,
-
             ILogger<RegisterModel> logger,
             IEmailSender emailSender)
         {

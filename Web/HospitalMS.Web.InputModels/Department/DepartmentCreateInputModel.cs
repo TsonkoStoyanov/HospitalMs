@@ -8,7 +8,7 @@
     public class DepartmentCreateInputModel : IMapTo<DepartmentServiceModel>
     {
         [Required]
-        [MinLength(4, ErrorMessage = "The {0} must be at least {1} characters long.")]
+        [StringLength(10, ErrorMessage = "{0} must be between {2} and {1} symbols", MinimumLength = 4)]
         public string Name { get; set; }
 
         public string Description { get; set; }

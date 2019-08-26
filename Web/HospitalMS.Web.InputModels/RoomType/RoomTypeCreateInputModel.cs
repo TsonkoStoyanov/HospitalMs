@@ -12,7 +12,7 @@
         public string Name { get; set; }
 
         [Required]
-        [Range(1, 200, ErrorMessage = "Bed {0} can only be between {1} .. {2}")]
+        [Range(1, 200, ErrorMessage = "Price for bed can only be between {1} .. {2}")]
         public decimal PriceForBed { get; set; }
     }
 }

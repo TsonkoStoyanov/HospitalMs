@@ -1,5 +1,6 @@
 ﻿namespace HospitalMS.Data.Models
 {
+ 
     public class Bed : BaseModel<int>
     {
         public int Number { get; set; }
@@ -8,9 +9,9 @@
         public string RoomId { get; set; }
         public virtual Room Room { get; set; }
 
-        public string HospitalMSUserId { get; set; }
+        public string PatientId { get; set; }
 
-        public virtual HospitalMSUser Patient { get; set; }
+        public virtual Patient Patient { get; set; }
 
     }
 }

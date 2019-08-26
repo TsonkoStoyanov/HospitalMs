@@ -17,6 +17,14 @@
 
         public DbSet<Bed> Beds { get; set; }
 
+        public DbSet<Doctor> Doctors { get; set; }
+
+        public DbSet<Patient> Patients { get; set; }
+
+        public DbSet<Recepcionist> Recepcionists { get; set; }
+
+        public DbSet<Invoice> Invoices { get; set; }
+
         public HospitalMSDbContext(DbContextOptions options) : base(options)
         {
         }
@@ -34,6 +42,12 @@
                 .HasForeignKey(department => department.DepartmentId)
                .OnDelete(DeleteBehavior.Cascade
                );
+
+            builder.Entity<Bed>()
+                .HasOne(patient=> patient.Patient)
+                .WithOne(bed => bed.Bed)
+                .HasForeignKey<Bed>(bed => bed.PatientId);
+
 
             base.OnModelCreating(builder);
         }

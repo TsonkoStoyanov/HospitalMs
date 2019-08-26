@@ -27,11 +27,11 @@
         [Route("/Administration/Department/All")]
         public async Task<IActionResult> All()
         {
-            List<DepartmentAllViewModel> departments = this.departmentService.GetAllDepartments()
+            List<DepartmentAllViewModel> departments = departmentService.GetAllDepartments()
                 .To<DepartmentAllViewModel>()
                 .ToList();
 
-            return this.View(departments);
+            return View(departments);
         }
 
         [HttpGet]
@@ -39,76 +39,76 @@
         {
             await GetAllHospitals();
 
-            return this.View();
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(DepartmentCreateInputModel departmentAddInputModel)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 await GetAllHospitals();
 
-                return this.View(departmentAddInputModel);
+                return View(departmentAddInputModel);
             }
 
             DepartmentServiceModel departmentServiceModel = AutoMapper.Mapper.Map<DepartmentServiceModel>(departmentAddInputModel);
 
-            await this.departmentService.Create(departmentServiceModel);
+            await departmentService.Create(departmentServiceModel);
 
-            return this.Redirect("/Administration/Department/All");
+            return Redirect("/Administration/Department/All");
 
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            DepartmentEditInputModel departmentEditInputModel = (await this.departmentService.GetById(id)
+            DepartmentEditInputModel departmentEditInputModel = (await departmentService.GetById(id)
                ).To<DepartmentEditInputModel>();
 
             if (departmentEditInputModel == null)
             {
-                return this.Redirect("/Administration/Department/All");
+                return Redirect("/Administration/Department/All");
             }
 
             await GetAllHospitals();
 
-            return this.View(departmentEditInputModel);
+            return View(departmentEditInputModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, DepartmentEditInputModel departmentEditInputModel)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 await GetAllHospitals();
 
-                return this.View(departmentEditInputModel);
+                return View(departmentEditInputModel);
             }
 
             DepartmentServiceModel departmentServiceModel = AutoMapper.Mapper.Map<DepartmentServiceModel>(departmentEditInputModel);
 
-            await this.departmentService.Edit(id, departmentServiceModel);
+            await departmentService.Edit(id, departmentServiceModel);
 
-            return this.Redirect("/Administration/Department/All");
+            return Redirect("/Administration/Department/All");
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
-            DepartmentDeleteViewModel departmentDeleteViewModel = (await this.departmentService.GetById(id)
+            DepartmentDeleteViewModel departmentDeleteViewModel = (await departmentService.GetById(id)
               ).To<DepartmentDeleteViewModel>();
 
             if (departmentDeleteViewModel == null)
             {
-                return this.Redirect("/Administration/Department/All");
+                return Redirect("/Administration/Department/All");
             }
 
             await GetAllHospitals();
 
-            return this.View(departmentDeleteViewModel);
+            return View(departmentDeleteViewModel);
         }
 
         [HttpPost]
@@ -116,16 +116,16 @@
         [Route("/Administration/Department/Delete/{id}")]
         public async Task<IActionResult> ConfirmDelete(string id)
         {
-            await this.departmentService.Delete(id);
+            await departmentService.Delete(id);
 
-            return this.Redirect("/Administration/Department/All");
+            return Redirect("/Administration/Department/All");
         }
 
         private async Task GetAllHospitals()
         {
-            var allHospitals = await this.hospitalService.GetAllHospitals().ToListAsync();
+            var allHospitals = await hospitalService.GetAllHospitals().ToListAsync();
 
-            this.ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentCreateHospitalViewModel
+            ViewData["hospitals"] = allHospitals.Select(hospital => new DepartmentCreateHospitalViewModel
             {
                 HospitalName = hospital.Name
             }).ToList();

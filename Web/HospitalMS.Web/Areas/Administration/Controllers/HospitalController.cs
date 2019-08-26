@@ -20,31 +20,31 @@
         [HttpGet(Name = "Edit")]
         public async Task<IActionResult> Edit(string id)
         {
-            HospitalEditInputModel hospitalEditInputModel = (await this.hospitalService.GetById(id)
+            HospitalEditInputModel hospitalEditInputModel = (await hospitalService.GetById(id)
                 ).To<HospitalEditInputModel>();
 
             if (hospitalEditInputModel == null)
             {
-                return this.Redirect("");
+                return Redirect("");
             }
 
-            return this.View(hospitalEditInputModel);
+            return View(hospitalEditInputModel);
         }
 
         [HttpPost(Name = "Edit")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, HospitalEditInputModel hospitalEditInputModel)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                return this.View(hospitalEditInputModel);
+                return View(hospitalEditInputModel);
             }
 
             HospitalServiceModel hospitalServiceModel = AutoMapper.Mapper.Map<HospitalServiceModel>(hospitalEditInputModel);
 
-            await this.hospitalService.Edit(id, hospitalServiceModel);
+            await hospitalService.Edit(id, hospitalServiceModel);
 
-            return this.Redirect("/Hospital/Details");
+            return Redirect("/Hospital/Details");
         }
     }
 }

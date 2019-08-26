@@ -30,96 +30,96 @@
         public async Task<IActionResult> All()
         {
             //TODO if time remains make it async
-            var rooms = this.roomService.GetAllRooms()
+            var rooms = roomService.GetAllRooms()
                 .To<RoomAllViewModel>().ToList();
 
-            return this.View(rooms);
+            return View(rooms);
         }
 
         [HttpGet]
         public async Task<IActionResult> Create()
         {
-            await this.GetAllRoomTypes();
+            await GetAllRoomTypes();
 
-            await this.GetAllDepartments();
+            await GetAllDepartments();
 
-            return this.View();
+            return View();
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(RoomCreateInputModel roomCreateInputModel)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                await this.GetAllRoomTypes();
+                await GetAllRoomTypes();
 
-                await this.GetAllDepartments();
+                await GetAllDepartments();
 
-                return this.View();
+                return View(roomCreateInputModel);
             }
 
             RoomServiceModel roomServiceModel = AutoMapper.Mapper.Map<RoomServiceModel>(roomCreateInputModel);
 
-            await this.roomService.Create(roomServiceModel);
+            await roomService.Create(roomServiceModel);
 
-            return this.Redirect("All");
+            return Redirect("All");
         }
 
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            RoomEditInputModel roomEditInputModel = (await this.roomService.GetById(id)
+            RoomEditInputModel roomEditInputModel = (await roomService.GetById(id)
                ).To<RoomEditInputModel>();
 
             if (roomEditInputModel == null)
             {
-                return this.Redirect("/Administration/Room/All");
+                return Redirect("/Administration/Room/All");
             }
 
-            await this.GetAllRoomTypes();
+            await GetAllRoomTypes();
 
-            await this.GetAllDepartments();
+            await GetAllDepartments();
 
-            return this.View(roomEditInputModel);
+            return View(roomEditInputModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(string id, RoomEditInputModel roomEditInputModel)
         {
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
-                await this.GetAllRoomTypes();
+                await GetAllRoomTypes();
 
-                await this.GetAllDepartments();
+                await GetAllDepartments();
 
-                return this.View(roomEditInputModel);
+                return View(roomEditInputModel);
             }
 
             RoomServiceModel roomServiceModel = AutoMapper.Mapper.Map<RoomServiceModel>(roomEditInputModel);
 
-            await this.roomService.Edit(id, roomServiceModel);
+            await roomService.Edit(id, roomServiceModel);
 
-            return this.Redirect("/Administration/Room/All");
+            return Redirect("/Administration/Room/All");
         }
 
         [HttpGet]
         public async Task<IActionResult> Delete(string id)
         {
-            RoomDeleteViewModel roomDeleteViewModel = (await this.roomService.GetById(id)
+            RoomDeleteViewModel roomDeleteViewModel = (await roomService.GetById(id)
               ).To<RoomDeleteViewModel>();
 
             if (roomDeleteViewModel == null)
             {
-                return this.Redirect("/Administration/Room/All");
+                return Redirect("/Administration/Room/All");
             }
 
-            await this.GetAllRoomTypes();
+            await GetAllRoomTypes();
 
-            await this.GetAllDepartments();
+            await GetAllDepartments();
 
-            return this.View(roomDeleteViewModel);
+            return View(roomDeleteViewModel);
         }
 
         [HttpPost]
@@ -127,17 +127,17 @@
         [Route("/Administration/Room/Delete/{id}")]
         public async Task<IActionResult> ConfirmDelete(string id)
         {
-            await this.roomService.Delete(id);
+            await roomService.Delete(id);
 
-            return this.Redirect("/Administration/Room/All");
+            return Redirect("/Administration/Room/All");
         }
 
         //TODO if time remains to make it better not ViewData
         private async Task GetAllRoomTypes()
         {
-            var allRoomTypes = await this.roomTypeService.GetAllRoomTypes().ToListAsync();
+            var allRoomTypes = await roomTypeService.GetAllRoomTypes().ToListAsync();
 
-            this.ViewData["roomTypes"] = allRoomTypes.Select(roomType => new RoomCreateRoomTypeViewModel
+            ViewData["roomTypes"] = allRoomTypes.Select(roomType => new RoomCreateRoomTypeViewModel
             {
                 RoomTypeName = roomType.Name
             })
@@ -147,9 +147,9 @@
         //TODO if time remains to make it better not ViewData
         private async Task GetAllDepartments()
         {
-            var allDepartments = await this.departmentService.GetAllActiveDepartments().ToListAsync();
+            var allDepartments = await departmentService.GetAllActiveDepartments().ToListAsync();
 
-            this.ViewData["departments"] = allDepartments.Select(department => new RoomCreateDepartmentViewModel
+            ViewData["departments"] = allDepartments.Select(department => new RoomCreateDepartmentViewModel
             {
                 DepartmentName = department.Name
             })

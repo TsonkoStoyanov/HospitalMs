@@ -26,17 +26,17 @@
         public async Task<IActionResult> Create(string id, BedCreateInputModel bedCreateInputModel)
         {
             
-            if (!this.ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 
-                return this.View(bedCreateInputModel);
+                return View(bedCreateInputModel);
             }
 
             BedServiceModel bedServiceModel = AutoMapper.Mapper.Map<BedServiceModel>(bedCreateInputModel);
 
-            await this.bedService.Create(bedServiceModel);
+            await bedService.Create(bedServiceModel);
 
-            return this.Redirect("/Administration/Room/Details/{id}");
+            return Redirect("/Administration/Room/Details/{id}");
 
         }
     }
