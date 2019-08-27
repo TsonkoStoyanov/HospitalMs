@@ -101,5 +101,43 @@
             return context.Departments
                 .SingleOrDefault(department => department.Name == doctorServiceModel.Department.Name);
         }
+
+        public async Task<bool> Delete(string id)
+        {
+            Doctor doctorFromDb = await context.Doctors.SingleOrDefaultAsync(doctor => doctor.Id == id);
+
+            if (doctorFromDb == null)
+            {
+                throw new ArgumentNullException(nameof(doctorFromDb));
+            }
+
+            var userIdentityId = doctorFromDb.HospitalMSUserId;
+
+            var user = await userManager.FindByIdAsync(userIdentityId);
+            var rolesForUser = await userManager.GetRolesAsync(user);
+
+            using (var transaction = context.Database.BeginTransaction())
+            {
+                if (rolesForUser.Count() > 0)
+                {
+                    foreach (var item in rolesForUser.ToList())
+                    {
+                        var resultUser = await userManager.RemoveFromRoleAsync(user, item);
+                    }
+                }
+
+                await userManager.DeleteAsync(user);
+                transaction.Commit();
+            }
+
+            context.Doctors.Remove(doctorFromDb);
+
+            int result = await context.SaveChangesAsync();
+
+            return result > 0;
+        }
+
+
     }
 }
+

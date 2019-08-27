@@ -44,11 +44,11 @@
                                         <tr role="row" class="@(i % 2 != 0 ? "even" : "odd")">
                                             <td>
                                                 <a class="text-info" href="/Doctor/Details/@Model[i].Id">
-                                                    @Model[i].FirstName + " " + @Model[i].LastName
+                                                    @string.Concat(Model[i].FirstName + " " + @Model[i].LastName)
                                                 </a>
                                             </td>
-                                            <td>@(Model[i].DepartmentName)</td>
                                             <td>@(Model[i].PhoneNumber)</td>
+                                            <td>@(Model[i].DepartmentName)</td>
                                             <td>
                                                 <a href="/Administration/Doctor/Edit/@Model[i].Id" class="btn btn-xs  btn-info">
                                                     <i class="fa fa-edit"></i>

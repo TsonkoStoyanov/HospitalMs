@@ -27,6 +27,7 @@
             {
                 throw new ArgumentNullException(nameof(roomTypeFromDb));
             }
+
             Department departmentFromDb = GetDepartmentFromDb(roomServiceModel);
 
             if (departmentFromDb == null)
@@ -118,5 +119,7 @@
             return context.Departments
                 .SingleOrDefault(department => department.Name == roomServiceModel.Department.Name);
         }
+
+
     }
 }

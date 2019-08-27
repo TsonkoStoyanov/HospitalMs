@@ -14,5 +14,7 @@
         Task<DoctorServiceModel> GetById(string id);
 
         Task<bool> Edit(string id, DoctorServiceModel doctorServiceModel);
+
+        Task<bool> Delete(string id);
     }
 }

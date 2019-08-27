@@ -12,21 +12,12 @@
         {
             if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                return this.View("DashBoard");
+                return Redirect("/Administration/Home/Dashboard");
             }
             else
             {
-                return View("Privacy");
+                return View();
             }
-        }
-
-        public async Task<IActionResult> Privacy()
-        {
-            return View();
-        }
-        public async Task<IActionResult> Dashboard()
-        {
-            return View();
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

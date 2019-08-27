@@ -9,7 +9,7 @@ namespace HospitalMS.Services
         {
             throw new System.NotImplementedException();
         }
-
+        
         public Task<bool> Delete(int id)
         {
             throw new System.NotImplementedException();

@@ -3,7 +3,6 @@
     using HospitalMS.Services.Models;
     using HospitalMS.Services.Mapping;
     using System.Collections.Generic;
-    using HospitalMS.Web.ViewModels.Room;
 
 
     public class DepartmentAllViewModel : IMapFrom<DepartmentServiceModel>

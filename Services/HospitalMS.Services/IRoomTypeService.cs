@@ -16,5 +16,6 @@
         Task<bool> Edit(int id, RoomTypeServiceModel roomTypeServiceModel);
 
         Task<bool> Delete(int id);
+       
     }
 }

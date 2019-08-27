@@ -45,7 +45,6 @@
         public async Task<IActionResult> Create(DoctorCreateInputModel doctorCreateInputModel)
         {
 
-
             if (!ModelState.IsValid)
             {
                 await GetAllDepartments();
@@ -84,6 +83,32 @@
 
             return Redirect("/Administration/Doctor/All");
 
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(string id)
+        {
+            DoctorDeleteViewModel doctorDeleteViewModel = (await doctorService.GetById(id)
+              ).To<DoctorDeleteViewModel>();
+
+            if (doctorDeleteViewModel == null)
+            {
+                return Redirect("/Administration/Doctor/All");
+            }
+
+            await GetAllDepartments();
+
+            return View(doctorDeleteViewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/Administration/Doctor/Delete/{id}")]
+        public async Task<IActionResult> ConfirmDelete(string id)
+        {
+            await doctorService.Delete(id);
+
+            return Redirect("/Administration/Doctor/All");
         }
 
         private async Task GetAllDepartments()

@@ -87,15 +87,6 @@
             }
 
             //TODO Cascade Delete if time remains to make warrning has room and users on department before delete
-            //if (departmentFromDb.Rooms.Count > 0)
-            //{
-            //    throw new ArgumentException("Are sure there is rooms related to Department.");
-            //}
-
-            //if (departmentFromDb.Users.Count > 0)
-            //{
-            //    throw new ArgumentException("Are sure there is users related to Department.");
-            //}
 
             context.Departments.Remove(departmentFromDb);
 
@@ -103,7 +94,7 @@
 
             return result > 0;
         }
-        
+
         public async Task<DepartmentServiceModel> GetById(string id)
         {
             return await context.Departments
@@ -116,5 +107,7 @@
             return context.Hospitals
                  .SingleOrDefault(hospital => hospital.Name == departmentServiceModel.HospitalName);
         }
+
+
     }
 }

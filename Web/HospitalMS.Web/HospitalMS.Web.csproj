@@ -24,10 +24,9 @@
 
 
   <ItemGroup>
-    <Folder Include="Areas\Administration\Views\Recepcionist\" />
+    <Folder Include="Areas\Administration\Views\Receptionist\" />
     <Folder Include="Areas\Administration\Views\Patient\" />
     <Folder Include="Views\Bed\" />
-    <Folder Include="wwwroot\images\" />
   </ItemGroup>
 
 
@@ -36,6 +35,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Areas\Administration\Views\Department\All.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Administration\Views\Home\DashBoard.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Areas\Administration\Views\Room\All.cshtml">

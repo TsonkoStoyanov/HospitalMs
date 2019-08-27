@@ -20,10 +20,7 @@
         }
         public async Task<bool> CreateRoomType(RoomTypeServiceModel roomTypeServiceModel)
         {
-            RoomType roomType = new RoomType
-            {
-                Name = roomTypeServiceModel.Name
-            };
+            RoomType roomType = AutoMapper.Mapper.Map<RoomType>(roomTypeServiceModel);
 
             context.RoomTypes.Add(roomType);
             int result = await context.SaveChangesAsync();
@@ -77,6 +74,7 @@
             return result > 0;
         }
 
-   
+    
+
     }
 }

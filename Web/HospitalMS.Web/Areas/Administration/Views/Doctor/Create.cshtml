@@ -26,11 +26,11 @@
                 <div class="col-md-10">
                     <form method="post">
                         <div class="form-group row">
-                            <label asp-for="Email" class="col-sm-2 col-form-label">
+                            <label asp-for="Email" class="col-sm-3 col-form-label">
                                 Email
                                 <i class="text-danger">*</i>
                             </label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-9">
                                 <input asp-for="Email" class="form-control" />
                                 <div class="asp-val">
                                     <span asp-validation-for="Email"></span>
@@ -38,11 +38,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label asp-for="Password" class="col-sm-2 col-form-label">
+                            <label asp-for="Password" class="col-sm-3 col-form-label">
                                 Password
                                 <i class="text-danger">*</i>
                             </label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-9">
                                 <input type="password" asp-for="Password" class="form-control" />
                                 <div class="asp-val">
                                     <span asp-validation-for="Password"></span>
@@ -50,11 +50,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label asp-for="ConfirmPassword" class="col-sm-2 col-form-label">
+                            <label asp-for="ConfirmPassword" class="col-sm-3 col-form-label">
                                 ConfirmPassword
                                 <i class="text-danger">*</i>
                             </label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-9">
                                 <input type="password" asp-for="ConfirmPassword" class="form-control" />
                                 <div class="asp-val">
                                     <span asp-validation-for="ConfirmPassword"></span>
@@ -62,11 +62,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label asp-for="FirstName" class="col-sm-2 col-form-label">
+                            <label asp-for="FirstName" class="col-sm-3 col-form-label">
                                 First Name
                                 <i class="text-danger">*</i>
                             </label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-9">
                                 <input asp-for="FirstName" class="form-control" />
                                 <div class="asp-val">
                                     <span asp-validation-for="FirstName"></span>
@@ -74,11 +74,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label asp-for="LastName" class="col-sm-2 col-form-label">
+                            <label asp-for="LastName" class="col-sm-3 col-form-label">
                                 Last Name
                                 <i class="text-danger">*</i>
                             </label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-9">
                                 <input asp-for="LastName" class="form-control" />
                                 <div class="asp-val">
                                     <span asp-validation-for="LastName"></span>
@@ -86,11 +86,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label asp-for="PhoneNumber" class="col-sm-2 col-form-label">
+                            <label asp-for="PhoneNumber" class="col-sm-3 col-form-label">
                                 PhoneNumber
                                 <i class="text-danger">*</i>
                             </label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-9">
                                 <input asp-for="PhoneNumber" class="form-control" />
                                 <div class="asp-val">
                                     <span asp-validation-for="PhoneNumber"></span>
@@ -98,11 +98,11 @@
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label class="col-sm-2 col-form-label">
+                            <label class="col-sm-3 col-form-label">
                                 Department
                                 <i class="text-danger">*</i>
                             </label>
-                            <div class="col-sm-10">
+                            <div class="col-sm-9">
                                 <select class="form-control text-primary" id="type" asp-for="Department">
                                     <option selected disabled>--- Select Department ---</option>
                                     @foreach (var department in departments)
@@ -115,7 +115,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group col-sm-2">
+                        <div class="form-group col-sm-3">
                             <input type="submit" value="Create" class="btn btn-info btn-block font-weight-bold" />
                         </div>
                     </form>

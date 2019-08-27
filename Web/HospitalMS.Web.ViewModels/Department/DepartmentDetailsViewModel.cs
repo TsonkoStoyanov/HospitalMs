@@ -2,7 +2,6 @@
 {
     using HospitalMS.Services.Mapping;
     using HospitalMS.Services.Models;
-    using HospitalMS.Web.ViewModels.Room;
     using System.Collections.Generic;
 
     public class DepartmentDetailsViewModel : IMapFrom<DepartmentServiceModel>

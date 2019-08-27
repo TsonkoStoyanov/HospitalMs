@@ -118,8 +118,6 @@ namespace HospitalMS.Data.Migrations
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken();
 
-                    b.Property<string>("DepartmentId");
-
                     b.Property<string>("Email")
                         .HasMaxLength(256);
 
@@ -151,8 +149,6 @@ namespace HospitalMS.Data.Migrations
                         .HasMaxLength(256);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("NormalizedEmail")
                         .HasName("EmailIndex");
@@ -196,6 +192,8 @@ namespace HospitalMS.Data.Migrations
 
                     b.Property<string>("Address");
 
+                    b.Property<string>("DepartmentId");
+
                     b.Property<string>("Diagnose");
 
                     b.Property<string>("Email");
@@ -210,12 +208,14 @@ namespace HospitalMS.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("DepartmentId");
+
                     b.HasIndex("HospitalMSUserId");
 
                     b.ToTable("Patients");
                 });
 
-            modelBuilder.Entity("HospitalMS.Data.Models.Recepcionist", b =>
+            modelBuilder.Entity("HospitalMS.Data.Models.Receptionist", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -234,7 +234,7 @@ namespace HospitalMS.Data.Migrations
 
                     b.HasIndex("HospitalMSUserId");
 
-                    b.ToTable("Recepcionists");
+                    b.ToTable("Receptionist");
                 });
 
             modelBuilder.Entity("HospitalMS.Data.Models.Room", b =>
@@ -403,19 +403,13 @@ namespace HospitalMS.Data.Migrations
             modelBuilder.Entity("HospitalMS.Data.Models.Doctor", b =>
                 {
                     b.HasOne("HospitalMS.Data.Models.Department", "Department")
-                        .WithMany()
-                        .HasForeignKey("DepartmentId");
+                        .WithMany("Doctors")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HospitalMS.Data.Models.HospitalMSUser", "UserDoctor")
                         .WithMany()
                         .HasForeignKey("HospitalMSUserId");
-                });
-
-            modelBuilder.Entity("HospitalMS.Data.Models.HospitalMSUser", b =>
-                {
-                    b.HasOne("HospitalMS.Data.Models.Department")
-                        .WithMany("Users")
-                        .HasForeignKey("DepartmentId");
                 });
 
             modelBuilder.Entity("HospitalMS.Data.Models.Invoice", b =>
@@ -427,14 +421,19 @@ namespace HospitalMS.Data.Migrations
 
             modelBuilder.Entity("HospitalMS.Data.Models.Patient", b =>
                 {
+                    b.HasOne("HospitalMS.Data.Models.Department", "Department")
+                        .WithMany("Patients")
+                        .HasForeignKey("DepartmentId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
                     b.HasOne("HospitalMS.Data.Models.HospitalMSUser", "UserPatient")
                         .WithMany()
                         .HasForeignKey("HospitalMSUserId");
                 });
 
-            modelBuilder.Entity("HospitalMS.Data.Models.Recepcionist", b =>
+            modelBuilder.Entity("HospitalMS.Data.Models.Receptionist", b =>
                 {
-                    b.HasOne("HospitalMS.Data.Models.HospitalMSUser", "UserRecepcionist")
+                    b.HasOne("HospitalMS.Data.Models.HospitalMSUser", "UserReceptionist")
                         .WithMany()
                         .HasForeignKey("HospitalMSUserId");
                 });

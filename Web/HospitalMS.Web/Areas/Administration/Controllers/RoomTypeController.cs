@@ -34,10 +34,8 @@
                 return View(roomTypeCreateInputModel);
             }
 
-            RoomTypeServiceModel roomTypeServiceModel = new RoomTypeServiceModel
-            {
-                Name = roomTypeCreateInputModel.Name
-            };
+            RoomTypeServiceModel roomTypeServiceModel = AutoMapper.Mapper.Map<RoomTypeServiceModel>(roomTypeCreateInputModel);
+
 
             await roomTypeService.CreateRoomType(roomTypeServiceModel);
 
