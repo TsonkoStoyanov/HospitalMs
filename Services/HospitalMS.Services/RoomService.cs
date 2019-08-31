@@ -21,28 +21,46 @@
 
         public async Task<bool> Create(RoomServiceModel roomServiceModel)
         {
-            RoomType roomTypeFromDb = GetRoomTypeFromDb(roomServiceModel);
+            RoomType roomTypeFromDb = await GetRoomTypeFromDb(roomServiceModel);
 
             if (roomTypeFromDb == null)
             {
                 throw new ArgumentNullException(nameof(roomTypeFromDb));
             }
 
-            Department departmentFromDb = GetDepartmentFromDb(roomServiceModel);
+            Department departmentFromDb = await GetDepartmentFromDb(roomServiceModel);
 
             if (departmentFromDb == null)
             {
                 throw new ArgumentNullException(nameof(departmentFromDb));
             }
+            var roomFromDb = await context.Rooms.SingleOrDefaultAsync(x => x.Name == roomServiceModel.Name);
 
-            Room room = AutoMapper.Mapper.Map<Room>(roomServiceModel);
-            room.RoomType = roomTypeFromDb;
-            room.Department = departmentFromDb;
+            if (roomFromDb != null)
+            {
+                roomFromDb.Name = roomServiceModel.Name;
+                
+                roomFromDb.IsDeleted = false;
+                roomFromDb.DeletedOn = null;
+                roomFromDb.RoomType = roomTypeFromDb;
+                roomFromDb.Department = departmentFromDb;
 
-            context.Rooms.Add(room);
-            int result = await context.SaveChangesAsync();
+                context.Rooms.Update(roomFromDb);
+                int result = await context.SaveChangesAsync();
 
-            return result > 0;
+                return result > 0;
+            }
+            else
+            {
+                Room room = AutoMapper.Mapper.Map<Room>(roomServiceModel);
+                room.RoomType = roomTypeFromDb;
+                room.Department = departmentFromDb;
+
+                context.Rooms.Add(room);
+                int result = await context.SaveChangesAsync();
+
+                return result > 0;
+            }
         }
 
         public IQueryable<RoomServiceModel> GetAllRooms()
@@ -60,14 +78,14 @@
 
         public async Task<bool> Edit(string id, RoomServiceModel roomServiceModel)
         {
-            RoomType roomTypeFromDb = GetRoomTypeFromDb(roomServiceModel);
+            RoomType roomTypeFromDb = await GetRoomTypeFromDb(roomServiceModel);
 
             if (roomTypeFromDb == null)
             {
                 throw new ArgumentNullException(nameof(roomTypeFromDb));
             }
 
-            Department departmentFromDb = GetDepartmentFromDb(roomServiceModel);
+            Department departmentFromDb = await GetDepartmentFromDb(roomServiceModel);
 
             if (departmentFromDb == null)
             {
@@ -91,7 +109,7 @@
 
             return result > 0;
         }
-        
+
 
         public async Task<bool> Delete(string id)
         {
@@ -102,24 +120,26 @@
                 throw new ArgumentNullException(nameof(roomFromDb));
             }
 
-            context.Rooms.Remove(roomFromDb);
+            roomFromDb.IsDeleted = true;
+            roomFromDb.DeletedOn = DateTime.UtcNow;
+
+            context.Rooms.Update(roomFromDb);
 
             int result = await context.SaveChangesAsync();
 
             return result > 0;
+
         }
 
-        private RoomType GetRoomTypeFromDb(RoomServiceModel roomServiceModel)
+        private Task<RoomType> GetRoomTypeFromDb(RoomServiceModel roomServiceModel)
         {
             return context.RoomTypes
-                 .SingleOrDefault(roomType => roomType.Name == roomServiceModel.RoomType.Name);
+                 .SingleOrDefaultAsync(roomType => roomType.Name == roomServiceModel.RoomType.Name);
         }
-        private Department GetDepartmentFromDb(RoomServiceModel roomServiceModel)
+        private Task<Department> GetDepartmentFromDb(RoomServiceModel roomServiceModel)
         {
             return context.Departments
-                .SingleOrDefault(department => department.Name == roomServiceModel.Department.Name);
+                .SingleOrDefaultAsync(department => department.Name == roomServiceModel.Department.Name);
         }
-
-
     }
 }

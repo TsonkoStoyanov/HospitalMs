@@ -1,10 +1,8 @@
-﻿
-namespace HospitalMS.Services
+﻿namespace HospitalMS.Services
 {
     using HospitalMS.Data;
     using System.Linq;
     using System.Threading.Tasks;
-
 
 
     public class DashboardService : IDashboardService
@@ -14,6 +12,11 @@ namespace HospitalMS.Services
         public DashboardService(HospitalMSDbContext context)
         {
             this.context = context;
+        }
+
+        public async Task<int> GetAvailableBedsCount()
+        {
+            return context.Beds.Where(bed => bed.IsOcupied == false && bed.IsDeleted==false).ToList().Count;
         }
 
         public async Task<int> GetDepartmentsCount()
@@ -26,6 +29,21 @@ namespace HospitalMS.Services
             return context.Doctors.ToList().Count;
         }
 
+        public async Task<int> GetHospitalizedPatientsCount()
+        {
+            return context.Patients.Where(patient => patient.IsHospitalized == true).ToList().Count;
+        }
+
+        public async Task<int> GetPatientsCount()
+        {
+            return context.Patients.ToList().Count;
+        }
+
+        public async Task<int> GetReceptionistsCount()
+        {
+            return context.Receptionists.ToList().Count;
+        }
+
         public async Task<int> GetRoomsCount()
         {
             return context.Rooms.ToList().Count;
@@ -34,6 +52,11 @@ namespace HospitalMS.Services
         public async Task<int> GetRoomTypesCount()
         {
             return context.RoomTypes.ToList().Count;
+        }
+
+        public async Task<int> GetАvailableRoomsCount()
+        {
+            return context.Rooms.Where(bed => bed.Beds.Any(x => x.IsOcupied == false)).ToList().Count;
         }
     }
 }

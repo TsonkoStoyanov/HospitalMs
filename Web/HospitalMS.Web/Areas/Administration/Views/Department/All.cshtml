@@ -24,9 +24,11 @@
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 260px;" aria-label="Description: activate to sort column ascending">Description</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 120px;" aria-label="Hospital: activate to sort column ascending">Hospital</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 20px;" aria-label="Patients: activate to sort column ascending">Patients</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 20px;" aria-label="Doctors: activate to sort column ascending">Doctors</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 20px;" aria-label="Rooms: activate to sort column ascending">Rooms</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 50px;" aria-label="Status: activate to sort column ascending">Status</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 100px;" aria-label="Hospital: activate to sort column ascending">Hospital</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 40px;" aria-label="Hospital: activate to sort column ascending">Rooms</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 96px;">Actions</th>
                                     </tr>
                                 </thead>
@@ -34,9 +36,11 @@
                                     <tr>
                                         <th rowspan="1" colspan="1">Name</th>
                                         <th rowspan="1" colspan="1">Description</th>
-                                        <th rowspan="1" colspan="1">Status</th>
                                         <th rowspan="1" colspan="1">Hospital</th>
+                                        <th rowspan="1" colspan="1">Patients</th>
+                                        <th rowspan="1" colspan="1">Doctors</th>
                                         <th rowspan="1" colspan="1">Rooms</th>
+                                        <th rowspan="1" colspan="1">Status</th>
                                         <th rowspan="1" colspan="1">Actions</th>
                                     </tr>
                                 </tfoot>
@@ -50,16 +54,18 @@
                                                 </a>
                                             </td>
                                             <td>@Model[i].Description</td>
-                                            <td>@(Model[i].IsActive ? "active" : "inactive")</td>
                                             <td>@Model[i].HospitalName</td>
+                                            <td>@Model[i].Patients.Count</td>
+                                            <td>@Model[i].Doctors.Count</td>
                                             <td>@Model[i].Rooms.Count</td>
+                                            <td>@(Model[i].IsActive ? "active" : "inactive")</td>
 
                                             <td>
                                                 <a href="/Administration/Department/Edit/@Model[i].Id" class="btn btn-xs  btn-info">
-                                                    <i class="fa fa-edit"></i>
+                                                    <i class="fa fa-edit"title="Edit"></i>
                                                 </a>
                                                 <a href="/Administration/Department/Delete/@Model[i].Id" class="btn btn-xs  btn-danger">
-                                                    <i class="fa fa-trash"></i>
+                                                    <i class="fa fa-trash"title="Delete"></i>
                                                 </a>
                                             </td>
                                         </tr>

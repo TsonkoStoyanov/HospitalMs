@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HospitalMS.Data.Migrations
 {
-    public partial class initial : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,6 +53,8 @@ namespace HospitalMS.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
@@ -69,6 +71,8 @@ namespace HospitalMS.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     PriceForBed = table.Column<decimal>(nullable: false)
                 },
@@ -184,32 +188,12 @@ namespace HospitalMS.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Receptionist",
-                columns: table => new
-                {
-                    Id = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: true),
-                    FirstName = table.Column<string>(nullable: true),
-                    LastName = table.Column<string>(nullable: true),
-                    PhoneNumber = table.Column<string>(nullable: true),
-                    HospitalMSUserId = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Receptionist", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Receptionist_AspNetUsers_HospitalMSUserId",
-                        column: x => x.HospitalMSUserId,
-                        principalTable: "AspNetUsers",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Departments",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
                     IsActive = table.Column<bool>(nullable: false),
@@ -227,10 +211,43 @@ namespace HospitalMS.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Receptionists",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Email = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    LastName = table.Column<string>(nullable: true),
+                    PhoneNumber = table.Column<string>(nullable: true),
+                    HospitalMSUserId = table.Column<string>(nullable: true),
+                    HospitalId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Receptionists", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Receptionists_Hospitals_HospitalId",
+                        column: x => x.HospitalId,
+                        principalTable: "Hospitals",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Receptionists_AspNetUsers_HospitalMSUserId",
+                        column: x => x.HospitalMSUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Doctors",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
@@ -246,7 +263,7 @@ namespace HospitalMS.Data.Migrations
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Doctors_AspNetUsers_HospitalMSUserId",
                         column: x => x.HospitalMSUserId,
@@ -260,12 +277,17 @@ namespace HospitalMS.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     FirstName = table.Column<string>(nullable: true),
                     LastName = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
+                    BirthDate = table.Column<DateTime>(nullable: false),
                     Address = table.Column<string>(nullable: true),
-                    Diagnose = table.Column<string>(nullable: true),
+                    IsHospitalized = table.Column<bool>(nullable: false),
+                    DateOfAcceptance = table.Column<DateTime>(nullable: true),
+                    DateOfDischarge = table.Column<DateTime>(nullable: true),
                     HospitalMSUserId = table.Column<string>(nullable: true),
                     DepartmentId = table.Column<string>(nullable: true)
                 },
@@ -277,7 +299,7 @@ namespace HospitalMS.Data.Migrations
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Patients_AspNetUsers_HospitalMSUserId",
                         column: x => x.HospitalMSUserId,
@@ -291,6 +313,8 @@ namespace HospitalMS.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     RoomTypeId = table.Column<int>(nullable: false),
                     DepartmentId = table.Column<string>(nullable: true)
@@ -303,7 +327,7 @@ namespace HospitalMS.Data.Migrations
                         column: x => x.DepartmentId,
                         principalTable: "Departments",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Rooms_RoomTypes_RoomTypeId",
                         column: x => x.RoomTypeId,
@@ -313,16 +337,81 @@ namespace HospitalMS.Data.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Appointments",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    AppointmentDate = table.Column<DateTime>(nullable: false),
+                    Details = table.Column<string>(nullable: true),
+                    Status = table.Column<bool>(nullable: false),
+                    PatientId = table.Column<int>(nullable: false),
+                    PatientId1 = table.Column<string>(nullable: true),
+                    DoctorId = table.Column<int>(nullable: false),
+                    DoctorId1 = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Appointments", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Doctors_DoctorId1",
+                        column: x => x.DoctorId1,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Appointments_Patients_PatientId1",
+                        column: x => x.PatientId1,
+                        principalTable: "Patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Diagnoses",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
+                    Date = table.Column<DateTime>(nullable: false),
+                    Details = table.Column<string>(nullable: true),
+                    PatientId = table.Column<string>(nullable: true),
+                    DoctorId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Diagnoses", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Diagnoses_Doctors_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Diagnoses_Patients_PatientId",
+                        column: x => x.PatientId,
+                        principalTable: "Patients",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "Invoices",
                 columns: table => new
                 {
                     Id = table.Column<string>(nullable: false),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     Number = table.Column<int>(nullable: false),
                     IssuedOn = table.Column<DateTime>(nullable: false),
                     DateOfAcceptance = table.Column<DateTime>(nullable: false),
                     DateOfDischarge = table.Column<DateTime>(nullable: false),
                     TotalPrice = table.Column<decimal>(nullable: false),
-                    PatientId = table.Column<string>(nullable: true)
+                    PatientId = table.Column<string>(nullable: true),
+                    RecepcionistId = table.Column<string>(nullable: true),
+                    ReceptionistId = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -333,6 +422,12 @@ namespace HospitalMS.Data.Migrations
                         principalTable: "Patients",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_Invoices_Receptionists_ReceptionistId",
+                        column: x => x.ReceptionistId,
+                        principalTable: "Receptionists",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -341,6 +436,8 @@ namespace HospitalMS.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    IsDeleted = table.Column<bool>(nullable: false),
+                    DeletedOn = table.Column<DateTime>(nullable: true),
                     Number = table.Column<int>(nullable: false),
                     IsOcupied = table.Column<bool>(nullable: false),
                     RoomId = table.Column<string>(nullable: true),
@@ -362,6 +459,16 @@ namespace HospitalMS.Data.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_DoctorId1",
+                table: "Appointments",
+                column: "DoctorId1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Appointments_PatientId1",
+                table: "Appointments",
+                column: "PatientId1");
 
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
@@ -420,6 +527,16 @@ namespace HospitalMS.Data.Migrations
                 column: "HospitalId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Diagnoses_DoctorId",
+                table: "Diagnoses",
+                column: "DoctorId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Diagnoses_PatientId",
+                table: "Diagnoses",
+                column: "PatientId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Doctors_DepartmentId",
                 table: "Doctors",
                 column: "DepartmentId");
@@ -435,6 +552,11 @@ namespace HospitalMS.Data.Migrations
                 column: "PatientId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Invoices_ReceptionistId",
+                table: "Invoices",
+                column: "ReceptionistId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Patients_DepartmentId",
                 table: "Patients",
                 column: "DepartmentId");
@@ -445,8 +567,13 @@ namespace HospitalMS.Data.Migrations
                 column: "HospitalMSUserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Receptionist_HospitalMSUserId",
-                table: "Receptionist",
+                name: "IX_Receptionists_HospitalId",
+                table: "Receptionists",
+                column: "HospitalId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Receptionists_HospitalMSUserId",
+                table: "Receptionists",
                 column: "HospitalMSUserId");
 
             migrationBuilder.CreateIndex(
@@ -462,6 +589,9 @@ namespace HospitalMS.Data.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "Appointments");
+
             migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
@@ -481,13 +611,10 @@ namespace HospitalMS.Data.Migrations
                 name: "Beds");
 
             migrationBuilder.DropTable(
-                name: "Doctors");
+                name: "Diagnoses");
 
             migrationBuilder.DropTable(
                 name: "Invoices");
-
-            migrationBuilder.DropTable(
-                name: "Receptionist");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
@@ -496,7 +623,13 @@ namespace HospitalMS.Data.Migrations
                 name: "Rooms");
 
             migrationBuilder.DropTable(
+                name: "Doctors");
+
+            migrationBuilder.DropTable(
                 name: "Patients");
+
+            migrationBuilder.DropTable(
+                name: "Receptionists");
 
             migrationBuilder.DropTable(
                 name: "RoomTypes");

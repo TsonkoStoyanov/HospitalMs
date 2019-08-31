@@ -1,13 +1,14 @@
 ﻿namespace HospitalMS.Web.Areas.Administration.Controllers
 {
-    using HospitalMS.Web.Controllers;
-    using Microsoft.AspNetCore.Authorization;
+    using HospitalMS.Common;
+    using HospitalMS.Common.Attributes;
+    using HospitalMS.Web.Controllers;   
     using Microsoft.AspNetCore.Mvc;
 
 
-    [Authorize(Roles = "Administrator")]
+    [AuthorizeRoles(GlobalConstants.AdministratorRoleName, GlobalConstants.ReceptionistRoleName)]
     [Area("Administration")]
-    public class AdministratorController : BaseController
+    public class AdministrationController : BaseController
     {
     }
 }

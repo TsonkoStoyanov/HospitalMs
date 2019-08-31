@@ -1,0 +1,58 @@
+﻿@model ReceptionistDetailsViewModel
+
+@{
+    ViewData["Title"] = "Receptionist Details";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header d-flex flex-row align-items-center justify-content-between">
+        <h6 class="m-0 font-weight-bold text-secondary">Receptionist <span class="text-info">Details</span></h6>
+        <div>
+            <a class="" href="/Administration/Receptionist/All" role="button">
+                <h6 class="m-0 font-weight-bold text-secondary"><i class="fas fa-step-backward"></i>Back to <span class="text-info">All</span></h6>
+            </a>
+        </div>
+    </div>
+    <div class="card-body">
+        <div>
+            <dl class="row">
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.Email)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.Email)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.FirstName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.FirstName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.LastName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.LastName)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.PhoneNumber)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.PhoneNumber)
+                </dd>
+                <dt class="col-sm-2">
+                    @Html.DisplayNameFor(model => model.HospitalName)
+                </dt>
+                <dd class="col-sm-10">
+                    @Html.DisplayFor(model => model.HospitalName)
+                </dd>
+            </dl>
+            @if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            {
+                <div class="col-sm-2">
+                    <a href="/Administration/Receptionist/Edit/@Model.Id" class="btn btn-info btn-block font-weight-bold">Edit</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

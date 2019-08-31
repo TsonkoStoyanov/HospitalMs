@@ -8,10 +8,10 @@
     {
         Task<BedServiceModel> GetById(int id);
 
-        Task<bool> Create(BedServiceModel BedServiceModel);
+        Task<bool> Create(string roomId, BedServiceModel bedServiceModel);
 
-        Task<bool> Edit(int id, BedServiceModel BedServiceModel);
+        Task<bool> Edit(int id, BedServiceModel bedServiceModel);
 
-        Task<bool> Delete(int id);
+        Task<bool> Remove(string roomId);
     }
 }

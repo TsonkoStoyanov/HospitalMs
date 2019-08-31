@@ -20,17 +20,35 @@
         }
         public async Task<bool> CreateRoomType(RoomTypeServiceModel roomTypeServiceModel)
         {
-            RoomType roomType = AutoMapper.Mapper.Map<RoomType>(roomTypeServiceModel);
+            var roomTypeFromDb = await context.RoomTypes.SingleOrDefaultAsync(x => x.Name == roomTypeServiceModel.Name);
 
-            context.RoomTypes.Add(roomType);
-            int result = await context.SaveChangesAsync();
+            if (roomTypeFromDb != null)
+            {
+                roomTypeFromDb.Name = roomTypeServiceModel.Name;
+                roomTypeFromDb.PriceForBed = roomTypeServiceModel.PriceForBed;
+                roomTypeFromDb.IsDeleted = false;
+                roomTypeFromDb.DeletedOn = null; 
 
-            return result > 0;
+                context.RoomTypes.Update(roomTypeFromDb);
+                int result = await context.SaveChangesAsync();
+
+                return result > 0;
+            }
+            else
+            {
+
+                RoomType roomType = AutoMapper.Mapper.Map<RoomType>(roomTypeServiceModel);
+
+                context.RoomTypes.Add(roomType);
+                int result = await context.SaveChangesAsync();
+
+                return result > 0;
+            }
         }
 
         public IQueryable<RoomTypeServiceModel> GetAllRoomTypes()
         {
-            return context.RoomTypes.To<RoomTypeServiceModel>();
+            return context.RoomTypes.Where(roomType => roomType.IsDeleted == false).To<RoomTypeServiceModel>();
         }
 
         public async Task<RoomTypeServiceModel> GetById(int id)
@@ -40,7 +58,7 @@
                 .SingleOrDefaultAsync(roomType => roomType.Id == id);
         }
 
-        public async Task<bool> Edit(int id, RoomTypeServiceModel roomtypeServiceModel)
+        public async Task<bool> Edit(int id, RoomTypeServiceModel roomTypeServiceModel)
         {
             RoomType roomTypeFromDb = await context.RoomTypes.SingleOrDefaultAsync(roomType => roomType.Id == id);
 
@@ -49,7 +67,8 @@
                 throw new ArgumentNullException(nameof(roomTypeFromDb));
             }
 
-            roomTypeFromDb.Name = roomtypeServiceModel.Name;
+            roomTypeFromDb.Name = roomTypeServiceModel.Name;
+            roomTypeFromDb.PriceForBed = roomTypeServiceModel.PriceForBed;
 
             context.RoomTypes.Update(roomTypeFromDb);
             int result = await context.SaveChangesAsync();
@@ -61,20 +80,22 @@
         {
             RoomType roomTypeFromDb = await context.RoomTypes.SingleOrDefaultAsync(roomType => roomType.Id == id);
 
-            
             if (roomTypeFromDb == null)
             {
                 throw new ArgumentNullException(nameof(roomTypeFromDb));
             }
 
-            context.RoomTypes.Remove(roomTypeFromDb);
+            roomTypeFromDb.IsDeleted = true;
+            roomTypeFromDb.DeletedOn = DateTime.UtcNow;
+
+            context.RoomTypes.Update(roomTypeFromDb);
 
             int result = await context.SaveChangesAsync();
 
             return result > 0;
         }
 
-    
+
 
     }
 }

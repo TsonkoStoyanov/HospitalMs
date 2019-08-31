@@ -52,7 +52,7 @@
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Doctor menu:</h6>
                     <a class="collapse-item" href="/Administration/Doctor/Create">Create Doctor</a>
-                    <a class="collapse-item" href="/Administration/Doctor/All">List Doctors</a>
+                    <a class="collapse-item" href="/Doctor/All">List Doctors</a>
                 </div>
             </div>
         </div>
@@ -65,22 +65,22 @@
             <div id="collapsePatientMenu" class="collapse" aria-labelledby="collapsePatientMenu" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Patient menu:</h6>
-                    <a class="collapse-item" href="utilities-color.html">Add Patient</a>
-                    <a class="collapse-item" href="utilities-border.html">List Patients</a>
+                    <a class="collapse-item" href="/Administration/Patient/Create">Create Patient</a>
+                    <a class="collapse-item" href="/Patient/All">List Patients</a>
                 </div>
             </div>
         </div>
         <!-- Nav Item - Recepcionist Collapse Menu -->
         <div class="nav-item">
-            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRecepcionistMenu" aria-expanded="true" aria-controls="collapseRecepcionistMenu">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseReceptionistMenu" aria-expanded="true" aria-controls="collapseReceptionistMenu">
                 <i class="fas fa-notes-medical"></i>
-                <span>Recepcionist</span>
+                <span>Receptionist</span>
             </a>
-            <div id="collapseRecepcionistMenu" class="collapse" aria-labelledby="collapseRecepcionistMenu" data-parent="#accordionSidebar">
+            <div id="collapseReceptionistMenu" class="collapse" aria-labelledby="collapseReceptionistMenu" data-parent="#accordionSidebar">
                 <div class="bg-white py-2 collapse-inner rounded">
                     <h6 class="collapse-header">Recepcionist menu:</h6>
-                    <a class="collapse-item" href="utilities-color.html">Add Recepcionist</a>
-                    <a class="collapse-item" href="utilities-border.html">List Recepcionists</a>
+                    <a class="collapse-item" href="/Administration/Receptionist/Create">Create Receptionist</a>
+                    <a class="collapse-item" href="/Administration/Receptionist/All">List Receptionist</a>
                 </div>
             </div>
         </div>
@@ -121,24 +121,140 @@
                 <span>Departments</span>
             </a>
         </div>
+        <hr class="sidebar-divider">
+        <div class="nav-item">
+            <a class="nav-link" href="/Appointment/Create">
+                <i class="far fa-calendar-check"></i>
+                <span>Create Appointment</span>
+            </a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/Doctor/All">
+                <i class="fas fa-user-md"></i>
+                <span>Doctors</span>
+            </a>
+        </div>
     }
     else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.DoctorRoleName))
     {
         <div class="sidebar-heading text-center">
             Doctor
         </div>
+        <!-- Nav Item - Hospital Collapse Menu -->
+        <div class="nav-item">
+            <a class="nav-link" href="/Hospital/Details">
+                <i class="fas fa-hospital-symbol"></i>
+                <span>Hospital</span>
+            </a>
+        </div>
+        <div class="nav-item">
+            <a class="nav-link" href="/Department/All">
+                <i class="fas fa-clinic-medical"></i>
+                <span>Departments</span>
+            </a>
+        </div>
+        <hr class="sidebar-divider">
+        <div class="nav-item">
+            <a class="nav-link" href="/Patient/All">
+                <i class="fas fa-user-injured"></i>
+                <span>Patients</span>
+            </a>
+        </div>
     }
     else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.ReceptionistRoleName))
     {
+        <!-- Heading -->
         <div class="sidebar-heading text-center">
-            Recepcionist
+            Receptionist
         </div>
-        <!-- Nav Item - Charts -->
-        <div class="nav-item">
-            <a class="nav-link" href="charts.html">
-                <i class="fas fa-fw fa-chart-area"></i>
-                <span>Charts</span>
+        <div id="p" class="nav-item">
+            <a class="nav-link" href="/Home/Index">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span>
             </a>
+        </div>
+        <hr class="sidebar-divider">
+        <!-- Nav Item - Hospital Collapse Menu -->
+        <div class="nav-item">
+            <a class="nav-link" href="/Hospital/Details">
+                <i class="fas fa-hospital-symbol"></i>
+                <span>Hospital</span>
+            </a>
+        </div>
+        <!-- Nav Item - Department Collapse Menu -->
+        <div class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDepartmentMenu" aria-expanded="true" aria-controls="collapseDepartmentMenu">
+                <i class="fas fa-clinic-medical"></i>
+                <span>Department</span>
+            </a>
+            <div id="collapseDepartmentMenu" class="collapse" aria-labelledby="collapseDepartmentMenu" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Department menu:</h6>
+                    <a class="collapse-item" href="/Administration/Department/Create">Create Department</a>
+                    <a class="collapse-item" href="/Administration/Department/All">List Departments</a>
+                </div>
+            </div>
+        </div>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+        <div class="nav-item">
+            <a class="nav-link" href="/Appointment/Create">
+                <i class="far fa-calendar-check"></i>
+                <span>Create Appointment</span>
+            </a>
+        </div>
+        <!-- Nav Item - Doctor Collapse Menu -->
+        <div class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseDoctorMenu" aria-expanded="true" aria-controls="collapseDoctorMenu">
+                <i class="fas fa-user-md"></i>
+                <span>Doctor</span>
+            </a>
+            <div id="collapseDoctorMenu" class="collapse" aria-labelledby="collapseDoctorMenu" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Doctor menu:</h6>
+                    <a class="collapse-item" href="/Administration/Doctor/Create">Create Doctor</a>
+                    <a class="collapse-item" href="/Doctor/All">List Doctors</a>
+                </div>
+            </div>
+        </div>
+        <!-- Nav Item - Patient Collapse Menu -->
+        <div class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePatientMenu" aria-expanded="true" aria-controls="collapsePatientMenu">
+                <i class="fas fa-user-injured"></i>
+                <span>Patient</span>
+            </a>
+            <div id="collapsePatientMenu" class="collapse" aria-labelledby="collapsePatientMenu" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Patient menu:</h6>
+                    <a class="collapse-item" href="/Administration/Patient/Create">Create Patient</a>
+                    <a class="collapse-item" href="/Patient/All">List Patients</a>
+                </div>
+            </div>
+        </div>
+        <hr class="sidebar-divider">
+        <div class="nav-item">
+            <a class="nav-link" href="/Invoice/Create">
+                <i class="far fa-calendar-check"></i>
+                <span>Create Invoice</span>
+            </a>
+        </div>
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+        <!-- Nav Item - Room Collapse Menu -->
+        <div class="nav-item">
+            <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseRoomMenu" aria-expanded="true" aria-controls="collapseRoomMenu">
+                <i class="fas fa-door-open"></i>
+                <span>Room</span>
+            </a>
+            <div id="collapseRoomMenu" class="collapse" aria-labelledby="collapseRoomMenu" data-parent="#accordionSidebar">
+                <div class="bg-white py-2 collapse-inner rounded">
+                    <h6 class="collapse-header">Room menu:</h6>
+                    <a class="collapse-item" href="/Administration/RoomType/Create">Create RoomType</a>
+                    <a class="collapse-item" href="/Administration/RoomType/All">List RoomTypes </a>
+                    <a class="collapse-item" href="/Administration/Room/Create">Create Room</a>
+                    <a class="collapse-item" href="/Administration/Room/All">List Rooms </a>
+                </div>
+            </div>
         </div>
     }
     <!-- Divider -->

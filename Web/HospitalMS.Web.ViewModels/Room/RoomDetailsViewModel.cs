@@ -5,7 +5,6 @@
     using HospitalMS.Web.ViewModels.Bed;
     using System.Collections.Generic;
 
-
     public class RoomDetailsViewModel : IMapFrom<RoomServiceModel>
     {
         public string Id { get; set; }
@@ -17,5 +16,7 @@
         public string DepartmentName { get; set; }
 
         public List<BedViewModel> Beds { get; set; }
+
+
     }
 }

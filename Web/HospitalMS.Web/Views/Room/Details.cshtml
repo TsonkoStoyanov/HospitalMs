@@ -3,11 +3,12 @@
 @{
     ViewData["Title"] = "Room Details";
 }
-<!-- Departments Card Example -->
+
 <div class="card shadow mb-4">
     <div class="card-header d-flex flex-row align-items-center justify-content-between">
         <h6 class="m-0 font-weight-bold text-secondary">Room <span class="text-info">Details</span></h6>
-        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+        @if (this.User.Identity.IsAuthenticated && (this.User.IsInRole(GlobalConstants.AdministratorRoleName)
+          || this.User.IsInRole(GlobalConstants.ReceptionistRoleName)))
         {
             <div>
                 <a class="" href="/Administration/Room/All" role="button">
@@ -52,16 +53,20 @@
                     @Html.DisplayFor(model => model.Beds.Count)
                 </dd>
             </dl>
-            @if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            @if (this.User.Identity.IsAuthenticated && (this.User.IsInRole(GlobalConstants.AdministratorRoleName)
+            || this.User.IsInRole(GlobalConstants.ReceptionistRoleName)))
             {
                 <div class="row">
                     <div class="col-sm-2">
-                        <input type="hidden" value="@Model.Id">
-                        <a href="/Administration/Bed/Create" class="btn btn-info btn-block font-weight-bold">Add Bed</a>
+                        <a href="/Administration/Room/Bed/Add/@Model.Id" class="btn btn-info btn-block font-weight-bold">Add Bed</a>
                     </div>
-                    <div class="col-sm-2">
-                        <a href="/Administration/Bed/Remove" class="btn btn-danger btn-block font-weight-bold">Remove Bed</a>
-                    </div>
+                    @if (Model.Beds.Count > 0)
+                    {
+
+                        <div class="col-sm-2">
+                            <a href="/Administration/Room/Bed/Remove/@Model.Id" class="btn btn-danger btn-block font-weight-bold">Remove Bed</a>
+                        </div>
+                    }
                 </div>
             }
         </div>

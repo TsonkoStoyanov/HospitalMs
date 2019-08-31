@@ -1,12 +1,13 @@
 ﻿namespace HospitalMS.Web.Controllers
 {
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using HospitalMS.Services;
     using HospitalMS.Services.Mapping;
     using HospitalMS.Web.ViewModels.Department;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
+    
 
     public class DepartmentController : BaseController
     {
@@ -21,9 +22,9 @@
         [Route("/Department/All")]
         public async Task<IActionResult> All()
         {
-            List<DepartmentAllViewModel> departments = await this.departmentService.GetAllActiveDepartments()
+            List<DepartmentAllViewModel> departments = this.departmentService.GetAllActiveDepartments()
                 .To<DepartmentAllViewModel>()
-                .ToListAsync();
+                .ToList();
 
             return this.View(departments);
         }

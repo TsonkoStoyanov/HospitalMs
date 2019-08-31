@@ -4,14 +4,14 @@
     using HospitalMS.Services.Mapping;
     using HospitalMS.Web.ViewModels.Room;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
+
 
     public class RoomController : BaseController
     {
         private readonly IRoomService roomService;
-
 
         public RoomController(IRoomService roomService)
         {
@@ -22,9 +22,9 @@
         [Route("/Room/All")]
         public async Task<IActionResult> All()
         {
-            List<RoomAllViewModel> rooms = await this.roomService.GetAllRooms()
+            List<RoomAllViewModel> rooms = this.roomService.GetAllRooms()
                 .To<RoomAllViewModel>()
-                .ToListAsync();
+                .ToList();
 
             return this.View(rooms);
         }

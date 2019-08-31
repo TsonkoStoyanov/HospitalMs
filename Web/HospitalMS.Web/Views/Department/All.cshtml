@@ -1,14 +1,12 @@
 ﻿@model List<DepartmentAllViewModel>
 
 @{
-    ViewData["Title"] = "All";
-
+    ViewData["Title"] = "Department All";
 }
 <div class="card shadow mb-4">
     <div class="card-header py-3">
         <h6 class="m-0 font-weight-bold">Department <span class="text-info">All</span></h6>
     </div>
-
     <div class="card-body">
         @if (@Model.Count != 0)
         {
@@ -16,7 +14,6 @@
                 <div id="dataTable_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <div class="row">
                         <div class="col-sm-12 col-md-6">
-
                         </div>
                         <div class="col-sm-12 col-md-6"></div>
                     </div>
@@ -25,17 +22,23 @@
                             <table class="table table-bordered dataTable" id="dataTable" role="grid" aria-describedby="dataTable_info" style="width: 100%;" width="100%" cellspacing="0">
                                 <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 160px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 246px;" aria-label="Description: activate to sort column ascending">Description</th>                                     
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 50px;" aria-label="Hospital: activate to sort column ascending">Hospital</th>
-
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Name</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 260px;" aria-label="Description: activate to sort column ascending">Description</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 120px;" aria-label="Hospital: activate to sort column ascending">Hospital</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 20px;" aria-label="Patients: activate to sort column ascending">Patients</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 20px;" aria-label="Doctors: activate to sort column ascending">Doctors</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 20px;" aria-label="Rooms: activate to sort column ascending">Rooms</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th rowspan="1" colspan="1">Name</th>
-                                        <th rowspan="1" colspan="1">Description</th>                                       
+                                        <th rowspan="1" colspan="1">Description</th>
                                         <th rowspan="1" colspan="1">Hospital</th>
+                                        <th rowspan="1" colspan="1">Patients</th>
+                                        <th rowspan="1" colspan="1">Doctors</th>
+                                        <th rowspan="1" colspan="1">Rooms</th>
+
 
                                     </tr>
                                 </tfoot>
@@ -48,8 +51,12 @@
                                                     @Model[i].Name
                                                 </a>
                                             </td>
-                                            <td>@Model[i].Description</td>                                          
+                                            <td>@Model[i].Description</td>
                                             <td>@Model[i].HospitalName</td>
+                                            <td>@Model[i].Patients.Count</td>
+                                            <td>@Model[i].Doctors.Count</td>
+                                            <td>@Model[i].Rooms.Count</td>
+
                                         </tr>
                                     }
                                 </tbody>
@@ -63,6 +70,5 @@
         {
             <h4>You have no Departments in your Hospital.</h4>
         }
-
     </div>
 </div>

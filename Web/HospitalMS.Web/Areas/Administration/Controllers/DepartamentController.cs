@@ -12,7 +12,7 @@
     using System.Collections.Generic;
 
 
-    public class DepartmentController : AdministratorController
+    public class DepartmentController : AdministrationController
     {
         private readonly IDepartmentService departmentService;
         private readonly IHospitalService hospitalService;

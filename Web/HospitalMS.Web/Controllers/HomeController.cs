@@ -1,23 +1,30 @@
-﻿namespace HospitalMS.Web.Controllers
-{
-    using System.Diagnostics;
-    using System.Threading.Tasks;
-    using HospitalMS.Common;
-    using HospitalMS.Web.ViewModels;
-    using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using System.Threading.Tasks;
+using HospitalMS.Common;
+using HospitalMS.Web.ViewModels;
+using Microsoft.AspNetCore.Mvc;
 
+
+namespace HospitalMS.Web.Controllers
+{
     public class HomeController : BaseController
     {
         public async Task<IActionResult> Index()
         {
-            if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+            if (User.IsInRole(GlobalConstants.AdministratorRoleName))
             {
-                return Redirect("/Administration/Home/Dashboard");
+                return Redirect("/Administration/Home/AdministratorDashboard");
             }
-            else
+            else if (User.IsInRole(GlobalConstants.ReceptionistRoleName))
             {
-                return View();
+                return Redirect("/Administration/Home/ReceptionistDashboard");
             }
+            else if (User.IsInRole(GlobalConstants.PatientRoleName))
+            {
+                return View("Patient/Index");
+            }
+
+            return View("Doctor/Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

@@ -17,5 +17,9 @@
         public string HospitalName { get; set; }
 
         public List<RoomServiceModel> Rooms { get; set; }
+
+        public List<DoctorServiceModel> Doctors { get; set; }
+
+        public List<PatientServiceModel> Patients { get; set; }
     }
 }

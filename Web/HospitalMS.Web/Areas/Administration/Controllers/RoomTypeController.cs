@@ -10,7 +10,7 @@
     using HospitalMS.Web.InputModels.RoomType;
     using HospitalMS.Web.ViewModels.RoomType;
 
-    public class RoomTypeController : AdministratorController
+    public class RoomTypeController : AdministrationController
     {
         private readonly IRoomTypeService roomTypeService;
 

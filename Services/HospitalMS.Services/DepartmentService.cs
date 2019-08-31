@@ -21,36 +21,62 @@
 
         public IQueryable<DepartmentServiceModel> GetAllActiveDepartments()
         {
-            return context.Departments.Where(status => status.IsActive == true).To<DepartmentServiceModel>();
+            return context.Departments
+                .Where(deleted => deleted.IsDeleted == false)
+                .Where(status => status.IsActive == true)
+                .To<DepartmentServiceModel>();
         }
 
         public IQueryable<DepartmentServiceModel> GetAllDepartments()
         {
-            return context.Departments.To<DepartmentServiceModel>();
+            return context.Departments.Where(deleted => deleted.IsDeleted == false).To<DepartmentServiceModel>();
         }
 
         public async Task<bool> Create(DepartmentServiceModel departmentServiceModel)
         {
-            Hospital hospitalFromDb = GetHospital(departmentServiceModel);
+            Hospital hospitalFromDb = await GetHospital(departmentServiceModel);
 
             if (hospitalFromDb == null)
             {
                 throw new ArgumentNullException(nameof(hospitalFromDb));
             }
 
-            Department department = AutoMapper.Mapper.Map<Department>(departmentServiceModel);
-            department.Hospital = hospitalFromDb;
+            var departmentFromDb = await context.Departments.SingleOrDefaultAsync(x => x.Name == departmentServiceModel.Name);
 
-            context.Departments.Add(department);
-            int result = await context.SaveChangesAsync();
+            if (departmentFromDb != null)
+            {
+                departmentFromDb.Name = departmentServiceModel.Name;
+                departmentFromDb.Description = departmentServiceModel.Description;
+                departmentFromDb.IsActive = departmentServiceModel.IsActive;
+                departmentFromDb.IsDeleted = false;
+                departmentFromDb.DeletedOn = null;
+                departmentFromDb.Hospital = hospitalFromDb;
 
-            return result > 0;
+                context.Departments.Update(departmentFromDb);
+
+                int result = await context.SaveChangesAsync();
+
+                return result > 0;
+            }
+            else
+            {
+
+                Department department = AutoMapper.Mapper.Map<Department>(departmentServiceModel);
+
+                department.Hospital = hospitalFromDb;
+
+                context.Departments.Add(department);
+
+                int result = await context.SaveChangesAsync();
+
+                return result > 0;
+            }
         }
 
         public async Task<bool> Edit(string id, DepartmentServiceModel departmentServiceModel)
         {
             Hospital hospitalFromDb =
-                GetHospital(departmentServiceModel);
+                await GetHospital(departmentServiceModel);
 
             if (hospitalFromDb == null)
             {
@@ -67,7 +93,6 @@
             departmentFromDb.Name = departmentServiceModel.Name;
             departmentFromDb.Description = departmentServiceModel.Description;
             departmentFromDb.IsActive = departmentServiceModel.IsActive;
-
 
             departmentFromDb.Hospital = hospitalFromDb;
 
@@ -86,9 +111,11 @@
                 throw new ArgumentNullException(nameof(departmentFromDb));
             }
 
-            //TODO Cascade Delete if time remains to make warrning has room and users on department before delete
 
-            context.Departments.Remove(departmentFromDb);
+            departmentFromDb.IsDeleted = true;
+            departmentFromDb.DeletedOn = DateTime.UtcNow;
+
+            context.Departments.Update(departmentFromDb);
 
             int result = await context.SaveChangesAsync();
 
@@ -102,10 +129,10 @@
                  .SingleOrDefaultAsync(department => department.Id == id);
         }
 
-        private Hospital GetHospital(DepartmentServiceModel departmentServiceModel)
+        private async Task<Hospital> GetHospital(DepartmentServiceModel departmentServiceModel)
         {
-            return context.Hospitals
-                 .SingleOrDefault(hospital => hospital.Name == departmentServiceModel.HospitalName);
+            return await context.Hospitals
+                 .SingleOrDefaultAsync(hospital => hospital.Name == departmentServiceModel.HospitalName);
         }
 
 

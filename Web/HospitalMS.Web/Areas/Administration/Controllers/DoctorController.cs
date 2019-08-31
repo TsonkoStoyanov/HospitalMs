@@ -12,7 +12,7 @@
 
 
 
-    public class DoctorController : AdministratorController
+    public class DoctorController : AdministrationController
     {
         private readonly IDoctorService doctorService;
         private readonly IDepartmentService departmentService;
@@ -23,16 +23,7 @@
             this.departmentService = departmentService;
         }
 
-        [HttpGet]
-        public async Task<IActionResult> All()
-        {
-            var doctor = doctorService.GetAllDoctors()
-               .To<DoctorAllViewModel>().ToList();
-
-            return View(doctor);
-        }
-
-        [HttpGet]
+         [HttpGet]
         public async Task<IActionResult> Create()
         {
             await GetAllDepartments();
@@ -57,13 +48,23 @@
             await doctorService.Create(doctorCreateInputModel.Password, doctorServiceModel);
 
 
-            return Redirect("/Administration/Doctor/All");
+            return Redirect("/Doctor/All");
 
         }
         [HttpGet]
         public async Task<IActionResult> Edit(string id)
         {
-            return View();
+            DoctorEditInputModel doctorEditInputModel = (await doctorService.GetById(id)
+               ).To<DoctorEditInputModel>();
+
+            if (doctorEditInputModel == null)
+            {
+                return Redirect("/Doctor/All");
+            }
+
+            await GetAllDepartments();
+
+            return View(doctorEditInputModel);
         }
 
         [HttpPost]
@@ -80,9 +81,7 @@
 
             await doctorService.Edit(id, doctorServiceModel);
 
-
-            return Redirect("/Administration/Doctor/All");
-
+            return Redirect("/Doctor/All");
         }
 
         [HttpGet]
@@ -93,7 +92,7 @@
 
             if (doctorDeleteViewModel == null)
             {
-                return Redirect("/Administration/Doctor/All");
+                return Redirect("/Doctor/All");
             }
 
             await GetAllDepartments();
@@ -108,7 +107,7 @@
         {
             await doctorService.Delete(id);
 
-            return Redirect("/Administration/Doctor/All");
+            return Redirect("/Doctor/All");
         }
 
         private async Task GetAllDepartments()

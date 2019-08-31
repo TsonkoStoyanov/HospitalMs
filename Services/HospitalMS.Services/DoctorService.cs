@@ -40,7 +40,7 @@
                 await userManager.AddToRoleAsync(user, GlobalConstants.DoctorRoleName);
             }
 
-            Department departmentFromDb = GetDepartmentFromDb(doctorServiceModel);
+            Department departmentFromDb = await GetDepartmentFromDb(doctorServiceModel);
 
             if (departmentFromDb == null)
             {
@@ -61,9 +61,7 @@
 
         public async Task<bool> Edit(string id, DoctorServiceModel doctorServiceModel)
         {
-
-
-            Department departmentFromDb = GetDepartmentFromDb(doctorServiceModel);
+            Department departmentFromDb = await GetDepartmentFromDb(doctorServiceModel);
 
             if (departmentFromDb == null)
             {
@@ -94,12 +92,6 @@
             return await context.Doctors
                  .To<DoctorServiceModel>()
                  .SingleOrDefaultAsync(doctor => doctor.Id == id);
-        }
-
-        private Department GetDepartmentFromDb(DoctorServiceModel doctorServiceModel)
-        {
-            return context.Departments
-                .SingleOrDefault(department => department.Name == doctorServiceModel.Department.Name);
         }
 
         public async Task<bool> Delete(string id)
@@ -137,7 +129,11 @@
             return result > 0;
         }
 
-
+        private Task<Department> GetDepartmentFromDb(DoctorServiceModel doctorServiceModel)
+        {
+            return context.Departments
+                .SingleOrDefaultAsync(department => department.Name == doctorServiceModel.Department.Name);
+        }
     }
 }
 

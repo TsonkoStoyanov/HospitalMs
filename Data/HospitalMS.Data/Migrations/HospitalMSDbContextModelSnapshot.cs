@@ -19,11 +19,47 @@ namespace HospitalMS.Data.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("HospitalMS.Data.Models.Appointment", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("AppointmentDate");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<string>("Details");
+
+                    b.Property<int>("DoctorId");
+
+                    b.Property<string>("DoctorId1");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<int>("PatientId");
+
+                    b.Property<string>("PatientId1");
+
+                    b.Property<bool>("Status");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId1");
+
+                    b.HasIndex("PatientId1");
+
+                    b.ToTable("Appointments");
+                });
+
             modelBuilder.Entity("HospitalMS.Data.Models.Bed", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<bool>("IsOcupied");
 
@@ -49,11 +85,15 @@ namespace HospitalMS.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime?>("DeletedOn");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("HospitalId");
 
                     b.Property<bool>("IsActive");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Name");
 
@@ -64,10 +104,38 @@ namespace HospitalMS.Data.Migrations
                     b.ToTable("Departments");
                 });
 
+            modelBuilder.Entity("HospitalMS.Data.Models.Diagnose", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Date");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<string>("Details");
+
+                    b.Property<string>("DoctorId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<string>("PatientId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DoctorId");
+
+                    b.HasIndex("PatientId");
+
+                    b.ToTable("Diagnoses");
+                });
+
             modelBuilder.Entity("HospitalMS.Data.Models.Doctor", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime?>("DeletedOn");
 
                     b.Property<string>("DepartmentId");
 
@@ -76,6 +144,8 @@ namespace HospitalMS.Data.Migrations
                     b.Property<string>("FirstName");
 
                     b.Property<string>("HospitalMSUserId");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("LastName");
 
@@ -97,7 +167,11 @@ namespace HospitalMS.Data.Migrations
 
                     b.Property<string>("Address");
 
+                    b.Property<DateTime?>("DeletedOn");
+
                     b.Property<string>("Email");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Name");
 
@@ -170,17 +244,27 @@ namespace HospitalMS.Data.Migrations
 
                     b.Property<DateTime>("DateOfDischarge");
 
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
+
                     b.Property<DateTime>("IssuedOn");
 
                     b.Property<int>("Number");
 
                     b.Property<string>("PatientId");
 
+                    b.Property<string>("RecepcionistId");
+
+                    b.Property<string>("ReceptionistId");
+
                     b.Property<decimal>("TotalPrice");
 
                     b.HasKey("Id");
 
                     b.HasIndex("PatientId");
+
+                    b.HasIndex("ReceptionistId");
 
                     b.ToTable("Invoices");
                 });
@@ -192,15 +276,25 @@ namespace HospitalMS.Data.Migrations
 
                     b.Property<string>("Address");
 
-                    b.Property<string>("DepartmentId");
+                    b.Property<DateTime>("BirthDate");
 
-                    b.Property<string>("Diagnose");
+                    b.Property<DateTime?>("DateOfAcceptance");
+
+                    b.Property<DateTime?>("DateOfDischarge");
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<string>("DepartmentId");
 
                     b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
 
                     b.Property<string>("HospitalMSUserId");
+
+                    b.Property<bool>("IsDeleted");
+
+                    b.Property<bool>("IsHospitalized");
 
                     b.Property<string>("LastName");
 
@@ -220,11 +314,17 @@ namespace HospitalMS.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime?>("DeletedOn");
+
                     b.Property<string>("Email");
 
                     b.Property<string>("FirstName");
 
+                    b.Property<string>("HospitalId");
+
                     b.Property<string>("HospitalMSUserId");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("LastName");
 
@@ -232,9 +332,11 @@ namespace HospitalMS.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("HospitalId");
+
                     b.HasIndex("HospitalMSUserId");
 
-                    b.ToTable("Receptionist");
+                    b.ToTable("Receptionists");
                 });
 
             modelBuilder.Entity("HospitalMS.Data.Models.Room", b =>
@@ -242,7 +344,11 @@ namespace HospitalMS.Data.Migrations
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<DateTime?>("DeletedOn");
+
                     b.Property<string>("DepartmentId");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Name");
 
@@ -262,6 +368,10 @@ namespace HospitalMS.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime?>("DeletedOn");
+
+                    b.Property<bool>("IsDeleted");
 
                     b.Property<string>("Name");
 
@@ -382,6 +492,17 @@ namespace HospitalMS.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("HospitalMS.Data.Models.Appointment", b =>
+                {
+                    b.HasOne("HospitalMS.Data.Models.Doctor", "Doctor")
+                        .WithMany("Appointments")
+                        .HasForeignKey("DoctorId1");
+
+                    b.HasOne("HospitalMS.Data.Models.Patient", "Patient")
+                        .WithMany("Appointments")
+                        .HasForeignKey("PatientId1");
+                });
+
             modelBuilder.Entity("HospitalMS.Data.Models.Bed", b =>
                 {
                     b.HasOne("HospitalMS.Data.Models.Patient", "Patient")
@@ -400,12 +521,23 @@ namespace HospitalMS.Data.Migrations
                         .HasForeignKey("HospitalId");
                 });
 
+            modelBuilder.Entity("HospitalMS.Data.Models.Diagnose", b =>
+                {
+                    b.HasOne("HospitalMS.Data.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
+
+                    b.HasOne("HospitalMS.Data.Models.Patient", "Patient")
+                        .WithMany("Diagnoses")
+                        .HasForeignKey("PatientId");
+                });
+
             modelBuilder.Entity("HospitalMS.Data.Models.Doctor", b =>
                 {
                     b.HasOne("HospitalMS.Data.Models.Department", "Department")
                         .WithMany("Doctors")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HospitalMS.Data.Models.HospitalMSUser", "UserDoctor")
                         .WithMany()
@@ -415,8 +547,12 @@ namespace HospitalMS.Data.Migrations
             modelBuilder.Entity("HospitalMS.Data.Models.Invoice", b =>
                 {
                     b.HasOne("HospitalMS.Data.Models.Patient", "Patient")
-                        .WithMany()
+                        .WithMany("Invoices")
                         .HasForeignKey("PatientId");
+
+                    b.HasOne("HospitalMS.Data.Models.Receptionist", "Receptionist")
+                        .WithMany("Invoices")
+                        .HasForeignKey("ReceptionistId");
                 });
 
             modelBuilder.Entity("HospitalMS.Data.Models.Patient", b =>
@@ -424,7 +560,7 @@ namespace HospitalMS.Data.Migrations
                     b.HasOne("HospitalMS.Data.Models.Department", "Department")
                         .WithMany("Patients")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HospitalMS.Data.Models.HospitalMSUser", "UserPatient")
                         .WithMany()
@@ -433,6 +569,10 @@ namespace HospitalMS.Data.Migrations
 
             modelBuilder.Entity("HospitalMS.Data.Models.Receptionist", b =>
                 {
+                    b.HasOne("HospitalMS.Data.Models.Hospital", "Hospital")
+                        .WithMany()
+                        .HasForeignKey("HospitalId");
+
                     b.HasOne("HospitalMS.Data.Models.HospitalMSUser", "UserReceptionist")
                         .WithMany()
                         .HasForeignKey("HospitalMSUserId");
@@ -443,7 +583,7 @@ namespace HospitalMS.Data.Migrations
                     b.HasOne("HospitalMS.Data.Models.Department", "Department")
                         .WithMany("Rooms")
                         .HasForeignKey("DepartmentId")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("HospitalMS.Data.Models.RoomType", "RoomType")
                         .WithMany()

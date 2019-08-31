@@ -9,20 +9,22 @@
     using HospitalMS.Services;
     using HospitalMS.Web.ViewModels.Room;
     using Microsoft.EntityFrameworkCore;
+    using HospitalMS.Web.InputModels.Bed;
 
-
-    public class RoomController : AdministratorController
+    public class RoomController : AdministrationController
     {
         private readonly IRoomService roomService;
         private readonly IDepartmentService departmentService;
         private readonly IRoomTypeService roomTypeService;
+        private readonly IBedService bedService;
 
         public RoomController(IRoomService roomService, IDepartmentService departmentService,
-            IRoomTypeService roomTypeService)
+            IRoomTypeService roomTypeService, IBedService bedService)
         {
             this.roomService = roomService;
             this.departmentService = departmentService;
             this.roomTypeService = roomTypeService;
+            this.bedService = bedService;
         }
 
         [HttpGet]
@@ -34,6 +36,50 @@
                 .To<RoomAllViewModel>().ToList();
 
             return View(rooms);
+        }
+
+        [HttpGet]
+        [Route("/Administration/Room/Bed/Add/{id}")]
+        public async Task<IActionResult> Add(string id)
+        {
+            return View("Bed/Add");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [Route("/Administration/Room/Bed/Add/{id}")]
+        public async Task<IActionResult> Add(string id, BedAddInputModel bedCreateInputModel)
+        {
+            if (!ModelState.IsValid)
+            {
+
+                return View(bedCreateInputModel);
+            }
+
+            BedServiceModel bedServiceModel = AutoMapper.Mapper.Map<BedServiceModel>(bedCreateInputModel);
+
+            await bedService.Create(id, bedServiceModel);
+
+            return Redirect("/Administration/Room/All");
+
+        }
+
+        [HttpGet]
+        [Route("/Administration/Room/Bed/Remove/{id}")]
+        public async Task<IActionResult> Remove()
+        {
+            return View("Bed/Remove");
+        }
+
+        [HttpPost]
+        [Route("/Administration/Room/Bed/Remove/{id}")]
+        public async Task<IActionResult> Remove(string id)
+        {
+           
+            await bedService.Remove(id);
+
+            return Redirect("/Administration/Room/All");
+
         }
 
         [HttpGet]

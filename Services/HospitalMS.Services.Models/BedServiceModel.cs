@@ -12,5 +12,11 @@
 
         public bool IsOcupied { get; set; } = false;
 
+        public bool IsDeleted { get; set; }
+
+        public RoomServiceModel Room { get; set; }
+
+        public PatientServiceModel Patient { get; set; }
+
     }
 }

@@ -3,6 +3,7 @@ namespace HospitalMS.Services.Models
 {
     using HospitalMS.Data.Models;
     using HospitalMS.Services.Mapping;
+    using System.Collections.Generic;
 
     public class DoctorServiceModel : IMapTo<Doctor>, IMapFrom<Doctor>
     {
@@ -19,5 +20,7 @@ namespace HospitalMS.Services.Models
         public string HospitalMSUserId { get; set; }
 
         public DepartmentServiceModel Department { get; set; }
+
+        public List<AppointmentServiceModel> Appointments { get; set; }
     }
 }

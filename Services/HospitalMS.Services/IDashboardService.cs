@@ -12,5 +12,16 @@
         Task<int> GetRoomTypesCount();
 
         Task<int> GetDoctorsCount();
+
+        Task<int> GetReceptionistsCount();
+
+        Task<int> GetPatientsCount();
+
+        Task<int> GetHospitalizedPatientsCount();
+
+        Task<int> GetAvailableBedsCount();
+
+        Task<int> GetАvailableRoomsCount();
+
     }
 }

@@ -8,7 +8,7 @@
     using HospitalMS.Services.Models;
 
 
-    public class HospitalController : AdministratorController
+    public class HospitalController : AdministrationController
     {
         private readonly IHospitalService hospitalService;
 

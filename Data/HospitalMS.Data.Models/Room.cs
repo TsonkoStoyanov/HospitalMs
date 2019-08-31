@@ -7,7 +7,7 @@
     {
         public Room()
         {
-            this.Beds = new HashSet<Bed>();
+            this.Beds = new List<Bed>();
         }
         public string Name { get; set; }
 

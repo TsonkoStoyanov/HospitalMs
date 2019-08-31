@@ -16,8 +16,10 @@
         public decimal TotalPrice { get; set; }
 
         public string PatientId { get; set; }
-
         public virtual Patient Patient { get; set; }
+
+        public string RecepcionistId { get; set; }
+        public virtual Receptionist Receptionist { get; set; }
 
     }
 }

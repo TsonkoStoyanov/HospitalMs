@@ -24,20 +24,16 @@
 
 
   <ItemGroup>
-    <Folder Include="Areas\Administration\Views\Receptionist\" />
-    <Folder Include="Areas\Administration\Views\Patient\" />
-    <Folder Include="Views\Bed\" />
-  </ItemGroup>
-
-
-  <ItemGroup>
-    <Content Update="Areas\Administration\Views\Bed\Create.cshtml">
+    <Content Update="Areas\Administration\Views\Home\ReceptionistDashboard.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="Areas\Administration\Views\Room\Bed\Add.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Areas\Administration\Views\Department\All.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Update="Areas\Administration\Views\Home\DashBoard.cshtml">
+    <Content Update="Areas\Administration\Views\Home\AdministratorDashboard.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Update="Areas\Administration\Views\Room\All.cshtml">

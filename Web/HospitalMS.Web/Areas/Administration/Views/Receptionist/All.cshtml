@@ -1,12 +1,12 @@
-﻿@model List<DoctorAllViewModel>
+﻿@model List<ReceptionistAllViewModel>
 
 @{
-    ViewData["Title"] = "Doctor All";
+    ViewData["Title"] = "Receptionist All";
 
 }
 <div class="card shadow mb-4">
     <div class="card-header py-3">
-        <h6 class="m-0 font-weight-bold">Doctor <span class="text-info">All</span></h6>
+        <h6 class="m-0 font-weight-bold">Receptionist <span class="text-info">All</span></h6>
     </div>
 
     <div class="card-body">
@@ -25,16 +25,16 @@
                                 <thead>
                                     <tr role="row">
                                         <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 160px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Full Name</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 246px;" aria-label="PhoneNumber: activate to sort column ascending">PhoneNumber</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 246px;" aria-label="Department: activate to sort column ascending">Department</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 96px;" aria-label="PhoneNumber: activate to sort column ascending">PhoneNumber</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 96px;" aria-label="Hospital: activate to sort column ascending">Hospital</th>
                                         <th rowspan="1" colspan="1" style="width: 96px;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
-                                        <th rowspan="1" colspan="1">Name</th>
-                                        <th rowspan="1" colspan="1">RoomType</th>
-                                        <th rowspan="1" colspan="1">Department</th>
+                                        <th rowspan="1" colspan="1">Full Name</th>
+                                        <th rowspan="1" colspan="1">PhoneNumber</th>
+                                        <th rowspan="1" colspan="1">Hospital</th>
                                         <th rowspan="1" colspan="1">Actions</th>
                                     </tr>
                                 </tfoot>
@@ -43,18 +43,18 @@
                                     {
                                         <tr role="row" class="@(i % 2 != 0 ? "even" : "odd")">
                                             <td>
-                                                <a class="text-info" href="/Doctor/Details/@Model[i].Id">
+                                                <a class="text-info" href="/Receptionist/Details/@Model[i].Id">
                                                     @string.Concat(Model[i].FirstName + " " + @Model[i].LastName)
                                                 </a>
                                             </td>
                                             <td>@(Model[i].PhoneNumber)</td>
-                                            <td>@(Model[i].DepartmentName)</td>
+                                            <td>@(Model[i].HospitalName)</td>
                                             <td>
-                                                <a href="/Administration/Doctor/Edit/@Model[i].Id" class="btn btn-xs  btn-info">
-                                                    <i class="fa fa-edit"></i>
+                                                <a href="/Administration/Receptionist/Edit/@Model[i].Id" class="btn btn-xs  btn-info">
+                                                    <i class="fa fa-edit" title="Edit"></i>
                                                 </a>
-                                                <a href="/Administration/Doctor/Delete/@Model[i].Id" class="btn btn-xs  btn-danger">
-                                                    <i class="fa fa-trash"></i>
+                                                <a href="/Administration/Receptionist/Delete/@Model[i].Id" class="btn btn-xs  btn-danger">
+                                                    <i class="fa fa-trash"title="Delete"></i>
                                                 </a>
                                             </td>
                                         </tr>
@@ -68,7 +68,7 @@
         }
         else
         {
-            <h4>You have no Doctors in your Hospital.</h4>
+            <h4>You have no Receptionists in your Hospital.</h4>
         }
 
     </div>
