@@ -8,6 +8,7 @@
         public Doctor()
         {
             Appointments = new HashSet<Appointment>();
+            Diagnoses = new HashSet<Diagnose>();
         }
 
         public string Email { get; set; }
@@ -26,5 +27,7 @@
         public virtual Department Department { get; set; }
 
         public virtual ICollection<Appointment> Appointments { get; set; }
+
+        public virtual ICollection<Diagnose> Diagnoses { get; set; }
     }
 }

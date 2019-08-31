@@ -1,6 +1,8 @@
 ﻿namespace HospitalMS.Web.Controllers
 {
+    using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
     using HospitalMS.Common;
@@ -9,19 +11,22 @@
     using HospitalMS.Services.Models;
     using HospitalMS.Web.InputModels.Patient;
     using HospitalMS.Web.ViewModels;
+    using HospitalMS.Web.ViewModels.Diagnose;
     using HospitalMS.Web.ViewModels.User;
     using Microsoft.AspNetCore.Mvc;
-
+    using Microsoft.EntityFrameworkCore;
 
     public class HomeController : BaseController
     {
         private readonly IUserService userService;
         private readonly IPatientService patientService;
+        private readonly IDiagnoseService diagnoseService;
 
-        public HomeController(IUserService userService, IPatientService patientService)
+        public HomeController(IUserService userService, IPatientService patientService, IDiagnoseService diagnoseService)
         {
             this.userService = userService;
             this.patientService = patientService;
+            this.diagnoseService = diagnoseService;
         }
 
         public async Task<IActionResult> Index()
@@ -46,7 +51,10 @@
                 }
                 else
                 {
-                    return View("Patient/Index");
+                    List<PatientDiagnoseViewModel> patientDiagnoseAll = await diagnoseService.GetPatientAllDiagnoses(userId)
+                        .To<PatientDiagnoseViewModel>().ToListAsync();
+
+                    return View("Patient/Index", patientDiagnoseAll);
                 }
             }
 

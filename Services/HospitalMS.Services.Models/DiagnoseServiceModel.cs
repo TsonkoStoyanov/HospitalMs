@@ -1,6 +1,7 @@
 ﻿namespace HospitalMS.Services.Models
 {
     using System;
+    using AutoMapper;
     using HospitalMS.Data.Models;
     using HospitalMS.Services.Mapping;
 
@@ -13,8 +14,9 @@
 
         public string Details { get; set; }
 
-        public virtual PatientServiceModel Patient { get; set; }
+        public PatientServiceModel PatientName { get; set; }
 
-        public virtual DoctorServiceModel Doctor { get; set; }
+        public DoctorServiceModel DoctorName { get; set; }
+
     }
 }

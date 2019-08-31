@@ -34,13 +34,13 @@ namespace HospitalMS.Data.Migrations
 
                     b.Property<string>("DoctorId1");
 
+                    b.Property<bool>("IsComplete");
+
                     b.Property<bool>("IsDeleted");
 
                     b.Property<int>("PatientId");
 
                     b.Property<string>("PatientId1");
-
-                    b.Property<bool>("Status");
 
                     b.HasKey("Id");
 
@@ -524,12 +524,14 @@ namespace HospitalMS.Data.Migrations
             modelBuilder.Entity("HospitalMS.Data.Models.Diagnose", b =>
                 {
                     b.HasOne("HospitalMS.Data.Models.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId");
+                        .WithMany("Diagnoses")
+                        .HasForeignKey("DoctorId")
+                        .OnDelete(DeleteBehavior.Cascade);
 
                     b.HasOne("HospitalMS.Data.Models.Patient", "Patient")
                         .WithMany("Diagnoses")
-                        .HasForeignKey("PatientId");
+                        .HasForeignKey("PatientId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("HospitalMS.Data.Models.Doctor", b =>

@@ -60,10 +60,21 @@
                    .OnDelete(DeleteBehavior.Restrict);
 
             builder.Entity<Bed>()
-                .HasOne(patient => patient.Patient)
-                .WithOne(bed => bed.Bed)
-                .HasForeignKey<Bed>(bed => bed.PatientId);
+                   .HasOne(patient => patient.Patient)
+                   .WithOne(bed => bed.Bed)
+                   .HasForeignKey<Bed>(bed => bed.PatientId);
 
+            builder.Entity<Patient>()
+                   .HasMany(diagnose => diagnose.Diagnoses)
+                   .WithOne(patient => patient.Patient)
+                   .HasForeignKey(patient => patient.PatientId)
+                   .OnDelete(DeleteBehavior.Cascade);
+
+            builder.Entity<Doctor>()
+                   .HasMany(diagnose => diagnose.Diagnoses)
+                   .WithOne(doctor => doctor.Doctor)
+                   .HasForeignKey(doctor => doctor.DoctorId)
+                   .OnDelete(DeleteBehavior.Cascade);
 
             base.OnModelCreating(builder);
         }

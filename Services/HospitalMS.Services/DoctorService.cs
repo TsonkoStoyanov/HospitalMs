@@ -121,6 +121,7 @@
                 await userManager.DeleteAsync(user);
                 transaction.Commit();
             }
+            
 
             context.Doctors.Remove(doctorFromDb);
 

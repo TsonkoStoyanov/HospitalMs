@@ -1,9 +1,11 @@
 ﻿namespace HospitalMS.Services
 {
     using System;
+    using System.Linq;
     using System.Threading.Tasks;
     using HospitalMS.Data;
     using HospitalMS.Data.Models;
+    using HospitalMS.Services.Mapping;
     using HospitalMS.Services.Models;
     using Microsoft.EntityFrameworkCore;
 
@@ -43,6 +45,13 @@
             int result = await context.SaveChangesAsync();
 
             return result > 0;
+        }
+
+        public IQueryable<DiagnoseServiceModel> GetPatientAllDiagnoses(string userId)
+        {
+            return context.Diagnoses
+             .Where(patient => patient.Patient.HospitalMSUserId == userId)
+             .To<DiagnoseServiceModel>();
         }
     }
 }
