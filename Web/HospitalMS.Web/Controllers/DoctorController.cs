@@ -20,7 +20,7 @@
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
-            DoctorDetailsViewModel doctor = (await this.doctorService.GetById(id))
+            DoctorDetailsViewModel doctor = (await doctorService.GetById(id))
                  .To<DoctorDetailsViewModel>();
 
             return View(doctor);

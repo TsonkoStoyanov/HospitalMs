@@ -1,18 +1,18 @@
-﻿using System.Diagnostics;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using HospitalMS.Common;
-using HospitalMS.Services;
-using HospitalMS.Services.Mapping;
-using HospitalMS.Services.Models;
-using HospitalMS.Web.InputModels.Patient;
-using HospitalMS.Web.ViewModels;
-using HospitalMS.Web.ViewModels.User;
-using Microsoft.AspNetCore.Mvc;
-
-
-namespace HospitalMS.Web.Controllers
+﻿namespace HospitalMS.Web.Controllers
 {
+    using System.Diagnostics;
+    using System.Security.Claims;
+    using System.Threading.Tasks;
+    using HospitalMS.Common;
+    using HospitalMS.Services;
+    using HospitalMS.Services.Mapping;
+    using HospitalMS.Services.Models;
+    using HospitalMS.Web.InputModels.Patient;
+    using HospitalMS.Web.ViewModels;
+    using HospitalMS.Web.ViewModels.User;
+    using Microsoft.AspNetCore.Mvc;
+
+
     public class HomeController : BaseController
     {
         private readonly IUserService userService;
@@ -36,7 +36,7 @@ namespace HospitalMS.Web.Controllers
             }
             else if (User.IsInRole(GlobalConstants.PatientRoleName))
             {
-                string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+                string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
                 var hospitalMSUser = (await userService.GetById(userId)).To<HospitalMSUserViewModel>();
 
@@ -63,7 +63,7 @@ namespace HospitalMS.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(PatientCreateFromFirstLoginInputModel patientCreateFromFirstLoginInputModel)
         {
-            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            string userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
 
             var hospitalMSUser = (await userService.GetById(userId)).To<HospitalMSUserViewModel>();
 
@@ -76,7 +76,6 @@ namespace HospitalMS.Web.Controllers
 
             patientServiceModel.Email = hospitalMSUser.Email;
             patientServiceModel.HospitalMSUserId = hospitalMSUser.Id;
-
 
             await patientService.Create(patientServiceModel);
 

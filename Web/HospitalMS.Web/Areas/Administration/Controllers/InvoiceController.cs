@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-
-namespace HospitalMS.Web.Areas.Administration.Controllers
+﻿namespace HospitalMS.Web.Areas.Administration.Controllers
 {
-    public class InvoiceController : Controller
+    using Microsoft.AspNetCore.Mvc;
+
+    
+    public class InvoiceController : AdministrationController
     {
         public IActionResult Index()
         {

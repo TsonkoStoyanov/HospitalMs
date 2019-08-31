@@ -22,7 +22,7 @@
         [Route("/Room/All")]
         public async Task<IActionResult> All()
         {
-            List<RoomAllViewModel> rooms = this.roomService.GetAllRooms()
+            List<RoomAllViewModel> rooms = roomService.GetAllRooms()
                 .To<RoomAllViewModel>()
                 .ToList();
 
@@ -32,7 +32,7 @@
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
-            RoomDetailsViewModel room = (await this.roomService.GetById(id))
+            RoomDetailsViewModel room = (await roomService.GetById(id))
                  .To<RoomDetailsViewModel>();
 
             return this.View(room);

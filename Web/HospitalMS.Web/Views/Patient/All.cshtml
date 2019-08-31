@@ -24,18 +24,18 @@
                             <table class="table table-bordered dataTable" id="dataTable" role="grid" aria-describedby="dataTable_info" style="width: 100%;" width="100%" cellspacing="0">
                                 <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 120px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Full Name</th>
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Name: activate to sort column descending">Full Name</th>
                                         <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 60px;" aria-label="PhoneNumber: activate to sort column ascending">PhoneNumber</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 120px;" aria-label="Address: activate to sort column ascending">Address</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 80px;" aria-label="Status: activate to sort column ascending">Status</th>                                       
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 160px;" aria-label="Address: activate to sort column ascending">Address</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 80px;" aria-label="Status: activate to sort column ascending">Status</th>
                                         @if (this.User.Identity.IsAuthenticated && (this.User.IsInRole(GlobalConstants.AdministratorRoleName)
-                                                       || this.User.IsInRole(GlobalConstants.ReceptionistRoleName)))
+                                                     || this.User.IsInRole(GlobalConstants.ReceptionistRoleName)))
                                         {
                                             <th rowspan="1" colspan="1" style="width: 120px;">Actions</th>
                                         }
                                         else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.DoctorRoleName))
                                         {
-                                            <th rowspan="1" colspan="1" style="width: 26px;">Examine</th>
+                                            <th rowspan="1" colspan="1" style="width: 26px;">Examination</th>
                                         }
 
                                     </tr>
@@ -47,13 +47,13 @@
                                         <th rowspan="1" colspan="1">Address</th>
                                         <th rowspan="1" colspan="1">Status</th>
                                         @if (this.User.Identity.IsAuthenticated && (this.User.IsInRole(GlobalConstants.AdministratorRoleName)
-                                                                                || this.User.IsInRole(GlobalConstants.ReceptionistRoleName)))
+                                                                              || this.User.IsInRole(GlobalConstants.ReceptionistRoleName)))
                                         {
                                             <th rowspan="1" colspan="1">Actions</th>
                                         }
                                         else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.DoctorRoleName))
                                         {
-                                            <th rowspan="1" colspan="1">Examine</th>
+                                            <th rowspan="1" colspan="1">Examination</th>
                                         }
 
 
@@ -72,7 +72,7 @@
                                             <td>@(Model[i].Address)</td>
                                             <td>@(Model[i].IsHospitalized ? "Hospitalized" : "Not Hospitalized")</td>
                                             @if (this.User.Identity.IsAuthenticated && (this.User.IsInRole(GlobalConstants.AdministratorRoleName)
-                                               || this.User.IsInRole(GlobalConstants.ReceptionistRoleName)))
+                                             || this.User.IsInRole(GlobalConstants.ReceptionistRoleName)))
                                             {
                                                 <td>
                                                     <a href="/Administration/Patient/Hospitalize/@Model[i].Id" class="btn btn-xs  btn-success">
@@ -89,8 +89,8 @@
                                             else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.DoctorRoleName))
                                             {
                                                 <td>
-                                                    <a href="/Administration/Patient/Examine/@Model[i].Id" class="btn btn-xs  btn-info">
-                                                        <i class="fas fa-diagnoses" title="Examine"></i>
+                                                    <a href="/Examination/Create/@Model[i].Id" class="btn btn-xs btn-info">
+                                                        <i class="fas fa-diagnoses" title="Examination"></i>
                                                     </a>
                                                 </td>
                                             }

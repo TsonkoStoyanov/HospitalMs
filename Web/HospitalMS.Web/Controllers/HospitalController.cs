@@ -18,7 +18,7 @@ namespace HospitalMS.Web.Controllers
         [HttpGet(Name = "Details")]
         public async Task<IActionResult> Details()
         {
-            HospitalDetailsViewModel hospitalDetailsViewModel = (await this.hospitalService.Get())
+            HospitalDetailsViewModel hospitalDetailsViewModel = (await hospitalService.Get())
                 .To<HospitalDetailsViewModel>();
 
             return View(hospitalDetailsViewModel);

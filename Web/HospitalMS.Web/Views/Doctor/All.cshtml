@@ -83,7 +83,7 @@
                                             else if (this.User.Identity.IsAuthenticated && this.User.IsInRole(GlobalConstants.PatientRoleName))
                                             {
                                                 <td>
-                                                    <a href="/Administration/Doctor/CreateAppointment/@Model[i].Id" class="btn btn-xs  btn-danger">
+                                                    <a href="/Appointment/Create/@Model[i].Id" class="btn btn-xs  btn-info">
                                                         <i class="far fa-calendar-check" title="Create Appointment"></i>
                                                     </a>
                                                 </td>

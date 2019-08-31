@@ -48,10 +48,17 @@
                 </dd>
             </dl>
             @if (this.User.Identity.IsAuthenticated && (this.User.IsInRole(GlobalConstants.AdministratorRoleName)
-               || this.User.IsInRole(GlobalConstants.ReceptionistRoleName)))
+              || this.User.IsInRole(GlobalConstants.ReceptionistRoleName)))
             {
                 <div class="col-sm-2">
                     <a href="/Administration/Doctor/Edit/@Model.Id" class="btn btn-info btn-block font-weight-bold">Edit</a>
+                </div>
+            }
+
+            else if (this.User.Identity.IsAuthenticated && (this.User.IsInRole(GlobalConstants.PatientRoleName))
+            {
+                <div class="col-sm-2">
+                    <a href="/Appointment/Create/@Model.Id" class="btn btn-info btn-block font-weight-bold">Create Appointment</a>
                 </div>
             }
         </div>
