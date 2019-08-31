@@ -11,6 +11,8 @@
 
         Task<bool> Create(string password, PatientServiceModel patientServiceModel);
 
+        Task<bool> Create(PatientServiceModel patientServiceModel);
+
         Task<PatientServiceModel> GetById(string id);
 
         Task<bool> Edit(string id, PatientServiceModel patientServiceModel);

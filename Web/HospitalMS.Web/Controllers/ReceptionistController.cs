@@ -19,10 +19,10 @@
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
-            ReceptionistDetailsViewModel receptionist = (await this.receptionistService.GetById(id))
+            ReceptionistDetailsViewModel receptionist = (await receptionistService.GetById(id))
                  .To<ReceptionistDetailsViewModel>();
 
-            return this.View(receptionist);
+            return View(receptionist);
         }
     }
 }

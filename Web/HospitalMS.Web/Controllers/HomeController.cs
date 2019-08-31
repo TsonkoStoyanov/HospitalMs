@@ -1,7 +1,13 @@
 ﻿using System.Diagnostics;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using HospitalMS.Common;
+using HospitalMS.Services;
+using HospitalMS.Services.Mapping;
+using HospitalMS.Services.Models;
+using HospitalMS.Web.InputModels.Patient;
 using HospitalMS.Web.ViewModels;
+using HospitalMS.Web.ViewModels.User;
 using Microsoft.AspNetCore.Mvc;
 
 
@@ -9,6 +15,15 @@ namespace HospitalMS.Web.Controllers
 {
     public class HomeController : BaseController
     {
+        private readonly IUserService userService;
+        private readonly IPatientService patientService;
+
+        public HomeController(IUserService userService, IPatientService patientService)
+        {
+            this.userService = userService;
+            this.patientService = patientService;
+        }
+
         public async Task<IActionResult> Index()
         {
             if (User.IsInRole(GlobalConstants.AdministratorRoleName))
@@ -21,10 +36,51 @@ namespace HospitalMS.Web.Controllers
             }
             else if (User.IsInRole(GlobalConstants.PatientRoleName))
             {
-                return View("Patient/Index");
+                string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+                var hospitalMSUser = (await userService.GetById(userId)).To<HospitalMSUserViewModel>();
+
+                if (hospitalMSUser.IsFirstLogin)
+                {
+                    return RedirectToAction("Create");
+                }
+                else
+                {
+                    return View("Patient/Index");
+                }
             }
 
             return View("Doctor/Index");
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Create()
+        {
+            return View("Patient/Create");
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Create(PatientCreateFromFirstLoginInputModel patientCreateFromFirstLoginInputModel)
+        {
+            string userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+
+            var hospitalMSUser = (await userService.GetById(userId)).To<HospitalMSUserViewModel>();
+
+            if (!ModelState.IsValid)
+            {
+                return View(patientCreateFromFirstLoginInputModel);
+            }
+
+            PatientServiceModel patientServiceModel = AutoMapper.Mapper.Map<PatientServiceModel>(patientCreateFromFirstLoginInputModel);
+
+            patientServiceModel.Email = hospitalMSUser.Email;
+            patientServiceModel.HospitalMSUserId = hospitalMSUser.Id;
+
+
+            await patientService.Create(patientServiceModel);
+
+            return Redirect("Index");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

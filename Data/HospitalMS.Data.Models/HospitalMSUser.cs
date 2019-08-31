@@ -5,6 +5,6 @@
 
     public class HospitalMSUser : IdentityUser
     {
-        public bool IsFirstLogin { get; set; }
+        public bool IsFirstLogin { get; set; } = true;
     }
 }

@@ -5,7 +5,7 @@
 
 
 
-    public class HospitalMSUserViewModel : IMapFrom<HospitalMSUserServiceModel>
+    public class HospitalMSUserViewModel : IMapTo<HospitalMSUserServiceModel>, IMapFrom<HospitalMSUserServiceModel>
     {
         public string Id { get; set; }
 

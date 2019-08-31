@@ -30,7 +30,8 @@
 
             if (userCreateResult.Succeeded)
             {
-                user.EmailConfirmed = true;               
+                user.EmailConfirmed = true;
+                user.IsFirstLogin = false;
 
                 await userManager.AddToRoleAsync(user, GlobalConstants.ReceptionistRoleName);
             }

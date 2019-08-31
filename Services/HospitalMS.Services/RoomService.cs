@@ -65,8 +65,7 @@
 
         public IQueryable<RoomServiceModel> GetAllRooms()
         {
-
-            return context.Rooms.To<RoomServiceModel>();
+            return context.Rooms.Where(room=>room.IsDeleted == false).To<RoomServiceModel>();
         }
 
         public async Task<RoomServiceModel> GetById(string id)

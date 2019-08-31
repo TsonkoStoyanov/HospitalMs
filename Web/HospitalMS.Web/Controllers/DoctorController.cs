@@ -23,7 +23,7 @@
             DoctorDetailsViewModel doctor = (await this.doctorService.GetById(id))
                  .To<DoctorDetailsViewModel>();
 
-            return this.View(doctor);
+            return View(doctor);
         }
 
         [HttpGet]

@@ -36,18 +36,25 @@
                 await userManager.AddToRoleAsync(user, GlobalConstants.PatientRoleName);
             }
 
-            Department departmentFromDb = await GetDepartmentFromDb(patientServiceModel);
-
-            if (departmentFromDb == null)
-            {
-                throw new ArgumentNullException(nameof(departmentFromDb));
-            }
-
             patientServiceModel.HospitalMSUserId = user.Id;
 
             Patient patient = AutoMapper.Mapper.Map<Patient>(patientServiceModel);
+          
+            context.Patients.Add(patient);
 
-            patient.Department = departmentFromDb;
+            int result = await context.SaveChangesAsync();
+
+            return result > 0;
+        }
+
+        public async Task<bool> Create(PatientServiceModel patientServiceModel)
+        {
+            var user = await userManager.FindByIdAsync(patientServiceModel.HospitalMSUserId);
+            user.IsFirstLogin = false;
+            await userManager.UpdateAsync(user);
+
+            Patient patient = AutoMapper.Mapper.Map<Patient>(patientServiceModel);
+
             context.Patients.Add(patient);
 
             int result = await context.SaveChangesAsync();
@@ -92,13 +99,6 @@
 
         public async Task<bool> Edit(string id, PatientServiceModel patientServiceModel)
         {
-            Department departmentFromDb = await GetDepartmentFromDb(patientServiceModel);
-
-            if (departmentFromDb == null)
-            {
-                throw new ArgumentNullException(nameof(departmentFromDb));
-            }
-
             Patient patientFromDb = await context.Patients.SingleOrDefaultAsync(patient => patient.Id == id);
 
             if (patientFromDb == null)
@@ -110,9 +110,7 @@
             patientFromDb.LastName = patientServiceModel.LastName;
             patientFromDb.PhoneNumber = patientServiceModel.PhoneNumber;
             patientFromDb.Address = patientServiceModel.Address;
-            patientFromDb.BirthDate = patientServiceModel.BirthDate;           
-            patientFromDb.Department = departmentFromDb;
-
+            patientFromDb.BirthDate = patientServiceModel.BirthDate;          
 
             context.Patients.Update(patientFromDb);
             int result = await context.SaveChangesAsync();
@@ -132,10 +130,5 @@
                 .SingleOrDefaultAsync(patient => patient.Id == id);
         }
 
-        private Task<Department> GetDepartmentFromDb(PatientServiceModel patientServiceModel)
-        {
-            return context.Departments
-                .SingleOrDefaultAsync(department => department.Name == patientServiceModel.Department.Name);
-        }
     }
 }

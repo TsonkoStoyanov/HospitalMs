@@ -1,12 +1,12 @@
 ﻿namespace HospitalMS.Web.Controllers
 {
-    using System.Collections.Generic;
+    using System.Linq;
     using System.Threading.Tasks;
     using HospitalMS.Services;
     using HospitalMS.Services.Mapping;
     using HospitalMS.Web.ViewModels.Patient;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
+
 
     public class PatientController : BaseController
     {
@@ -20,26 +20,26 @@
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return this.View();
+            return View();
         }
 
         [HttpGet]
         public async Task<IActionResult> Details(string id)
         {
-            PatientDetailsViewModel patient = (await this.patientService.GetById(id))
+           var patient = (await patientService.GetById(id))
                  .To<PatientDetailsViewModel>();
 
-            return this.View(patient);
+            return View(patient);
         }
 
         [HttpGet]
         public async Task<IActionResult> All()
         {
-            List<PatientAllViewModel> patients = await this.patientService.GetAllPatients()
+            var patients = patientService.GetAllPatients()
                 .To<PatientAllViewModel>()
-                .ToListAsync();
+                .ToList();
 
-            return this.View(patients);
+            return View(patients);
         }
     }
 }

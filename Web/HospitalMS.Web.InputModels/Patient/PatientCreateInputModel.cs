@@ -7,7 +7,7 @@
     using HospitalMS.Services.Models;
 
 
-    public class PatientCreateInputModel : IMapTo<PatientServiceModel>, IHaveCustomMappings
+    public class PatientCreateInputModel : IMapTo<PatientServiceModel>
     {
         [Required]
         [EmailAddress]
@@ -42,16 +42,5 @@
 
         [Required]
         public DateTime BirthDate { get; set; }              
-
-        [Required]
-        public string Department { get; set; }
-
-        public void CreateMappings(IProfileExpression configuration)
-        {
-            configuration
-               .CreateMap<PatientCreateInputModel, PatientServiceModel>()
-               .ForMember(destination => destination.Department,
-                           opts => opts.MapFrom(origin => new DepartmentServiceModel { Name = origin.Department }));
-        }
     }
 }

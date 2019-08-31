@@ -69,6 +69,7 @@
             services.AddTransient<IDashboardService, DashboardService>();
             services.AddTransient<IPatientService, PatientService>();
             services.AddTransient<IReceptionistService, ReceptionistService>();
+            services.AddTransient<IUserService, UserService>();
 
             //SendGirdConfiguration
             services.Configure<SendGridOptions>(this.Configuration.GetSection("SendGridApiKey"));

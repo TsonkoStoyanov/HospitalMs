@@ -27,11 +27,6 @@
                 throw new ArgumentNullException(nameof(roomFromDb));
             }
 
-            if (roomFromDb.Beds.Where(bed=>bed.IsDeleted == false).Count() == 0)
-            {
-                throw new ArgumentNullException(nameof(roomFromDb));
-            }
-
             Bed bedFromDb = await context.Beds.FirstOrDefaultAsync(bed => bed.Number == bedServiceModel.Number);
 
             if (bedFromDb != null && bedFromDb.IsDeleted == true)
@@ -73,6 +68,8 @@
 
             bedFromDb.IsDeleted = true;
             bedFromDb.DeletedOn = DateTime.UtcNow;
+
+            roomFromDb.Beds.Remove(bedFromDb);
 
             context.Beds.Update(bedFromDb);
 

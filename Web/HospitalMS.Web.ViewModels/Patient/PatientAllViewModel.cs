@@ -20,8 +20,5 @@
 
         public DateTime BirthDate { get; set; }
 
-        public string DepartmentName { get; set; }
-
-       
     }
 }
