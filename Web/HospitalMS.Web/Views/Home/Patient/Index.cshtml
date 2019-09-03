@@ -23,25 +23,29 @@
                             <table class="table table-bordered dataTable" id="dataTable" role="grid" aria-describedby="dataTable_info" style="width: 100%;" width="100%" cellspacing="0">
                                 <thead>
                                     <tr role="row">
-                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 100px;" aria-sort="ascending" aria-label="Details: activate to sort column descending">Details</th>
-                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 260px;" aria-label="Date: activate to sort column ascending">Date</th>                                       
+                                        <th class="sorting_asc" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 260px;" aria-sort="ascending" aria-label="Details: activate to sort column descending">Details</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 100px;" aria-label="Date: activate to sort column ascending">Date</th>
+                                        <th class="sorting" tabindex="0" aria-controls="dataTable" rowspan="1" colspan="1" style="width: 160px;" aria-label="Date: activate to sort column ascending">Doctor</th>
+
                                     </tr>
                                 </thead>
                                 <tfoot>
                                     <tr>
                                         <th rowspan="1" colspan="1">Details</th>
-                                        <th rowspan="1" colspan="1">Date</th>                                       
+                                        <th rowspan="1" colspan="1">Date</th>
+                                        <th rowspan="1" colspan="1">Doctor</th>
                                     </tr>
                                 </tfoot>
                                 <tbody>
                                     @for (int i = 0; i < Model.Count; i++)
                                     {
-                                        <tr role="row" class="@(i % 2 != 0 ? "even" : "odd")">
-                                            <td class="sorting_1">
-                                                @Model[i].Details
-                                            </td>
-                                            <td>@Model[i].Date</td>                                            
-                                        </tr>
+                                    <tr role="row" class="@(i % 2 != 0 ? "even" : "odd")">
+                                        <td class="sorting_1">
+                                            @Model[i].Details
+                                        </td>
+                                        <td>@Model[i].Date</td>
+                                        <td>@String.Concat(Model[i].Doctor.FirstName + " " + Model[i].Doctor.LastName)</td>
+                                    </tr>
                                     }
                                 </tbody>
                             </table>

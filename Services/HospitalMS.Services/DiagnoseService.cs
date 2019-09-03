@@ -52,6 +52,8 @@
             return context.Diagnoses
              .Where(patient => patient.Patient.HospitalMSUserId == userId)
              .To<DiagnoseServiceModel>();
+             
+             
         }
     }
 }

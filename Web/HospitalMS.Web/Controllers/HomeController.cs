@@ -51,9 +51,9 @@
                 }
                 else
                 {
-                    List<PatientDiagnoseViewModel> patientDiagnoseAll = await diagnoseService.GetPatientAllDiagnoses(userId)
-                        .To<PatientDiagnoseViewModel>().ToListAsync();
-
+                    List<PatientDiagnoseViewModel> patientDiagnoseAll = (await diagnoseService.GetPatientAllDiagnoses(userId)                        
+                        .ToListAsync()).To<PatientDiagnoseViewModel>().ToList();
+                    ;
                     return View("Patient/Index", patientDiagnoseAll);
                 }
             }
