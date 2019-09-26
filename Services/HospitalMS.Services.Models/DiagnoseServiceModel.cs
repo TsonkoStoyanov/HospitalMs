@@ -14,9 +14,9 @@
 
         public string Details { get; set; }
 
-        public PatientServiceModel PatientName { get; set; }
+        public PatientServiceModel Patient { get; set; }
 
-        public DoctorServiceModel DoctorName { get; set; }
+        public DoctorServiceModel Doctor { get; set; }
 
     }
 }
