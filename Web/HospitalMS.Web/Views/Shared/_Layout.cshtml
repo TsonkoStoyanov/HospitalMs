@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@inject Microsoft.ApplicationInsights.AspNetCore.JavaScriptSnippet JavaScriptSnippet
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -31,6 +32,7 @@
         <link href="~/css/sb-admin-2.min.css" rel="stylesheet">
         <link href="~/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     </environment>
+    @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 
 <body id="page-top">
